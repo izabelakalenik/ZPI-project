@@ -8,15 +8,20 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFFE7C039), Color(0xFFA80092)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return SafeArea(
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFE7C039), Color(0xFFA80092)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: child,
         ),
       ),
-      child: child,
     );
   }
 }

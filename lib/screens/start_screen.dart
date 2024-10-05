@@ -17,6 +17,7 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     Widget page;
+
     switch (selectedIndex) {
       case 0:
         page = MainLayout(child: StartScreenContent(
@@ -34,15 +35,7 @@ class _StartScreenState extends State<StartScreen> {
       default:
         throw UnimplementedError('No widget for $selectedIndex');
     }
-
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: page,
-          )
-      ),
-    );
+    return page;
   }
 
   void _onLoginPressed() {
@@ -72,44 +65,38 @@ class StartScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'MoviePop',
+          style: theme.textTheme.displayMedium,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
 
-          Text(
-            'MoviePop',
-            style: theme.textTheme.displayMedium,
-            textAlign: TextAlign.center,
+        Text(
+          'Swipe to find movies you and your friends both want to watch. Let’s make a movie match!',
+          style: theme.textTheme.titleLarge,
+          textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 20),
+        const SizedBox(height: 100),
 
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              'Swipe to find movies you and your friends both want to watch. Let’s make a movie match!',
-              style: theme.textTheme.titleLarge,
-              textAlign: TextAlign.center,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Button(
+              text: const Text('Log in'),
+              onPressed: onLoginPressed,
             ),
-          ),
-          const SizedBox(height: 100),
-
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Button(
-                text: const Text('Log in'),
-                onPressed: onLoginPressed,
-              ),
-              const SizedBox(width: 30),
-              Button(
-                text: const Text('Register'),
-                onPressed: onRegisterPressed,
-              ),
-            ],
-          ),
-        ],
-      ),
+            const SizedBox(width: 30),
+            Button(
+              text: const Text('Register'),
+              onPressed: onRegisterPressed,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
