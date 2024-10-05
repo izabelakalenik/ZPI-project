@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/register_screen.dart';
+import '../styles/layouts.dart';
 import 'login_screen.dart';
-import '../main_layout.dart';
+
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -71,21 +72,18 @@ class StartScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          // Nagłówek "Match Flix"
           Text(
-            'Match Flix',
+            'MoviePop',
             style: theme.textTheme.displayMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
 
-          // Opis aplikacji
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
@@ -96,36 +94,17 @@ class StartScreenContent extends StatelessWidget {
           ),
           const SizedBox(height: 100),
 
-          // Przyciski Log in i Register
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                width: 150,
-                height: 50,
-                child: OutlinedButton(
-                  onPressed: onLoginPressed,
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.white, width: 1.5),
-                    foregroundColor: Colors.white,
-                    textStyle: theme.textTheme.titleLarge,
-                  ),
-                  child: const Text('Log in'),
-                ),
+              Button(
+                text: const Text('Log in'),
+                onPressed: onLoginPressed,
               ),
               const SizedBox(width: 30),
-              SizedBox(
-                width: 150,
-                height: 50,
-                child: OutlinedButton(
-                  onPressed: onRegisterPressed,
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.white, width: 1.5),
-                    foregroundColor: Colors.white,
-                    textStyle: theme.textTheme.titleLarge,
-                  ),
-                  child: const Text('Register'),
-                ),
+              Button(
+                text: const Text('Register'),
+                onPressed: onRegisterPressed,
               ),
             ],
           ),
