@@ -90,11 +90,7 @@ class HomeScreenContent extends StatelessWidget {
             child: SizedBox(
               width: 300,
               height: 400,
-              child: Text(
-                'PHOTO',
-                style: theme.textTheme.titleSmall,
-                textAlign: TextAlign.center,
-              ),
+              child: Image(image: AssetImage('assets/forrest_gump.jpg')),
             ),
           ),
           const SizedBox(height: 40),
