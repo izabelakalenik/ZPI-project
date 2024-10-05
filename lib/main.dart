@@ -13,8 +13,22 @@ class MyApp extends StatelessWidget {
       title: 'ZPI project',
       theme: ThemeData(
         useMaterial3: true,
+
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+
         fontFamily: 'Sen',
+
+        textTheme: TextTheme(
+            displayMedium: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            titleLarge: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+            )
+
+        )
+
       ),
       home: const MyHomePage(),
     );
@@ -88,15 +102,6 @@ class MainContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final titleStyle = theme.textTheme.displayMedium!.copyWith(
-      fontWeight: FontWeight.bold,
-      color: theme.colorScheme.onPrimary,
-    );
-
-    final descriptionStyle = theme.textTheme.titleLarge!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -113,7 +118,7 @@ class MainContent extends StatelessWidget {
             // Nagłówek "Match Flix"
             Text(
               'Match Flix',
-              style: titleStyle,
+              style: theme.textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
@@ -123,7 +128,7 @@ class MainContent extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 'Swipe to find movies you and your friends both want to watch. Let’s make a movie match!',
-                style: descriptionStyle,
+                style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -141,10 +146,7 @@ class MainContent extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.white, width: 1.5),
                       foregroundColor: Colors.white,
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Sen',
-                      ),
+                      textStyle: theme.textTheme.titleLarge,
                     ),
                     child: const Text('Log in'),
                   ),
@@ -158,10 +160,7 @@ class MainContent extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.white, width: 1.5),
                       foregroundColor: Colors.white,
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Sen',
-                      ),
+                      textStyle: theme.textTheme.titleLarge,
                     ),
                     child: const Text('Register'),
                   ),
