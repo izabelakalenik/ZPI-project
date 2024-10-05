@@ -23,5 +23,9 @@ final mainTheme = ThemeData(
       color: Colors.white
     ),
 
+    titleSmall: TextStyle(
+        color: Colors.white
+    ),
+
   ),
 );
