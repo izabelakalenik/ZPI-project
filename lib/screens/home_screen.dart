@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../styles/layouts.dart';
-import '../widgets/nav-drawer.dart';
+import '../widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
