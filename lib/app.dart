@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 

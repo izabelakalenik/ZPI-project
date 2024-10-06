@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
 
                     Text('Login', style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 30), // Odstęp poniżej tytułu
+                    const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
