@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/setting_screens/settings_screen.dart';
+
 import 'package:zpi_project/styles/theme.dart';
 
 class App extends StatelessWidget {
@@ -11,7 +13,7 @@ class App extends StatelessWidget {
       title: 'MoviePop',
       theme: mainTheme,
       // To see other screens, change home attribute --> home: const StartScreen(),
-      home: const HomeScreen(),
+      home: const SettingsScreen(),
     );
   }
 }
