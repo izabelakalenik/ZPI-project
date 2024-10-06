@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/setting_screens/settings_screen.dart';
+
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
 
@@ -46,7 +48,13 @@ class NavDrawer extends StatelessWidget {
               'Settings',
               style: theme.textTheme.bodyLarge,
             ),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.of(context).pop(),
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              ),
+            },
           ),
         ],
       ),
