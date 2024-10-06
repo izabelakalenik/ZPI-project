@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/setting_screens/settings_screen.dart';
 
-
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
 
