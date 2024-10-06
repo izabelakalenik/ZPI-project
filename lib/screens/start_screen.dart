@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen.dart';
 
 import '../styles/layouts.dart';
-import 'login_screen.dart';
+import 'login_screen/login_bloc.dart';
+import 'login_screen/login_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -28,7 +30,12 @@ class _StartScreenState extends State<StartScreen> {
         );
         break;
       case 1:
-        page = const LoginPage();
+        page = BlocProvider(
+          create: (context) => LoginBloc(),
+          child: MainLayout(
+            child: const LoginScreen(),
+          ),
+        );
         break;
       case 2:
         page = const RegisterPage();
