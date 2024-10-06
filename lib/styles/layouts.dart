@@ -18,7 +18,7 @@ class MainLayout extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(0.0),
           child: child,
         ),
       ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/register_screen.dart';
+
 import '../styles/layouts.dart';
 import 'login_screen.dart';
 
-
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
+
   @override
   State<StartScreen> createState() => _StartScreenState();
 }
-
 
 class _StartScreenState extends State<StartScreen> {
   var selectedIndex = 0;
@@ -20,9 +20,10 @@ class _StartScreenState extends State<StartScreen> {
 
     switch (selectedIndex) {
       case 0:
-        page = MainLayout(child: StartScreenContent(
-          onLoginPressed: _onLoginPressed,
-          onRegisterPressed: _onRegisterPressed,
+        page = MainLayout(
+          child: StartScreenContent(
+            onLoginPressed: _onLoginPressed,
+            onRegisterPressed: _onRegisterPressed,
           ),
         );
         break;
@@ -74,14 +75,12 @@ class StartScreenContent extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
-
         Text(
           'Swipe to find movies you and your friends both want to watch. Let’s make a movie match!',
           style: theme.textTheme.titleLarge,
           textAlign: TextAlign.center,
-          ),
+        ),
         const SizedBox(height: 100),
-
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
