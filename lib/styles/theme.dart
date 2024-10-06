@@ -12,6 +12,8 @@ final mainTheme = ThemeData(
   ),
 
   fontFamily: 'Sen',
+  navigationBarTheme: NavigationBarThemeData(backgroundColor: Colors.black.withOpacity(0.6)),
+  iconTheme: IconThemeData(color: Colors.white, size: 30),
   textTheme: TextTheme(
 
     displayMedium: TextStyle(
@@ -26,6 +28,15 @@ final mainTheme = ThemeData(
     titleSmall: TextStyle(
         color: Colors.white
     ),
+
+    bodyLarge:TextStyle(
+          color: Colors.white
+    ),
+
+    headlineLarge: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white
+    )
 
   ),
 );
