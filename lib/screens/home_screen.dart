@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../styles/layouts.dart';
-import '../widgets/nav-drawer.dart';
+import '../widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +31,15 @@ class HomeScreenContent extends StatelessWidget {
         appBar: AppBar(
             title: Text(
               'MoviePop',
-              style: theme.textTheme.displayMedium,
+              style: theme.textTheme.displayMedium?.copyWith(
+                shadows: [
+                  Shadow(
+                    offset: Offset(1.0, 2.0),
+                    blurRadius: 3.0,
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                ],
+              ),
             ),
             iconTheme: theme.iconTheme,
             titleSpacing: 1),
