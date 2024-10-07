@@ -134,39 +134,26 @@ class HomeScreenContent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    FloatingActionButton(
+                    SwipeButton(
+                      icon: CupertinoIcons.clear,
                       onPressed: () => controller.swipe(CardSwiperDirection.left),
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: const Icon(CupertinoIcons.clear, size: 25, color: Colors.white),
                     ),
-                    FloatingActionButton(
+                    SwipeButton(
+                      icon: CupertinoIcons.refresh,
                       onPressed: controller.undo,
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: const Icon(CupertinoIcons.refresh, size: 25, color: Colors.white),
                     ),
-                    FloatingActionButton(
+                    SwipeButton(
+                      icon: CupertinoIcons.heart,
                       onPressed: () => controller.swipe(CardSwiperDirection.right),
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: const Icon(CupertinoIcons.heart, size: 25, color: Colors.white),
                     ),
                     ///MAYBE USEFUL IN THE FUTURE
-                    // FloatingActionButton(
+                    // SwipeButton(
+                    //   icon: CupertinoIcons.arrow_up,
                     //   onPressed: () => controller.swipe(CardSwiperDirection.top),
-                    //   child: const Icon(Icons.keyboard_arrow_up),
                     // ),
-                    // FloatingActionButton(
-                    //   onPressed: () =>
-                    //       controller.swipe(CardSwiperDirection.bottom),
-                    //   child: const Icon(Icons.keyboard_arrow_down),
+                    // SwipeButton(
+                    //   icon: CupertinoIcons.arrow_down,
+                    //   onPressed: () =>  controller.swipe(CardSwiperDirection.bottom),
                     // ),
                   ],
                 ),
