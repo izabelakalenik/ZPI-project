@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../styles/layouts.dart';
-import '../widgets/example_candidate_model.dart';
-import '../widgets/example_card.dart';
+import '../widgets/movie_card/movie_card_model.dart';
+import '../widgets/movie_card/movie_card.dart';
 import '../widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
 
-  final cards = candidates.map(ExampleCard.new).toList();
+  final cards = movies.map(MovieCard.new).toList();
 
   @override
   void dispose() {
@@ -119,8 +120,7 @@ class HomeScreenContent extends StatelessWidget {
                     onSwipe: _onSwipe,
                     onUndo: _onUndo,
                     numberOfCardsDisplayed: 3,
-                    backCardOffset: const Offset(40, 40),
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(15.0),
                     cardBuilder: (
                         context,
                         index,
@@ -131,32 +131,43 @@ class HomeScreenContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-                // TODO: change it to icons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FloatingActionButton(
-                      onPressed: controller.undo,
-                      child: const Icon(Icons.rotate_left),
-                    ),
-                    FloatingActionButton(
                       onPressed: () => controller.swipe(CardSwiperDirection.left),
-                      child: const Icon(Icons.keyboard_arrow_left),
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: const Icon(CupertinoIcons.clear, size: 25, color: Colors.white),
                     ),
                     FloatingActionButton(
-                      onPressed: () =>
-                          controller.swipe(CardSwiperDirection.right),
-                      child: const Icon(Icons.keyboard_arrow_right),
+                      onPressed: controller.undo,
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: const Icon(CupertinoIcons.refresh, size: 25, color: Colors.white),
                     ),
                     FloatingActionButton(
-                      onPressed: () => controller.swipe(CardSwiperDirection.top),
-                      child: const Icon(Icons.keyboard_arrow_up),
+                      onPressed: () => controller.swipe(CardSwiperDirection.right),
+                      backgroundColor: Colors.black.withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: const Icon(CupertinoIcons.heart, size: 25, color: Colors.white),
                     ),
-                    FloatingActionButton(
-                      onPressed: () =>
-                          controller.swipe(CardSwiperDirection.bottom),
-                      child: const Icon(Icons.keyboard_arrow_down),
-                    ),
+                    ///MAYBE USEFUL IN THE FUTURE
+                    // FloatingActionButton(
+                    //   onPressed: () => controller.swipe(CardSwiperDirection.top),
+                    //   child: const Icon(Icons.keyboard_arrow_up),
+                    // ),
+                    // FloatingActionButton(
+                    //   onPressed: () =>
+                    //       controller.swipe(CardSwiperDirection.bottom),
+                    //   child: const Icon(Icons.keyboard_arrow_down),
+                    // ),
                   ],
                 ),
               ],

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'example_candidate_model.dart';
+import 'movie_card_model.dart';
 
-class ExampleCard extends StatelessWidget {
-  final ExampleCandidateModel candidate;
+class MovieCard extends StatelessWidget {
+  final MovieCardModel movie;
 
-  const ExampleCard(
-      this.candidate, {
+  const MovieCard(
+      this.movie, {
         super.key,
       });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -30,41 +32,31 @@ class ExampleCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: candidate.color,
-                ),
-              ),
+            child: Image.asset(
+              movie.poster,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 330,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  candidate.name,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                  movie.title,
+                  style: theme.textTheme.labelLarge,
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  movie.director,
+                  style: theme.textTheme.labelMedium,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  candidate.job,
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  candidate.city,
-                  style: const TextStyle(color: Colors.grey),
+                  movie.description,
+                  style: theme.textTheme.labelSmall,
                 ),
               ],
             ),
