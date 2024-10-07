@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class AboutAuthorsScreen extends StatelessWidget {
+  const AboutAuthorsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Register Page',
+        'About Authors',
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );

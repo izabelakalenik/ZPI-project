@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class ReportProblemScreen extends StatelessWidget {
+  const ReportProblemScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Register Page',
+        'Report Problem',
         style: Theme.of(context).textTheme.displayMedium,
       ),
     );
