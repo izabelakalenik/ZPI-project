@@ -28,34 +28,9 @@ class MainLayout extends StatelessWidget {
 
 class Button extends StatelessWidget {
   final Widget text;
-  final VoidCallback onPressed;
-
-  const Button({required this.text, required this.onPressed, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return SizedBox(
-      width: 150,
-      height: 50,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Colors.white, width: 1.5),
-          foregroundColor: Colors.white,
-          textStyle: Theme.of(context).textTheme.titleLarge,
-        ),
-        child: text,
-      ),
-    );
-  }
-}
-
-class ElevatedCustomButton extends StatelessWidget {
-  final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
 
-  const ElevatedCustomButton({required this.text, required this.onPressed, super.key});
+  const Button({required this.text, required this.onPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
