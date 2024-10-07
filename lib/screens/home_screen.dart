@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../styles/layouts.dart';
+import '../widgets/example_candidate_model.dart';
+import '../widgets/example_card.dart';
 import '../widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,14 +12,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final CardSwiperController controller = CardSwiperController();
+
+  final cards = candidates.map(ExampleCard.new).toList();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MainLayout(child: HomeScreenContent());
+    return MainLayout(child: HomeScreenContent(cards: cards, controller: controller));
   }
 }
 
 class HomeScreenContent extends StatelessWidget {
-  const HomeScreenContent({super.key});
+  final List cards;
+  final CardSwiperController controller;
+
+  const HomeScreenContent({super.key, required this.cards, required this.controller});
 
   void someAction() {}
 
@@ -96,35 +112,78 @@ class HomeScreenContent extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Card(
-                  elevation: 4,
-                  child: SizedBox(
-                    width: 300,
-                    height: 400,
-                    child: Text(
-                      'PHOTO',
-                      style: theme.textTheme.titleSmall,
-                      textAlign: TextAlign.center,
-                    ),
+                Flexible(
+                  child: CardSwiper(
+                    controller: controller,
+                    cardsCount: cards.length,
+                    onSwipe: _onSwipe,
+                    onUndo: _onUndo,
+                    numberOfCardsDisplayed: 3,
+                    backCardOffset: const Offset(40, 40),
+                    padding: const EdgeInsets.all(24.0),
+                    cardBuilder: (
+                        context,
+                        index,
+                        horizontalThresholdPercentage,
+                        verticalThresholdPercentage,
+                        ) =>
+                    cards[index],
                   ),
                 ),
                 const SizedBox(height: 40),
                 // TODO: change it to icons
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Button(
-                      text: const Text('X'),
-                      onPressed: someAction,
+                    FloatingActionButton(
+                      onPressed: controller.undo,
+                      child: const Icon(Icons.rotate_left),
                     ),
-                    const SizedBox(width: 30),
-                    Button(
-                      text: const Text('<3'),
-                      onPressed: someAction,
+                    FloatingActionButton(
+                      onPressed: () => controller.swipe(CardSwiperDirection.left),
+                      child: const Icon(Icons.keyboard_arrow_left),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () =>
+                          controller.swipe(CardSwiperDirection.right),
+                      child: const Icon(Icons.keyboard_arrow_right),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () => controller.swipe(CardSwiperDirection.top),
+                      child: const Icon(Icons.keyboard_arrow_up),
+                    ),
+                    FloatingActionButton(
+                      onPressed: () =>
+                          controller.swipe(CardSwiperDirection.bottom),
+                      child: const Icon(Icons.keyboard_arrow_down),
                     ),
                   ],
                 ),
               ],
-            )));
+            )
+        )
+    );
   }
+  bool _onSwipe(
+      int previousIndex,
+      int? currentIndex,
+      CardSwiperDirection direction,
+      ) {
+    debugPrint(
+      'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
+    );
+    return true;
+  }
+
+  bool _onUndo(
+      int? previousIndex,
+      int currentIndex,
+      CardSwiperDirection direction,
+      ) {
+    debugPrint(
+      'The card $currentIndex was undod from the ${direction.name}',
+    );
+    return true;
+  }
+
 }
