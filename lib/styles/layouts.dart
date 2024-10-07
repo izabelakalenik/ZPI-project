@@ -29,8 +29,9 @@ class MainLayout extends StatelessWidget {
 class Button extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
+  final Color backgroundColor;
 
-  const Button({required this.text, required this.onPressed, super.key});
+  const Button({required this.text, required this.onPressed, super.key, this.backgroundColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class Button extends StatelessWidget {
           // padding: const EdgeInsets.symmetric(vertical: 16.0),
           minimumSize: const Size(150, 50),
           side: const BorderSide(color: Colors.white, width: 1.5),
-          backgroundColor: Colors.white.withOpacity(0.2),
+          backgroundColor: backgroundColor.withOpacity(0.2),
           foregroundColor: Colors.white,
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
