@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../styles/layouts.dart';
 import '../widgets/movie_card/movie_card_model.dart';
 import '../widgets/movie_card/movie_card.dart';
@@ -47,14 +48,14 @@ class HomeScreenContent extends StatelessWidget {
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: 'MoviePop'),
+      appBar: CustomAppBar(text: AppLocalizations.of(context)!.appTitle),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             const SizedBox(height: 10),
             Text(
-              'Categories',
+              AppLocalizations.of(context)!.categories,
               style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: 10),
@@ -65,35 +66,35 @@ class HomeScreenContent extends StatelessWidget {
                 children: <Widget>[
                   Button(
                     text: Text(
-                      'Comedy',
+                      AppLocalizations.of(context)!.comedy,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      'Romance',
+                      AppLocalizations.of(context)!.romance,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      'Crime',
+                      AppLocalizations.of(context)!.crime,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      'Documentary',
+                      AppLocalizations.of(context)!.documentary,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      'Drama',
+                      AppLocalizations.of(context)!.drama,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,

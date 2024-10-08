@@ -1,0 +1,12 @@
+{
+  "appTitle": "MoviePop",
+  "welcomeMessage": "Swipe to find movies you and your friends both want to watch.",
+  "login": "Log in",
+  "register": "Register",
+  "categories": "Categories",
+  "comedy": "Comedy",
+  "romance": "Romance",
+  "crime": "Crime",
+  "documentary": "Documentary",
+  "drama": "Drama"
+}

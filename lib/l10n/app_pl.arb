@@ -1,0 +1,12 @@
+{
+  "appTitle": "MoviePop",
+  "welcomeMessage": "Przesuń, aby znaleźć filmy, które Ty i Twoi znajomi chcecie obejrzeć.",
+  "login": "Zaloguj się",
+  "register": "Zarejestruj się",
+  "categories": "Kategorie",
+  "comedy": "Komedia",
+  "romance": "Romans",
+  "crime": "Kryminał",
+  "documentary": "Dokument",
+  "drama": "Dramat"
+}
