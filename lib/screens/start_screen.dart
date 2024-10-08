@@ -14,10 +14,11 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+        child: Padding(
+      padding: const EdgeInsets.all(20.0),
       child: StartScreenContent(
         onLoginPressed: () {
           Navigator.push(
@@ -39,7 +40,7 @@ class _StartScreenState extends State<StartScreen> {
           );
         },
       ),
-    );
+    ));
   }
 }
 
@@ -81,7 +82,8 @@ class StartScreenContent extends StatelessWidget {
             ),
             const SizedBox(width: 30),
             Button(
-              text: Text(AppLocalizations.of(context)!.register),
+              text: Text(AppLocalizations.of(context)!.register,
+                  textAlign: TextAlign.center),
               onPressed: onRegisterPressed,
             ),
           ],

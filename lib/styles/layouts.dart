@@ -7,7 +7,6 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Container(
         decoration: const BoxDecoration(
@@ -31,7 +30,11 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
 
-  const Button({super.key, required this.text, required this.onPressed, this.backgroundColor = Colors.white});
+  const Button(
+      {super.key,
+      required this.text,
+      required this.onPressed,
+      this.backgroundColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +106,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
       ),
     );
-
   }
 
   // Implement the preferredSize getter to define the app bar size
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -141,17 +142,16 @@ class CustomTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
-          borderSide: const BorderSide(color: Colors.white70), // Gray border on focus
+          borderSide:
+              const BorderSide(color: Colors.white70), // Gray border on focus
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
-          borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
+          borderSide: const BorderSide(
+              color: Colors.white70), // Gray border when enabled
         ),
         suffixIcon: suffixIcon, // Use the optional suffix icon
       ),
     );
   }
 }
-
-
-

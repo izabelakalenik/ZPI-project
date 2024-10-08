@@ -8,13 +8,11 @@ import '../widgets/movie_card/movie_card.dart';
 import '../widgets/movie_card/swipe_utils.dart';
 import '../widgets/nav_drawer.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
@@ -29,16 +27,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(child: HomeScreenContent(cards: cards, controller: controller));
+    return MainLayout(
+        child: HomeScreenContent(cards: cards, controller: controller));
   }
 }
-
 
 class HomeScreenContent extends StatelessWidget {
   final List cards;
   final CardSwiperController controller;
 
-  const HomeScreenContent({super.key, required this.cards, required this.controller});
+  const HomeScreenContent(
+      {super.key, required this.cards, required this.controller});
 
   void someAction() {}
 
@@ -113,12 +112,12 @@ class HomeScreenContent extends StatelessWidget {
                 numberOfCardsDisplayed: 3,
                 padding: const EdgeInsets.all(15.0),
                 cardBuilder: (
-                    context,
-                    index,
-                    horizontalThresholdPercentage,
-                    verticalThresholdPercentage,
-                    ) =>
-                cards[index],
+                  context,
+                  index,
+                  horizontalThresholdPercentage,
+                  verticalThresholdPercentage,
+                ) =>
+                    cards[index],
               ),
             ),
             const SizedBox(height: 40),
@@ -145,4 +144,3 @@ class HomeScreenContent extends StatelessWidget {
     );
   }
 }
-

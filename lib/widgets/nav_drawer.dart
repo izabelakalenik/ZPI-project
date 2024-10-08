@@ -25,8 +25,7 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text(
-                AppLocalizations.of(context)!.home,
+            title: Text(AppLocalizations.of(context)!.home,
                 style: theme.textTheme.bodyLarge),
             // for now clicking on those buttons doesn't do anything
             // in the future change this line to navigate to a proper screen

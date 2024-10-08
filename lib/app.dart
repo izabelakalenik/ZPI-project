@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:zpi_project/screens/home_screen.dart';
-import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +15,7 @@ class App extends StatelessWidget {
       based on the system language, you can omit the locale parameter entirely.
       The app will automatically choose the appropriate locale from the
       supportedLocales list based on the device's language settings.*/
-      locale: const Locale('pl'), // Force Polish locale
+      locale: const Locale('pl'), // Uncomment if u want a polish language
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -28,7 +27,7 @@ class App extends StatelessWidget {
         Locale('pl'), // Polish
       ],
       // To see other screens, change home attribute --> home: const StartScreen(),
-      home: const StartScreen() //const HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }

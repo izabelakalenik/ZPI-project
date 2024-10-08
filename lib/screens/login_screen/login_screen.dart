@@ -53,8 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                    Text(AppLocalizations.of(context)!.login_2, style: theme.textTheme.headlineLarge),
+                    Text(AppLocalizations.of(context)!.login_2,
+                        style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -62,35 +62,36 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: SocialLoginButton(
-                          text: AppLocalizations.of(context)!.google,
-                          textColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.2),
-                          buttonType: SocialLoginButtonType.google,
-                          imageWidth: 20,
-                          borderRadius: 15,
-                          onPressed: () async {
-                            // await socialAuthProvider.handleGoogleSignIn();
-                          },
-                        ),
+                            text: AppLocalizations.of(context)!.google,
+                            textColor: Colors.white,
+                            backgroundColor: Colors.black.withOpacity(0.2),
+                            buttonType: SocialLoginButtonType.google,
+                            imageWidth: 20,
+                            borderRadius: 15,
+                            onPressed: () async {
+                              // await socialAuthProvider.handleGoogleSignIn();
+                            },
+                          ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: SocialLoginButton(
-                          text: AppLocalizations.of(context)!.facebook,
-                          textColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.2),
-                          imageWidth: 20,
-                          buttonType: SocialLoginButtonType.facebook,
-                          borderRadius: 15,
-                          onPressed: () async {
-                            // await socialAuthProvider.handleGoogleSignIn();
-                          },
-                        ),
+                            text: AppLocalizations.of(context)!.facebook,
+                            textColor: Colors.white,
+                            backgroundColor: Colors.black.withOpacity(0.2),
+                            imageWidth: 20,
+                            buttonType: SocialLoginButtonType.facebook,
+                            borderRadius: 15,
+                            onPressed: () async {
+                              // await socialAuthProvider.handleGoogleSignIn();
+                            },
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(AppLocalizations.of(context)!.or, style: theme.textTheme.bodyLarge),
+                    Text(AppLocalizations.of(context)!.or,
+                        style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
@@ -105,14 +106,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons
-                              .visibility,
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: theme.iconTheme.color,
                         ),
                         onPressed: () {
                           setState(() {
                             _obscurePassword =
-                            !_obscurePassword; // Toggle password visibility
+                                !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -131,13 +133,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: Text(AppLocalizations.of(context)!.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                        loginBloc.add(
-                          LoginButtonPressed(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          ),
-                        );
-                      }
+                              loginBloc.add(
+                                LoginButtonPressed(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                            }
                           : null,
                     ),
                     if (state is LoginLoading)

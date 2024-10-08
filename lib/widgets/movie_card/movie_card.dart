@@ -5,9 +5,9 @@ class MovieCard extends StatelessWidget {
   final MovieCardModel movie;
 
   const MovieCard(
-      this.movie, {
-        super.key,
-      });
+    this.movie, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
