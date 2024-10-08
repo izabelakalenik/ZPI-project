@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'login_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Text('Login', style: theme.textTheme.headlineLarge),
+                    Text(AppLocalizations.of(context)!.login_2, style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -61,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: SocialLoginButton(
-                          text: 'Google',
+                          text: AppLocalizations.of(context)!.google,
                           textColor: Colors.white,
                           backgroundColor: Colors.black.withOpacity(0.2),
                           buttonType: SocialLoginButtonType.google,
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: SocialLoginButton(
-                          text: 'Facebook',
+                          text: AppLocalizations.of(context)!.facebook,
                           textColor: Colors.white,
                           backgroundColor: Colors.black.withOpacity(0.2),
                           imageWidth: 20,
@@ -89,18 +90,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text('Or', style: theme.textTheme.bodyLarge),
+                    Text(AppLocalizations.of(context)!.or, style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
-                      labelText: 'Email',
+                      labelText: AppLocalizations.of(context)!.email,
                     ),
                     const SizedBox(height: 16),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
-                      labelText: 'Password',
+                      labelText: AppLocalizations.of(context)!.password,
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -121,13 +122,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'Forgot Password?',
+                        AppLocalizations.of(context)!.forgot_password,
                         style: theme.textTheme.titleSmall,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Button(
-                      text: const Text('Login'),
+                      text: Text(AppLocalizations.of(context)!.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
                         loginBloc.add(

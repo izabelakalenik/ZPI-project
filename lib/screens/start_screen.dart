@@ -76,7 +76,7 @@ class StartScreenContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Button(
-              text: Text(AppLocalizations.of(context)!.login),
+              text: Text(AppLocalizations.of(context)!.login_1),
               onPressed: onLoginPressed,
             ),
             const SizedBox(width: 30),

@@ -1,12 +1,38 @@
 {
   "appTitle": "MoviePop",
   "welcomeMessage": "Przesuń, aby znaleźć filmy, które Ty i Twoi znajomi chcecie obejrzeć.",
-  "login": "Zaloguj się",
+  "login_1": "Zaloguj się",
   "register": "Zarejestruj się",
+
+  "login_2": "Zaloguj się",
+  "google": "Google",
+  "facebook": "Facebook",
+  "email": "E-mail",
+  "password": "Hasło",
+  "forgot_password": "Zapomniałeś hasła?",
+  "or": "Lub",
+
+  "settings": "Ustawienia",
+  "account": "Konto",
+  "edit_profile": "Edytuj profil",
+  "language": "Język",
+  "notifications": "Powiadomienia",
+  "more": "Więcej o nas c:",
+  "authors": "O autorach",
+  "actions": "Akcje",
+  "report": "Zgłoś problem",
+  "logout": "Wyloguj się",
+
+  "menu": "Menu",
+  "home": "Strona główna",
+  "liked": "Polubione filmy",
+  "connect": "Połącz z użytkownikiem",
+
   "categories": "Kategorie",
   "comedy": "Komedia",
   "romance": "Romans",
   "crime": "Kryminał",
   "documentary": "Dokument",
   "drama": "Dramat"
+
 }

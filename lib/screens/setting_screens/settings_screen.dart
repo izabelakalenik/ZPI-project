@@ -3,6 +3,7 @@ import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
 import 'package:zpi_project/screens/setting_screens/language_screen.dart';
 import 'package:zpi_project/screens/setting_screens/notifications_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'edit_profile_screen.dart';
@@ -31,7 +32,7 @@ class SettingsScreenContent extends StatelessWidget {
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: 'Settings'),
+      appBar: CustomAppBar(text: AppLocalizations.of(context)!.settings),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
@@ -40,15 +41,15 @@ class SettingsScreenContent extends StatelessWidget {
             // Account Section
             _buildSectionCard(
               context,
-              title: 'Account',
+              title: AppLocalizations.of(context)!.account,
               items: [
-                _buildMenuItem(Icons.person, 'Edit Profile', context, () {
+                _buildMenuItem(Icons.person, AppLocalizations.of(context)!.edit_profile, context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfileScreen()));
                 }),
-                _buildMenuItem(Icons.language, 'Language', context, () {
+                _buildMenuItem(Icons.language, AppLocalizations.of(context)!.language, context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LanguageScreen()));
                 }),
-                _buildMenuItem(Icons.notifications, 'Notifications', context, () {
+                _buildMenuItem(Icons.notifications, AppLocalizations.of(context)!.notifications, context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationsScreen()));
                 }),
               ],
@@ -58,9 +59,9 @@ class SettingsScreenContent extends StatelessWidget {
             // About Section
             _buildSectionCard(
               context,
-              title: 'More About Us c:',
+              title: AppLocalizations.of(context)!.more,
               items: [
-                _buildMenuItem(Icons.help_outline, 'About Authors', context, () {
+                _buildMenuItem(Icons.help_outline, AppLocalizations.of(context)!.authors, context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => AboutAuthorsScreen()));
                 }),
               ],
@@ -70,12 +71,12 @@ class SettingsScreenContent extends StatelessWidget {
             // Actions Section
             _buildSectionCard(
               context,
-              title: 'Actions',
+              title: AppLocalizations.of(context)!.actions,
               items: [
-                _buildMenuItem(Icons.report, 'Report a problem', context, () {
+                _buildMenuItem(Icons.report, AppLocalizations.of(context)!.report, context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ReportProblemScreen()));
                 }),
-                _buildMenuItem(Icons.logout, 'Log out', context, () {
+                _buildMenuItem(Icons.logout, AppLocalizations.of(context)!.logout, context, () {
                   // Add log out functionality
                 }),
               ],

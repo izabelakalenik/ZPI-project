@@ -64,6 +64,7 @@ class HomeScreenContent extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
+                  // This will be derived from API
                   Button(
                     text: Text(
                       AppLocalizations.of(context)!.comedy,

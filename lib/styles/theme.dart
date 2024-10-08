@@ -22,7 +22,8 @@ final mainTheme = ThemeData(
     ),
 
     titleLarge: TextStyle(
-      color: Colors.white
+      color: Colors.white,
+
     ),
 
     titleSmall: TextStyle(
