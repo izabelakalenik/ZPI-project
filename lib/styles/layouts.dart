@@ -67,7 +67,7 @@ class SwipeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => onPressed,
+      onPressed: onPressed,
       backgroundColor: Colors.black.withOpacity(0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
@@ -75,6 +75,36 @@ class SwipeButton extends StatelessWidget {
       child: Icon(icon, size: 25, color: Colors.white),
     );
   }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String text;
+
+  const CustomAppBar({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(
+        text,
+        style: Theme.of(context).textTheme.displayMedium?.copyWith(
+          shadows: [
+            Shadow(
+              offset: Offset(1.0, 2.0),
+              blurRadius: 3.0,
+              color: Colors.black.withOpacity(0.3),
+            ),
+          ],
+        ),
+      ),
+      iconTheme: Theme.of(context).iconTheme,
+      centerTitle: true,
+    );
+  }
+
+  // Implement the preferredSize getter to define the app bar size
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 

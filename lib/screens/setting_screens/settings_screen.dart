@@ -3,7 +3,6 @@ import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
 import 'package:zpi_project/screens/setting_screens/language_screen.dart';
 import 'package:zpi_project/screens/setting_screens/notifications_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
-
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'edit_profile_screen.dart';
@@ -29,26 +28,10 @@ class SettingsScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: AppBar(
-        title: Text(
-          'Settings',
-          style: theme.textTheme.displayMedium?.copyWith(
-            shadows: [
-              Shadow(
-                offset: Offset(1.0, 2.0),
-                blurRadius: 3.0,
-                color: Colors.black.withOpacity(0.3),
-              ),
-            ],
-          ),
-        ),
-        iconTheme: theme.iconTheme,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: 'Settings'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
