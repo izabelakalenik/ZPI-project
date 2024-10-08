@@ -31,7 +31,7 @@ class Button extends StatelessWidget {
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
 
-  const Button({required this.text, required this.onPressed, super.key, this.backgroundColor = Colors.white});
+  const Button({super.key, required this.text, required this.onPressed, this.backgroundColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +57,60 @@ class Button extends StatelessWidget {
     );
   }
 }
+
+class SwipeButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onPressed;
+
+  const SwipeButton({super.key, required this.icon, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: onPressed,
+      backgroundColor: Colors.black.withOpacity(0.5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Icon(icon, size: 25, color: Colors.white),
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String text;
+
+  const CustomAppBar({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: AppBar(
+        title: Text(
+          text,
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+            shadows: [
+              Shadow(
+                offset: Offset(1.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black.withOpacity(0.3),
+              ),
+            ],
+          ),
+        ),
+        iconTheme: Theme.of(context).iconTheme,
+        centerTitle: true,
+      ),
+    );
+
+  }
+
+  // Implement the preferredSize getter to define the app bar size
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
