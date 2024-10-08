@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       based on the system language, you can omit the locale parameter entirely.
       The app will automatically choose the appropriate locale from the
       supportedLocales list based on the device's language settings.*/
-      locale: const Locale('pl'), // Uncomment if u want a polish language
+      // locale: const Locale('pl'), // Uncomment if u want a polish language
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
