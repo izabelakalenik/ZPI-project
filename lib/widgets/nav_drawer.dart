@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zpi_project/screens/home_screen.dart';
 import '../screens/setting_screens/settings_screen.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -26,7 +27,13 @@ class NavDrawer extends StatelessWidget {
             title: Text('Home', style: theme.textTheme.bodyLarge),
             // for now clicking on those buttons doesn't do anything
             // in the future change this line to navigate to a proper screen
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.of(context).pop(),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              ),
+            },
           ),
           ListTile(
             title: Text(

@@ -33,9 +33,10 @@ class SettingsScreenContent extends StatelessWidget {
       drawer: NavDrawer(),
       appBar: CustomAppBar(text: 'Settings'),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
+            const SizedBox(height: 10),
             // Account Section
             _buildSectionCard(
               context,

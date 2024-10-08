@@ -84,22 +84,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(
-        text,
-        style: Theme.of(context).textTheme.displayMedium?.copyWith(
-          shadows: [
-            Shadow(
-              offset: Offset(1.0, 2.0),
-              blurRadius: 3.0,
-              color: Colors.black.withOpacity(0.3),
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: AppBar(
+        title: Text(
+          text,
+          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+            shadows: [
+              Shadow(
+                offset: Offset(1.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black.withOpacity(0.3),
+              ),
+            ],
+          ),
         ),
+        iconTheme: Theme.of(context).iconTheme,
+        centerTitle: true,
       ),
-      iconTheme: Theme.of(context).iconTheme,
-      centerTitle: true,
     );
+
   }
 
   // Implement the preferredSize getter to define the app bar size
