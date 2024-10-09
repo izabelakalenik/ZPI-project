@@ -65,14 +65,19 @@ class Button extends StatelessWidget {
 class SwipeButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
-  final hero_tag;
+  final String heroTag;
 
-  const SwipeButton({super.key, required this.icon, required this.onPressed, required this.hero_tag});
+  const SwipeButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    required this.heroTag,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      heroTag: hero_tag,
+      heroTag: heroTag,
       onPressed: onPressed,
       backgroundColor: Colors.black.withOpacity(0.5),
       shape: RoundedRectangleBorder(
