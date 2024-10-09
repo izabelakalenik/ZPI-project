@@ -1,24 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../styles/layouts.dart';
+import '../widgets/movie_card/movie_card_model.dart';
+import '../widgets/movie_card/movie_card.dart';
+import '../widgets/movie_card/swipe_utils.dart';
 import '../widgets/nav_drawer.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
+  final CardSwiperController controller = CardSwiperController();
+
+  final cards = movies.map(MovieCard.new).toList();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MainLayout(child: HomeScreenContent());
+    return MainLayout(child: HomeScreenContent(cards: cards, controller: controller));
   }
 }
 
+
 class HomeScreenContent extends StatelessWidget {
-  const HomeScreenContent({super.key});
+  final List cards;
+  final CardSwiperController controller;
+
+  const HomeScreenContent({super.key, required this.cards, required this.controller});
 
   void someAction() {}
 
@@ -27,106 +46,101 @@ class HomeScreenContent extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
-            title: Text(
-              'MoviePop',
-              style: theme.textTheme.displayMedium?.copyWith(
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 2.0),
-                    blurRadius: 3.0,
-                    color: Colors.black.withOpacity(0.3),
+      drawer: NavDrawer(),
+      appBar: CustomAppBar(text: 'MoviePop'),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Text(
+              'Categories',
+              style: theme.textTheme.titleLarge,
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 40,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Button(
+                    text: Text(
+                      'Comedy',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    onPressed: someAction,
+                  ),
+                  Button(
+                    text: Text(
+                      'Romance',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    onPressed: someAction,
+                  ),
+                  Button(
+                    text: Text(
+                      'Crime',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    onPressed: someAction,
+                  ),
+                  Button(
+                    text: Text(
+                      'Documentary',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    onPressed: someAction,
+                  ),
+                  Button(
+                    text: Text(
+                      'Drama',
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    onPressed: someAction,
                   ),
                 ],
               ),
             ),
-            iconTheme: theme.iconTheme,
-            titleSpacing: 1),
-        body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
+            const SizedBox(height: 20),
+            Flexible(
+              child: CardSwiper(
+                controller: controller,
+                cardsCount: cards.length,
+                onSwipe: SwipeUtils.onSwipe,
+                onUndo: SwipeUtils.onUndo,
+                numberOfCardsDisplayed: 3,
+                padding: const EdgeInsets.all(15.0),
+                cardBuilder: (
+                    context,
+                    index,
+                    horizontalThresholdPercentage,
+                    verticalThresholdPercentage,
+                    ) =>
+                cards[index],
+              ),
+            ),
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const SizedBox(height: 20),
-                Text(
-                  'Categories',
-                  style: theme.textTheme.titleLarge,
+                SwipeButton(
+                  icon: CupertinoIcons.clear,
+                  onPressed: () => controller.swipe(CardSwiperDirection.left),
                 ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 40,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    // TODO: this shouldn't be hard-coded, ideally it should be read from database, for now we could extract those string into a constant variable
-                    children: <Widget>[
-                      Button(
-                        text: Text(
-                          'Comedy',
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        onPressed: someAction,
-                      ),
-                      Button(
-                        text: Text(
-                          'Romance',
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        onPressed: someAction,
-                      ),
-                      Button(
-                        text: Text(
-                          'Crime',
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        onPressed: someAction,
-                      ),
-                      Button(
-                        text: Text(
-                          'Documentary',
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        onPressed: someAction,
-                      ),
-                      Button(
-                        text: Text(
-                          'Drama',
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        onPressed: someAction,
-                      ),
-                    ],
-                  ),
+                SwipeButton(
+                  icon: CupertinoIcons.refresh,
+                  onPressed: controller.undo,
                 ),
-                const SizedBox(height: 20),
-                Card(
-                  elevation: 4,
-                  child: SizedBox(
-                    width: 300,
-                    height: 400,
-                    child: Text(
-                      'PHOTO',
-                      style: theme.textTheme.titleSmall,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
-                // TODO: change it to icons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Button(
-                      text: const Text('X'),
-                      onPressed: someAction,
-                    ),
-                    const SizedBox(width: 30),
-                    Button(
-                      text: const Text('<3'),
-                      onPressed: someAction,
-                    ),
-                  ],
+                SwipeButton(
+                  icon: CupertinoIcons.heart,
+                  onPressed: () => controller.swipe(CardSwiperDirection.right),
                 ),
               ],
-            )));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
+
