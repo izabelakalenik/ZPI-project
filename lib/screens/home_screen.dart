@@ -127,14 +127,17 @@ class HomeScreenContent extends StatelessWidget {
                 SwipeButton(
                   icon: CupertinoIcons.clear,
                   onPressed: () => controller.swipe(CardSwiperDirection.left),
+                  hero_tag: "left_tag",
                 ),
                 SwipeButton(
                   icon: CupertinoIcons.refresh,
                   onPressed: controller.undo,
+                  hero_tag: "undo_tag",
                 ),
                 SwipeButton(
                   icon: CupertinoIcons.heart,
                   onPressed: () => controller.swipe(CardSwiperDirection.right),
+                  hero_tag: "heart_tag",
                 ),
               ],
             ),
