@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import '../home_screen.dart';
 import 'register_bloc.dart';
 
 class FavCategoriesScreen extends StatefulWidget {
@@ -27,7 +26,6 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
 
     return MainLayout(
@@ -68,12 +66,11 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                     itemBuilder: (context, index) {
                     final genre = _genres[index];
                       return CheckboxListTile(
-                        activeColor: Colors.purple,
                         side: BorderSide(color: Colors.white),
                         checkColor: Colors.white,
                         fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
                           if (states.contains(WidgetState.selected)) {
-                            return Colors.purple;
+                            return Color(0xFF91007E);
                           }
                           return Colors.white;
                         }),
@@ -100,18 +97,16 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
               ),
               const SizedBox(height: 20),
               Button(
+                width: 200,
                 text: Text('Create Account', textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                  // Akcja po kliknięciu przycisku
-                  // Możesz dodać logikę do przekazywania danych do BLoC
-                  // loginBloc.add(RegisterFavGenres(_selectedGenres));
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => WelcomeScreen()),
                   );
                 }
-                    : null, // Przycisk nieaktywny jeśli lista jest pusta
+                    : null, //the button disabled if nothing chosen
               ),
               const SizedBox(height: 16),
             ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zpi_project/screens/register_screen.dart';
 import 'package:zpi_project/screens/register_screen/register_bloc.dart';
 import 'package:zpi_project/screens/register_screen/register_screen.dart';
 import '../styles/layouts.dart';

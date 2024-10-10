@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+import '../login_screen/login_bloc.dart';
+import '../login_screen/login_screen.dart';
 import 'register_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
@@ -17,6 +19,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
+  void _navigateToLoginScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => LoginBloc(),
+          child: const LoginScreen(),
+        ),
+      ),
+    );
+  }
   @override
   void dispose() {
     _emailController.dispose();
@@ -150,9 +163,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        'Already have an account? Log in',
-                        style: theme.textTheme.titleSmall,
+                      child: InkWell(
+                        onTap: _navigateToLoginScreen,
+                        child: Text(
+                          'Already have an account? Log in',
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],

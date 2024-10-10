@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+import '../register_screen/register_bloc.dart';
+import '../register_screen/register_screen.dart';
 import 'login_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,6 +20,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
+  void _navigateToRegisterScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => RegisterBloc(),
+          child: const RegisterScreen(),
+        ),
+      ),
+    );
+  }
   @override
   void dispose() {
     _emailController.dispose();
@@ -152,7 +165,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(),
                       ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        onTap: _navigateToRegisterScreen,
+                        child: Text(
+                          "Don't have an account yet? Register",
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );

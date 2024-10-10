@@ -29,18 +29,20 @@ class Button extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
+  final double? width;
+  final double? height;
 
   const Button(
       {super.key,
       required this.text,
       required this.onPressed,
-      this.backgroundColor = Colors.white});
+      this.backgroundColor = Colors.white,
+      this.width = 150,
+      this.height = 50});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
-      height: 50,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

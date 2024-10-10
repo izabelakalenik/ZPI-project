@@ -37,13 +37,12 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
 
     if (picked != null) {
       setState(() {
-        _dateOfBirthController.text = DateFormat('dd/MM/yyyy').format(picked); // Ustawiamy datę w formacie dd/MM/yyyy
+        _dateOfBirthController.text = DateFormat('dd/MM/yyyy').format(picked);
       });
     }
   }
   @override
   Widget build(BuildContext context) {
-    final loginBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
 
     return MainLayout(
@@ -123,7 +122,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                                 borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
                               ),
                             ),
-                            dropdownColor: Color(0xFFE7C039),
+                            dropdownColor: Color(0xFFC96786).withOpacity(0.9),
                             items: _options.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -144,14 +143,6 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       text: const Text('Next'),
                       onPressed: state is! RegisterLoading
                           ? () {
-                        // loginBloc.add(
-                        //   RegisterButtonPressed(
-                        //     name: _nameController.text,
-                        //     nickname: _nicknameController.text,
-                        //     dateOfBirth: _dateOfBirthController.text,
-                        //     option: _selectedOption,
-                        //   ),
-                        // );
                         Navigator.push(
                           context,
                           MaterialPageRoute(
