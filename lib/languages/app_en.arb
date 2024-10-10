@@ -1,0 +1,38 @@
+{
+  "appTitle": "MoviePop",
+  "welcomeMessage": "Swipe to find movies you and your friends both want to watch.",
+  "login_1": "Log in",
+  "register": "Register",
+
+  "login_2": "Login",
+  "google": "Google",
+  "facebook": "Facebook",
+  "email": "Email",
+  "password": "Password",
+  "forgot_password": "Forgot Password?",
+  "or": "Or",
+
+  "settings": "Settings",
+  "account": "Account",
+  "edit_profile": "Edit Profile",
+  "language": "Language",
+  "notifications": "Notifications",
+  "more": "More About Us c:",
+  "authors": "About Authors",
+  "actions": "Actions",
+  "report": "Report a problem",
+  "logout": "Log out",
+
+  "menu": "Menu",
+  "home": "Home",
+  "liked": "Liked movies",
+  "connect": "Connect to user",
+
+  "categories": "Categories",
+  "comedy": "Comedy",
+  "romance": "Romance",
+  "crime": "Crime",
+  "documentary": "Documentary",
+  "drama": "Drama"
+
+}

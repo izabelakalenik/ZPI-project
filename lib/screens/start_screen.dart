@@ -6,6 +6,7 @@ import 'package:zpi_project/screens/register_screen/register_screen.dart';
 import '../styles/layouts.dart';
 import 'login_screen/login_bloc.dart';
 import 'login_screen/login_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -15,10 +16,11 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+        child: Padding(
+      padding: const EdgeInsets.all(20.0),
       child: StartScreenContent(
         onLoginPressed: () {
           Navigator.push(
@@ -43,7 +45,7 @@ class _StartScreenState extends State<StartScreen> {
           );
         },
       ),
-    );
+    ));
   }
 }
 
@@ -65,13 +67,13 @@ class StartScreenContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'MoviePop',
+          AppLocalizations.of(context)!.appTitle,
           style: theme.textTheme.displayMedium,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
         Text(
-          'Swipe to find movies you and your friends both want to watch. Let’s make a movie match!',
+          AppLocalizations.of(context)!.welcomeMessage,
           style: theme.textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -80,12 +82,13 @@ class StartScreenContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Button(
-              text: const Text('Log in'),
+              text: Text(AppLocalizations.of(context)!.login_1),
               onPressed: onLoginPressed,
             ),
             const SizedBox(width: 30),
             Button(
-              text: const Text('Register'),
+              text: Text(AppLocalizations.of(context)!.register,
+                  textAlign: TextAlign.center),
               onPressed: onRegisterPressed,
             ),
           ],

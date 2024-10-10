@@ -12,6 +12,7 @@ class MovieCardModel {
   });
 }
 
+// This will be derived from API
 final List<MovieCardModel> movies = [
   MovieCardModel(
     title: 'Forest Gump',

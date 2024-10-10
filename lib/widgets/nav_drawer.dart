@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/home_screen.dart';
 import '../screens/setting_screens/settings_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -18,13 +19,14 @@ class NavDrawer extends StatelessWidget {
           Center(
             child: DrawerHeader(
               child: Text(
-                'Menu',
+                AppLocalizations.of(context)!.menu,
                 style: theme.textTheme.headlineLarge,
               ),
             ),
           ),
           ListTile(
-            title: Text('Home', style: theme.textTheme.bodyLarge),
+            title: Text(AppLocalizations.of(context)!.home,
+                style: theme.textTheme.bodyLarge),
             // for now clicking on those buttons doesn't do anything
             // in the future change this line to navigate to a proper screen
             onTap: () => {
@@ -37,21 +39,21 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              'Liked movies',
+              AppLocalizations.of(context)!.liked,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             title: Text(
-              'Connect to user',
+              AppLocalizations.of(context)!.connect,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             title: Text(
-              'Settings',
+              AppLocalizations.of(context)!.settings,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {
