@@ -38,25 +38,24 @@ class SettingsScreenContent extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             // Account Section
-            _buildSectionCard(
+            buildSectionCard(
               context,
               title: AppLocalizations.of(context)!.account,
               items: [
-                _buildMenuItem(Icons.person,
+                buildMenuItem(Icons.person,
                     AppLocalizations.of(context)!.edit_profile, context, () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => EditProfileScreen()));
                 }),
-                _buildMenuItem(Icons.language,
-                    AppLocalizations.of(context)!.language, context, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LanguageScreen()));
-                }),
-                _buildMenuItem(Icons.notifications,
+                buildMenuItem(
+                  Icons.language,
+                  AppLocalizations.of(context)!.language,
+                  context,
+                      () {showLanguageDialog(context);},
+                ),
+                buildMenuItem(Icons.notifications,
                     AppLocalizations.of(context)!.notifications, context, () {
                   Navigator.push(
                       context,
@@ -68,11 +67,11 @@ class SettingsScreenContent extends StatelessWidget {
             const SizedBox(height: 20),
 
             // About Section
-            _buildSectionCard(
+            buildSectionCard(
               context,
               title: AppLocalizations.of(context)!.more,
               items: [
-                _buildMenuItem(Icons.help_outline,
+                buildMenuItem(Icons.help_outline,
                     AppLocalizations.of(context)!.authors, context, () {
                   Navigator.push(
                       context,
@@ -84,11 +83,11 @@ class SettingsScreenContent extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Actions Section
-            _buildSectionCard(
+            buildSectionCard(
               context,
               title: AppLocalizations.of(context)!.actions,
               items: [
-                _buildMenuItem(
+                buildMenuItem(
                     Icons.report, AppLocalizations.of(context)!.report, context,
                     () {
                   Navigator.push(
@@ -96,58 +95,12 @@ class SettingsScreenContent extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => ReportProblemScreen()));
                 }),
-                _buildMenuItem(
+                buildMenuItem(
                     Icons.logout, AppLocalizations.of(context)!.logout, context,
                     () {
                   // Add log out functionality
                 }),
               ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSectionCard(BuildContext context,
-      {required String title, required List<Widget> items}) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 4,
-      color: Colors.white.withOpacity(0.2),
-      shadowColor: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 10),
-            Column(children: items),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuItem(
-      IconData icon, String label, BuildContext context, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap, // Handle tap
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 15),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),
