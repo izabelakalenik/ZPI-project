@@ -61,15 +61,23 @@ class Button extends StatelessWidget {
   }
 }
 
+
 class SwipeButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
+  final String heroTag;
 
-  const SwipeButton({super.key, required this.icon, required this.onPressed});
+  const SwipeButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    required this.heroTag,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: heroTag,
       onPressed: onPressed,
       backgroundColor: Colors.black.withOpacity(0.5),
       shape: RoundedRectangleBorder(
@@ -79,7 +87,6 @@ class SwipeButton extends StatelessWidget {
     );
   }
 }
-
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
 
