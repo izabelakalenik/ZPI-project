@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen.dart';
+import 'package:zpi_project/screens/register_screen/register_bloc.dart';
+import 'package:zpi_project/screens/register_screen/register_screen.dart';
 import '../styles/layouts.dart';
 import 'login_screen/login_bloc.dart';
 import 'login_screen/login_screen.dart';
@@ -33,7 +35,10 @@ class _StartScreenState extends State<StartScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const RegisterPage(),
+              builder: (context) => BlocProvider(
+                create: (context) => RegisterBloc(),
+                child: const RegisterScreen(),
+              ),
             ),
           );
         },

@@ -116,13 +116,15 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final bool obscureText;
-  final Widget? suffixIcon; // Allow suffix icon
+  final Widget? suffixIcon;
+  final String? hintText;// Allow suffix icon
 
   const CustomTextField({
     required this.controller,
     required this.labelText,
     this.obscureText = false,
     this.suffixIcon,
+    this.hintText,
     super.key,
   });
 
@@ -134,7 +136,9 @@ class CustomTextField extends StatelessWidget {
       style: const TextStyle(color: Colors.white), // Text color
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white), // Label color
+        labelStyle: const TextStyle(color: Colors.white),
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.white),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
           borderSide: const BorderSide(color: Colors.white70), // Gray border

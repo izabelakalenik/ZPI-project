@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'register_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:intl/intl.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
   const SecondRegisterScreen({super.key});
@@ -14,14 +15,32 @@ class SecondRegisterScreen extends StatefulWidget {
 class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _nameController = TextEditingController();
   final _nicknameController = TextEditingController();
+  final _dateOfBirthController = TextEditingController();
+  String? _selectedOption;
+  final List<String> _options = ['cats', 'dogs'];
 
   @override
   void dispose() {
     _nameController.dispose();
     _nicknameController.dispose();
+    _dateOfBirthController.dispose();
     super.dispose();
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _dateOfBirthController.text = DateFormat('dd/MM/yyyy').format(picked); // Ustawiamy datę w formacie dd/MM/yyyy
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final loginBloc = BlocProvider.of<RegisterBloc>(context);
@@ -51,20 +70,74 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Tell us more about you!', style: theme.textTheme.headlineLarge),
+                    Text('Tell us more about you!', style: theme.textTheme.headlineLarge, textAlign: TextAlign.center),
                     const SizedBox(height: 20),
-                    Text('Or', style: theme.textTheme.bodyLarge),
-                    const SizedBox(height: 20),
-                    // Email Field
+                    // Name Field
                     CustomTextField(
                       controller: _nameController,
                       labelText: 'Name',
                     ),
                     const SizedBox(height: 16),
-                    // Password Field
+                    // Username Field
                     CustomTextField(
                       controller: _nicknameController,
-                      labelText: 'Nickname',
+                      labelText: 'Username',
+                    ),
+                    const SizedBox(height: 16),
+                    // Date of Birth Field
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: CustomTextField(
+                            controller: _dateOfBirthController,
+                            labelText: 'Date of Birth',
+                            hintText: 'dd/MM/yyyy',
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.calendar_today),
+                                color: Colors.white.withOpacity(0.9),
+                                onPressed: () {
+                                  _selectDate(context);
+                                },
+                              ),
+                            ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedOption,
+                            style: const TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                labelText: 'Cats Or Dogs?',
+                                labelStyle: const TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                                borderSide: const BorderSide(color: Colors.white70), // Gray border on focus
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                                borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
+                              ),
+                            ),
+                            dropdownColor: Color(0xFFE7C039),
+                            items: _options.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedOption = newValue;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     Button(
@@ -75,6 +148,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         //   RegisterButtonPressed(
                         //     name: _nameController.text,
                         //     nickname: _nicknameController.text,
+                        //     dateOfBirth: _dateOfBirthController.text,
+                        //     option: _selectedOption,
                         //   ),
                         // );
                       }
@@ -86,13 +161,6 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         child: CircularProgressIndicator(),
                       ),
                     const SizedBox(height: 16),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Already have an account? Log in',
-                        style: theme.textTheme.titleSmall,
-                      ),
-                    ),
                   ],
                 ),
               );

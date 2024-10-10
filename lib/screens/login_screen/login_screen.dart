@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'login_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -135,6 +136,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             email: _emailController.text,
                             password: _passwordController.text,
                           ),
+                        );
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                         );
                       }
                           : null,

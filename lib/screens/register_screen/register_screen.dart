@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'register_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -25,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = BlocProvider.of<RegisterBloc>(context);
+    final registerBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
 
     return MainLayout(
@@ -121,10 +122,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       text: const Text('Next'),
                       onPressed: state is! RegisterLoading
                           ? () {
-                        loginBloc.add(
+                        registerBloc.add(
                           RegisterButtonPressed(
                             email: _emailController.text,
                             password: _passwordController.text,
+                          ),
+                        );
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => RegisterBloc(),
+                              child: const SecondRegisterScreen(),
+                            ),
                           ),
                         );
                       }
