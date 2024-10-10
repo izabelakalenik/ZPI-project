@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
+import 'package:zpi_project/styles/layouts.dart';
+import '../home_screen.dart';
+import 'register_bloc.dart';
+
+class FavCategoriesScreen extends StatefulWidget {
+  const FavCategoriesScreen({super.key});
+
+  @override
+  State<FavCategoriesScreen> createState() => _FavCategoriesScreenState();
+}
+
+class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
+  final List<String> _genres = [
+    'Romantic Comedy',
+    'Adventure',
+    'Horror',
+    'Sci-fi',
+    'Thriller',
+    'Anime',
+    'Drama'
+  ];
+
+  final List<String> _selectedGenres = [];
+
+  @override
+  Widget build(BuildContext context) {
+    final loginBloc = BlocProvider.of<RegisterBloc>(context);
+    final theme = Theme.of(context);
+
+    return MainLayout(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'What do you like?',
+                style: theme.textTheme.headlineLarge?.copyWith(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Choose at least one',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 350,
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.transparent, width: 0),
+                  ),
+                  child: ListView.builder(
+                    itemCount: _genres.length,
+                    itemBuilder: (context, index) {
+                    final genre = _genres[index];
+                      return CheckboxListTile(
+                        activeColor: Colors.purple,
+                        side: BorderSide(color: Colors.white),
+                        checkColor: Colors.white,
+                        fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return Colors.purple;
+                          }
+                          return Colors.white;
+                        }),
+                        value: _selectedGenres.contains(genre),
+                        onChanged: (isChecked) {
+                          setState(() {
+                            if (isChecked!) {
+                              _selectedGenres.add(genre);
+                            } else {
+                              _selectedGenres.remove(genre);
+                            }
+                          });
+                        },
+                        title: Text(
+                          genre,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Button(
+                text: Text('Create Account', textAlign: TextAlign.center),
+                onPressed: _selectedGenres.isNotEmpty
+                    ? () {
+                  // Akcja po kliknięciu przycisku
+                  // Możesz dodać logikę do przekazywania danych do BLoC
+                  // loginBloc.add(RegisterFavGenres(_selectedGenres));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                  );
+                }
+                    : null, // Przycisk nieaktywny jeśli lista jest pusta
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

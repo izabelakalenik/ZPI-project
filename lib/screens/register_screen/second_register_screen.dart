@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'register_bloc.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:intl/intl.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
@@ -152,6 +152,15 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         //     option: _selectedOption,
                         //   ),
                         // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => RegisterBloc(),
+                              child: const FavCategoriesScreen(),
+                            ),
+                          ),
+                        );
                       }
                           : null,
                     ),
