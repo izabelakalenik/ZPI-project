@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swipe_detector/flutter_swipe_detector.dart';
-
 import '../../styles/layouts.dart';
 import '../home_screen.dart';
 
@@ -40,7 +38,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: GestureDetector(
         onVerticalDragUpdate: (details) {
           if (details.primaryDelta! < -10) {
-            // Sprawdza, czy przeciągnięcie było odpowiednio mocne w górę
             _navigateToHomeScreen();
           }
         },
