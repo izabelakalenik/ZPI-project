@@ -121,13 +121,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
+  final String? initialValue;
   final Widget? suffixIcon; // Allow suffix icon
 
   const CustomTextField({
-    required this.controller,
+    this.controller,
+    this.initialValue,
     required this.labelText,
     this.obscureText = false,
     this.suffixIcon,
@@ -137,6 +139,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
       style: const TextStyle(color: Colors.white), // Text color
@@ -162,3 +165,6 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
+
+
