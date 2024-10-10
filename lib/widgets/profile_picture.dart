@@ -44,7 +44,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
                 child: pickedImage != null
                     ? null
                     : Icon(Icons.person_rounded,
-                        color: Colors.amberAccent, size: 150))));
+                        color: Color(0xFFD08C4E), size: 150))));
   }
 
   Future<void> onProfileTapped() async {

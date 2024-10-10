@@ -20,7 +20,7 @@ class _EditProfileState extends State<EditProfileScreen> {
   TextEditingController? _emailController;
   TextEditingController? _usernameController;
 
-  String _selectedCountry = "Poland";
+  late String _selectedCountry;
   bool _obscurePassword = true;
   final List<String> _countries = ['Poland', 'France', 'Germany'];
 
@@ -41,6 +41,7 @@ class _EditProfileState extends State<EditProfileScreen> {
     _usernameController?.addListener(() {
       _usernameController == null ? "" : _usernameController!.text;
     });
+    _selectedCountry = (user.country ?? "");
     setState(() {});
   }
 
@@ -108,8 +109,8 @@ class _EditProfileState extends State<EditProfileScreen> {
           DropdownButtonFormField<String>(
             style: TextStyle(color: Colors.white),
             iconEnabledColor: Colors.white,
-            dropdownColor: Colors.black87,
-            value: _selectedCountry,
+            dropdownColor: Color(0xFFDA5888).withOpacity(0.9),
+            value: user.country,
             onChanged: (String? value) {
               setState(() {
                 _selectedCountry = value!;
@@ -126,12 +127,12 @@ class _EditProfileState extends State<EditProfileScreen> {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0),
                 borderSide: const BorderSide(
-                    color: Colors.white70), // Gray border on focus
+                    color: Colors.white70),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0),
                 borderSide: const BorderSide(
-                    color: Colors.white70), // Gray border when enabled
+                    color: Colors.white70),
               ),
             ),
             items: _countries.map<DropdownMenuItem<String>>((String value) {
