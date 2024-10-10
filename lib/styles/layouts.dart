@@ -61,7 +61,6 @@ class Button extends StatelessWidget {
   }
 }
 
-
 class SwipeButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
@@ -87,6 +86,7 @@ class SwipeButton extends StatelessWidget {
     );
   }
 }
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
 
@@ -142,10 +142,12 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white), // Text color
+      style: const TextStyle(color: Colors.white),
+      // Text color
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white), // Label color
+        labelStyle: const TextStyle(color: Colors.white),
+        // Label color
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
           borderSide: const BorderSide(color: Colors.white70), // Gray border
@@ -165,6 +167,3 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
-
-
-
