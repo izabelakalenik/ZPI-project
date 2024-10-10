@@ -21,6 +21,11 @@ final mainTheme = ThemeData(
       color: Colors.white
     ),
 
+    displaySmall: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white
+    ),
+
     titleLarge: TextStyle(
       color: Colors.white,
 

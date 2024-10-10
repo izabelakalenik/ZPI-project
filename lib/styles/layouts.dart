@@ -49,9 +49,11 @@ class Button extends StatelessWidget {
           ),
           // padding: const EdgeInsets.symmetric(vertical: 16.0),
           minimumSize: const Size(150, 50),
-          side: const BorderSide(color: Colors.white, width: 1.5),
-          backgroundColor: backgroundColor.withOpacity(0.2),
+          backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
+          side: BorderSide(
+              color: backgroundColor == Colors.black? Colors.transparent : Colors.white,
+              width: 1.5),
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
         ),
@@ -202,7 +204,7 @@ Widget buildMenuItem(
           const SizedBox(width: 15),
           Text(
             label,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge
           ),
         ],
       ),

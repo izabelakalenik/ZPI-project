@@ -1,13 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../styles/layouts.dart';
+import '../../styles/theme.dart';
 
 
 void showLanguageDialog(BuildContext context){
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return const LanguageDialog();
+      return BackdropFilter(filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6), child:LanguageDialog() );
     },
   );
 }
@@ -26,10 +29,6 @@ class _LanguageDialogState extends State<LanguageDialog> {
     setState(() {
       selectedLanguage = language;
     });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Language changed to $language')),
-    );
   }
 
   @override
@@ -38,7 +37,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      backgroundColor: Colors.pink.withOpacity(0.8),
+      backgroundColor: Color(0xFFFFC8DD).withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: LanguageDialogContent(
@@ -85,9 +84,12 @@ class LanguageDialogContent extends StatelessWidget {
         buildLanguageMenuItem(AppLocalizations.of(context)!.english, context),
         const SizedBox(height: 20),
         ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF4C0024).withOpacity(0.3),
+              foregroundColor: Colors.white,
+              textStyle: Theme.of(context).textTheme.titleLarge),
           onPressed: () {
-            Navigator.pop(context); // Close the dialog
+            Navigator.pop(context);
           },
           child: Text(AppLocalizations.of(context)!.cancel),
         ),
@@ -101,7 +103,7 @@ class LanguageDialogContent extends StatelessWidget {
       leading: const Icon(Icons.language, color: Colors.white),
       title: Text(
         language,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white, fontSize:18.0),
       ),
       onTap: () => onLanguageSelected(language),
     );
