@@ -22,7 +22,8 @@ class _EditProfileState extends State<EditProfileScreen> {
 
   late String _selectedCountry;
   bool _obscurePassword = true;
-  final List<String> _countries = ['Poland', 'France', 'Germany'];
+  // this should be read from API
+  final List<String> _countries = ['Poland', 'France', 'Germany', 'Croatia', 'Spain', 'Italy', 'Ukriane'];
 
   @override
   void initState() {
@@ -109,7 +110,8 @@ class _EditProfileState extends State<EditProfileScreen> {
           DropdownButtonFormField<String>(
             style: TextStyle(color: Colors.white),
             iconEnabledColor: Colors.white,
-            dropdownColor: Color(0xFFDA5888).withOpacity(0.9),
+            dropdownColor: Color(0xFFCF3F7B).withOpacity(0.9),
+            menuMaxHeight: 200,
             value: user.country,
             onChanged: (String? value) {
               setState(() {
