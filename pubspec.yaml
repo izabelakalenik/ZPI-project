@@ -78,7 +78,6 @@ flutter:
     - assets/avengers_2.jpg
     - assets/interstellar.jpg
     - assets/hobbit.jpg
-    - assets/cutecat.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
