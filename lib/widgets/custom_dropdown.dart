@@ -8,6 +8,7 @@ class CustomDropdown extends StatelessWidget {
   final Function(String?) onChanged;
 
   const CustomDropdown({
+    super.key,
     required this.labelText,
     required this.value,
     required this.items,
