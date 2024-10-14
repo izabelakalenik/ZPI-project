@@ -33,6 +33,12 @@
   "romance": "Romance",
   "crime": "Crime",
   "documentary": "Documentary",
-  "drama": "Drama"
+  "drama": "Drama",
+
+  "select_language": "Select Language",
+  "polish": "Polish",
+  "english": "English",
+  "cancel": "Cancel"
+
 
 }

@@ -33,6 +33,11 @@
   "romance": "Romans",
   "crime": "Kryminał",
   "documentary": "Dokument",
-  "drama": "Dramat"
+  "drama": "Dramat",
+
+  "select_language": "Wybierz Język",
+  "polish": "Polski",
+  "english": "Angielski",
+  "cancel": "Anuluj"
 
 }

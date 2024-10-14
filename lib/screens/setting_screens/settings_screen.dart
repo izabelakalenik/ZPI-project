@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
-import 'package:zpi_project/screens/setting_screens/language_screen.dart';
+import 'package:zpi_project/screens/setting_screens/language_dialog.dart';
 import 'package:zpi_project/screens/setting_screens/notifications_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
 
@@ -19,7 +19,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return MainLayout(child: SettingsScreenContent());
+    return MainLayout(child: const SettingsScreenContent());
   }
 }
 
@@ -30,125 +30,95 @@ class SettingsScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: AppLocalizations.of(context)!.settings),
+      appBar: CustomAppBar(text: localizations.settings),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
             const SizedBox(height: 10),
             // Account Section
-            _buildSectionCard(
-              context,
-              title: AppLocalizations.of(context)!.account,
+            SectionCard(
+              title: localizations.account,
               items: [
-                _buildMenuItem(Icons.person,
-                    AppLocalizations.of(context)!.edit_profile, context, () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.person,
+                  label: localizations.edit_profile,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => EditProfileScreen()));
-                }),
-                _buildMenuItem(Icons.language,
-                    AppLocalizations.of(context)!.language, context, () {
-                  Navigator.push(
+                          builder: (context) => EditProfileScreen()),
+                    );
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.language,
+                  label: localizations.language,
+                  onTap: () {
+                    showLanguageDialog(context);
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.notifications,
+                  label: localizations.notifications,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LanguageScreen()));
-                }),
-                _buildMenuItem(Icons.notifications,
-                    AppLocalizations.of(context)!.notifications, context, () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NotificationsScreen()));
-                }),
+                          builder: (context) => NotificationsScreen()),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20),
 
             // About Section
-            _buildSectionCard(
-              context,
-              title: AppLocalizations.of(context)!.more,
+            SectionCard(
+              title: localizations.more,
               items: [
-                _buildMenuItem(Icons.help_outline,
-                    AppLocalizations.of(context)!.authors, context, () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.help_outline,
+                  label: localizations.authors,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AboutAuthorsScreen()));
-                }),
+                          builder: (context) => AboutAuthorsScreen()),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20),
 
             // Actions Section
-            _buildSectionCard(
-              context,
-              title: AppLocalizations.of(context)!.actions,
+            SectionCard(
+              title: localizations.actions,
               items: [
-                _buildMenuItem(
-                    Icons.report, AppLocalizations.of(context)!.report, context,
-                    () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.report,
+                  label: localizations.report,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ReportProblemScreen()));
-                }),
-                _buildMenuItem(
-                    Icons.logout, AppLocalizations.of(context)!.logout, context,
-                    () {
-                  // Add log out functionality
-                }),
+                          builder: (context) => ReportProblemScreen()),
+                    );
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.logout,
+                  label: localizations.logout,
+                  onTap: () {
+                    // Add log out functionality
+                  },
+                ),
               ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSectionCard(BuildContext context,
-      {required String title, required List<Widget> items}) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 4,
-      color: Colors.white.withOpacity(0.2),
-      shadowColor: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 10),
-            Column(children: items),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuItem(
-      IconData icon, String label, BuildContext context, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap, // Handle tap
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            const SizedBox(width: 15),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),
