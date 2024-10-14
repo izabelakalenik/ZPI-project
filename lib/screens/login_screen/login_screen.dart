@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final loginBloc = BlocProvider.of<LoginBloc>(context);
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return MainLayout(
       child: Scaffold(
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(AppLocalizations.of(context)!.login_2,
+                    Text(localizations.login_2,
                         style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: SocialLoginButton(
-                            text: AppLocalizations.of(context)!.google,
+                            text: localizations.google,
                             textColor: Colors.white,
                             backgroundColor: Colors.black.withOpacity(0.2),
                             buttonType: SocialLoginButtonType.google,
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: SocialLoginButton(
-                            text: AppLocalizations.of(context)!.facebook,
+                            text: localizations.facebook,
                             textColor: Colors.white,
                             backgroundColor: Colors.black.withOpacity(0.2),
                             imageWidth: 20,
@@ -91,19 +92,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(AppLocalizations.of(context)!.or,
+                    Text(localizations.or,
                         style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
-                      labelText: AppLocalizations.of(context)!.email,
+                      labelText: localizations.email,
                     ),
                     const SizedBox(height: 16),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
-                      labelText: AppLocalizations.of(context)!.password,
+                      labelText: localizations.password,
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -114,8 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword =
-                                !_obscurePassword; // Toggle password visibility
+                            _obscurePassword = !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -125,22 +125,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        AppLocalizations.of(context)!.forgot_password,
+                        localizations.forgot_password,
                         style: theme.textTheme.titleSmall,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Button(
-                      text: Text(AppLocalizations.of(context)!.login_2),
+                      text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                              loginBloc.add(
-                                LoginButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-                            }
+                        loginBloc.add(
+                          LoginButtonPressed(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                      }
                           : null,
                     ),
                     if (state is LoginLoading)

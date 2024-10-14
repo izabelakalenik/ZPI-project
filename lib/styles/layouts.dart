@@ -48,9 +48,11 @@ class Button extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
           ),
           minimumSize: const Size(150, 50),
-          side: const BorderSide(color: Colors.white, width: 1.5),
-          backgroundColor: backgroundColor.withOpacity(0.2),
+          backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
+          side: BorderSide(
+              color: backgroundColor == Colors.black? Colors.transparent : Colors.white,
+              width: 1.5),
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
         ),
@@ -162,6 +164,77 @@ class CustomTextField extends StatelessWidget {
               color: Colors.white70), // Gray border when enabled
         ),
         suffixIcon: suffixIcon, // Use the optional suffix icon
+      ),
+    );
+  }
+}
+
+
+class SectionCard extends StatelessWidget {
+  final String title;
+  final List<Widget> items;
+
+  const SectionCard({
+    super.key,
+    required this.title,
+    required this.items,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 4,
+      color: Colors.white.withOpacity(0.2),
+      shadowColor: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Column(children: items),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MenuItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  const MenuItem({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap, // Handle tap
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.white),
+            const SizedBox(width: 15),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
       ),
     );
   }
