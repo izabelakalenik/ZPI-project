@@ -75,13 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: SocialLoginButton(
+                          child: CustomSocialLoginButton(
                             text: AppLocalizations.of(context)!.google,
-                            textColor: Colors.white,
-                            backgroundColor: Colors.black.withOpacity(0.2),
                             buttonType: SocialLoginButtonType.google,
-                            imageWidth: 20,
-                            borderRadius: 15,
                             onPressed: () async {
                               // await socialAuthProvider.handleGoogleSignIn();
                             },
@@ -89,13 +85,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: SocialLoginButton(
+                          child: CustomSocialLoginButton(
                             text: AppLocalizations.of(context)!.facebook,
-                            textColor: Colors.white,
-                            backgroundColor: Colors.black.withOpacity(0.2),
-                            imageWidth: 20,
                             buttonType: SocialLoginButtonType.facebook,
-                            borderRadius: 15,
                             onPressed: () async {
                               // await socialAuthProvider.handleGoogleSignIn();
                             },

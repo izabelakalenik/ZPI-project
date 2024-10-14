@@ -6,6 +6,7 @@ import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
 import 'register_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -74,13 +75,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: SocialLoginButton(
-                          text: 'Google',
-                          textColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.2),
+                          child: CustomSocialLoginButton(
+                          text: AppLocalizations.of(context)!.google,
                           buttonType: SocialLoginButtonType.google,
-                          imageWidth: 20,
-                          borderRadius: 15,
                           onPressed: () async {
                             // await socialAuthProvider.handleGoogleSignIn();
                           },
@@ -88,13 +85,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: SocialLoginButton(
-                          text: 'Facebook',
-                          textColor: Colors.white,
-                          backgroundColor: Colors.black.withOpacity(0.2),
-                          imageWidth: 20,
+                          child: CustomSocialLoginButton(
+                          text: AppLocalizations.of(context)!.facebook,
                           buttonType: SocialLoginButtonType.facebook,
-                          borderRadius: 15,
                           onPressed: () async {
                             // await socialAuthProvider.handleGoogleSignIn();
                           },

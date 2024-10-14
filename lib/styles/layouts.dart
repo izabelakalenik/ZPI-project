@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -171,3 +172,30 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
+class CustomSocialLoginButton extends StatelessWidget {
+  final String text;
+  final SocialLoginButtonType buttonType;
+  final VoidCallback onPressed;
+
+  const CustomSocialLoginButton({
+    required this.text,
+    required this.buttonType,
+    required this.onPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SocialLoginButton(
+      text: text,
+      textColor: Colors.white,
+      backgroundColor: Colors.black.withOpacity(0.2),
+      buttonType: buttonType,
+      imageWidth: 20,
+      borderRadius: 15,
+      onPressed: onPressed,
+    );
+  }
+}
+
