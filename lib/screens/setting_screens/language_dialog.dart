@@ -21,15 +21,15 @@ class LanguageDialog extends StatefulWidget {
   const LanguageDialog({super.key});
 
   @override
-  LanguageDialogState createState() => LanguageDialogState(); // Remove the underscore
+  LanguageDialogState createState() => LanguageDialogState();
 }
 
-class LanguageDialogState extends State<LanguageDialog> { // Remove the underscore
+class LanguageDialogState extends State<LanguageDialog> {
   String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context); // Fetch localizations
+    final localizations = AppLocalizations.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: const Color(0xFFFFC8DD).withOpacity(0.5),
@@ -39,7 +39,7 @@ class LanguageDialogState extends State<LanguageDialog> { // Remove the undersco
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              localizations.select_language, // Use the localization variable
+              localizations.select_language,
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 shadows: [
@@ -52,7 +52,6 @@ class LanguageDialogState extends State<LanguageDialog> { // Remove the undersco
               ),
             ),
             const SizedBox(height: 20),
-            // Reusing MenuItem for language selection
             MenuItem(
               icon: Icons.language,
               label: localizations.polish,

@@ -9,15 +9,15 @@ class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  AppState createState() => AppState(); // Change _AppState to AppState
+  AppState createState() => AppState();
 }
 
-class AppState extends State<App> { // Change class name from _AppState to AppState
+class AppState extends State<App> {
   @override
   void initState() {
     super.initState();
     LocalizationUtils.instance.addListener(_onLocaleChanged);
-    LocalizationUtils.instance.initialize(); // Initialize the locale
+    LocalizationUtils.instance.initialize();
   }
 
   @override
@@ -27,7 +27,7 @@ class AppState extends State<App> { // Change class name from _AppState to AppSt
   }
 
   void _onLocaleChanged() {
-    setState(() {}); // Rebuild the widget when the locale changes
+    setState(() {});
   }
 
   @override

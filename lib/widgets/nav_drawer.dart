@@ -10,7 +10,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final localizations = AppLocalizations.of(context); // Fetch localizations
+    final localizations = AppLocalizations.of(context);
 
     return Drawer(
       backgroundColor: theme.navigationBarTheme.backgroundColor,
@@ -21,14 +21,14 @@ class NavDrawer extends StatelessWidget {
           Center(
             child: DrawerHeader(
               child: Text(
-                localizations.menu, // Use localizations variable
+                localizations.menu,
                 style: theme.textTheme.headlineLarge,
               ),
             ),
           ),
           ListTile(
             title: Text(
-              localizations.home, // Use localizations variable
+              localizations.home,
               style: theme.textTheme.bodyLarge,
             ),
             // For now, clicking on those buttons doesn't do anything
@@ -43,21 +43,21 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              localizations.liked, // Use localizations variable
+              localizations.liked,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             title: Text(
-              localizations.connect, // Use localizations variable
+              localizations.connect,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             title: Text(
-              localizations.settings, // Use localizations variable
+              localizations.settings,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {

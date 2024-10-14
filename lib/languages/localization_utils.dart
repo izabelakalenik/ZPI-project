@@ -8,7 +8,7 @@ class LocalizationUtils extends ChangeNotifier {
 
   static final instance = LocalizationUtils._();
 
-  Locale? _locale; // Nullable Locale
+  Locale? _locale;
 
   Locale get locale => _locale ?? const Locale('en'); // Default to English if null
 

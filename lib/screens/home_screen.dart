@@ -51,14 +51,14 @@ class HomeScreenContent extends StatelessWidget {
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: localizations.appTitle), // Use localizations variable
+      appBar: CustomAppBar(text: localizations.appTitle),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             const SizedBox(height: 10),
             Text(
-              localizations.categories, // Use localizations variable
+              localizations.categories,
               style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: 10),
@@ -70,35 +70,35 @@ class HomeScreenContent extends StatelessWidget {
                   // This will be derived from API
                   Button(
                     text: Text(
-                      localizations.comedy, // Use localizations variable
+                      localizations.comedy,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      localizations.romance, // Use localizations variable
+                      localizations.romance,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      localizations.crime, // Use localizations variable
+                      localizations.crime,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      localizations.documentary, // Use localizations variable
+                      localizations.documentary,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      localizations.drama, // Use localizations variable
+                      localizations.drama,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,

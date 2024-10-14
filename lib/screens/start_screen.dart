@@ -58,19 +58,19 @@ class StartScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final localizations = AppLocalizations.of(context); // Fetch localizations
+    final localizations = AppLocalizations.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          localizations.appTitle, // Use localizations variable
+          localizations.appTitle,
           style: theme.textTheme.displayMedium,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
         Text(
-          localizations.welcomeMessage, // Use localizations variable
+          localizations.welcomeMessage,
           style: theme.textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -79,13 +79,13 @@ class StartScreenContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Button(
-              text: Text(localizations.login_1), // Use localizations variable
+              text: Text(localizations.login_1),
               onPressed: onLoginPressed,
             ),
             const SizedBox(width: 30),
             Button(
               text: Text(
-                localizations.register, // Use localizations variable
+                localizations.register,
                 textAlign: TextAlign.center,
               ),
               onPressed: onRegisterPressed,
