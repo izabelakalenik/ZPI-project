@@ -44,6 +44,8 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -130,6 +132,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;// Allow suffix icon
   final String? initialValue;
+  final bool readOnly;
 
   const CustomTextField({
     this.controller,
@@ -138,6 +141,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.hintText,
+    this.readOnly = false,
     super.key,
   });
 
@@ -147,6 +151,7 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
+      readOnly: readOnly,
       style: const TextStyle(color: Colors.white), // Text color
       decoration: InputDecoration(
         labelText: labelText,
