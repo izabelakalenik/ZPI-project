@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../languages/localization_utils.dart';
 import '../../styles/layouts.dart';
 
-
 void showLanguageDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -22,14 +21,15 @@ class LanguageDialog extends StatefulWidget {
   const LanguageDialog({super.key});
 
   @override
-  _LanguageDialogState createState() => _LanguageDialogState();
+  LanguageDialogState createState() => LanguageDialogState(); // Remove the underscore
 }
 
-class _LanguageDialogState extends State<LanguageDialog> {
+class LanguageDialogState extends State<LanguageDialog> { // Remove the underscore
   String? selectedLanguage;
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context); // Fetch localizations
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: const Color(0xFFFFC8DD).withOpacity(0.5),
@@ -39,7 +39,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              AppLocalizations.of(context)!.select_language,
+              localizations.select_language, // Use the localization variable
               style: Theme.of(context).textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 shadows: [
@@ -55,14 +55,14 @@ class _LanguageDialogState extends State<LanguageDialog> {
             // Reusing MenuItem for language selection
             MenuItem(
               icon: Icons.language,
-              label: AppLocalizations.of(context)!.polish,
+              label: localizations.polish,
               onTap: () {
                 _changeLanguage(const Locale("pl"));
               },
             ),
             MenuItem(
               icon: Icons.language,
-              label: AppLocalizations.of(context)!.english,
+              label: localizations.english,
               onTap: () {
                 _changeLanguage(const Locale("en"));
               },
@@ -75,7 +75,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
                 textStyle: Theme.of(context).textTheme.titleLarge,
               ),
               onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel),
+              child: Text(localizations.cancel),
             ),
           ],
         ),

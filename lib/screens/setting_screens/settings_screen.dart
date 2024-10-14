@@ -30,9 +30,11 @@ class SettingsScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context); // Fetch localizations
+
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: AppLocalizations.of(context)!.settings),
+      appBar: CustomAppBar(text: localizations.settings), // Use localizations variable
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
@@ -40,11 +42,11 @@ class SettingsScreenContent extends StatelessWidget {
             const SizedBox(height: 10),
             // Account Section
             SectionCard(
-              title: AppLocalizations.of(context)!.account,
+              title: localizations.account, // Use localizations variable
               items: [
                 MenuItem(
                   icon: Icons.person,
-                  label: AppLocalizations.of(context)!.edit_profile,
+                  label: localizations.edit_profile, // Use localizations variable
                   onTap: () {
                     Navigator.push(
                       context,
@@ -55,14 +57,14 @@ class SettingsScreenContent extends StatelessWidget {
                 ),
                 MenuItem(
                   icon: Icons.language,
-                  label: AppLocalizations.of(context)!.language,
+                  label: localizations.language, // Use localizations variable
                   onTap: () {
                     showLanguageDialog(context);
                   },
                 ),
                 MenuItem(
                   icon: Icons.notifications,
-                  label: AppLocalizations.of(context)!.notifications,
+                  label: localizations.notifications, // Use localizations variable
                   onTap: () {
                     Navigator.push(
                       context,
@@ -77,11 +79,11 @@ class SettingsScreenContent extends StatelessWidget {
 
             // About Section
             SectionCard(
-              title: AppLocalizations.of(context)!.more,
+              title: localizations.more, // Use localizations variable
               items: [
                 MenuItem(
                   icon: Icons.help_outline,
-                  label: AppLocalizations.of(context)!.authors,
+                  label: localizations.authors, // Use localizations variable
                   onTap: () {
                     Navigator.push(
                       context,
@@ -96,11 +98,11 @@ class SettingsScreenContent extends StatelessWidget {
 
             // Actions Section
             SectionCard(
-              title: AppLocalizations.of(context)!.actions,
+              title: localizations.actions, // Use localizations variable
               items: [
                 MenuItem(
                   icon: Icons.report,
-                  label: AppLocalizations.of(context)!.report,
+                  label: localizations.report, // Use localizations variable
                   onTap: () {
                     Navigator.push(
                       context,
@@ -111,7 +113,7 @@ class SettingsScreenContent extends StatelessWidget {
                 ),
                 MenuItem(
                   icon: Icons.logout,
-                  label: AppLocalizations.of(context)!.logout,
+                  label: localizations.logout, // Use localizations variable
                   onTap: () {
                     // Add log out functionality
                   },

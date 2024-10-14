@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: HomeScreenContent(cards: cards, controller: controller));
+      child: HomeScreenContent(cards: cards, controller: controller),
+    );
   }
 }
 
@@ -46,17 +47,18 @@ class HomeScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context); // Fetch localizations
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: AppLocalizations.of(context)!.appTitle),
+      appBar: CustomAppBar(text: localizations.appTitle), // Use localizations variable
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             const SizedBox(height: 10),
             Text(
-              AppLocalizations.of(context)!.categories,
+              localizations.categories, // Use localizations variable
               style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: 10),
@@ -68,35 +70,35 @@ class HomeScreenContent extends StatelessWidget {
                   // This will be derived from API
                   Button(
                     text: Text(
-                      AppLocalizations.of(context)!.comedy,
+                      localizations.comedy, // Use localizations variable
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      AppLocalizations.of(context)!.romance,
+                      localizations.romance, // Use localizations variable
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      AppLocalizations.of(context)!.crime,
+                      localizations.crime, // Use localizations variable
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      AppLocalizations.of(context)!.documentary,
+                      localizations.documentary, // Use localizations variable
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
                   Button(
                     text: Text(
-                      AppLocalizations.of(context)!.drama,
+                      localizations.drama, // Use localizations variable
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
@@ -114,12 +116,12 @@ class HomeScreenContent extends StatelessWidget {
                 numberOfCardsDisplayed: 3,
                 padding: const EdgeInsets.all(15.0),
                 cardBuilder: (
-                  context,
-                  index,
-                  horizontalThresholdPercentage,
-                  verticalThresholdPercentage,
-                ) =>
-                    cards[index],
+                    context,
+                    index,
+                    horizontalThresholdPercentage,
+                    verticalThresholdPercentage,
+                    ) =>
+                cards[index],
               ),
             ),
             const SizedBox(height: 40),
