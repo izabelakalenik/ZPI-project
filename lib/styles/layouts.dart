@@ -43,8 +43,6 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
-      height: 70,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -131,7 +129,6 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;// Allow suffix icon
   final String? initialValue;
-  final Widget? suffixIcon; // Allow suffix icon
 
   const CustomTextField({
     this.controller,
