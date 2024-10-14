@@ -11,6 +11,22 @@
   "password": "Hasło",
   "forgot_password": "Zapomniałeś hasła?",
   "or": "Lub",
+  "dont_have_an_account": "Nie masz jeszcze konta? Zarejestruj się",
+  "next": "Dalej",
+  "already_have_account": "Masz już konto? Zaloguj się",
+  "what_do_you_like": "Co lubisz?",
+  "choose": "Wybierz przynajmniej jedną opcję",
+  "create": "Utwórz konto",
+  "select_year": "Wybierz rok",
+  "more_about_you": "Powiedz nam więcej o sobie!",
+  "name": "Imię",
+  "username": "Nazwa użytkownika",
+  "year": "Rok urodzenia",
+  "year_format": "rrrr",
+  "gender": "Płeć",
+  "welcome_register": "Witamy w MoviePop!",
+  "swipe_to_start": "Przesuń, aby rozpocząć",
+
 
   "settings": "Ustawienia",
   "account": "Konto",
@@ -39,5 +55,7 @@
   "polish": "Polski",
   "english": "Angielski",
   "cancel": "Anuluj"
+
+
 
 }

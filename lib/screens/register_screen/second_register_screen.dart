@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'register_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
   const SecondRegisterScreen({super.key});
@@ -31,12 +32,13 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
     final DateTime now = DateTime.now();
     final DateTime firstDate = DateTime(now.year - 100);
     final DateTime lastDate = DateTime(now.year);
+    final localizations = AppLocalizations.of(context);
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Select Year'),
+          title: Text(localizations.select_year),
           content: SizedBox(
             height: 250,
             width: 300,
@@ -60,6 +62,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return MainLayout(
       child: Scaffold(
@@ -85,18 +88,18 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Tell us more about you!', style: theme.textTheme.headlineLarge, textAlign: TextAlign.center),
+                    Text(localizations.more_about_you, style: theme.textTheme.headlineLarge, textAlign: TextAlign.center),
                     const SizedBox(height: 20),
                     // Name Field
                     CustomTextField(
                       controller: _nameController,
-                      labelText: 'Name',
+                      labelText: localizations.name,
                     ),
                     const SizedBox(height: 16),
                     // Username Field
                     CustomTextField(
                       controller: _nicknameController,
-                      labelText: 'Username',
+                      labelText: localizations.username,
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -105,8 +108,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         Expanded(
                           child: CustomTextField(
                             controller: _yearOfBirthController,
-                            labelText: 'Year of Birth',
-                            hintText: 'yyyy',
+                            labelText: localizations.year,
+                            hintText: localizations.year_format,
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.calendar_today),
                               color: Colors.white.withOpacity(0.9),
@@ -122,7 +125,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             value: _selectedOption,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
-                                labelText: 'Gender',
+                                labelText: localizations.gender,
                                 labelStyle: const TextStyle(color: Colors.white),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
@@ -156,7 +159,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     ),
                     const SizedBox(height: 16),
                     Button(
-                      text: const Text('Next'),
+                      text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {
                         Navigator.push(

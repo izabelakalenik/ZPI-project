@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: CustomSocialLoginButton(
-                            text: AppLocalizations.of(context)!.google,
+                            text: localizations.google,
                             buttonType: SocialLoginButtonType.google,
                             onPressed: () async {
                               // await socialAuthProvider.handleGoogleSignIn();
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomSocialLoginButton(
-                            text: AppLocalizations.of(context)!.facebook,
+                            text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
                               // await socialAuthProvider.handleGoogleSignIn();
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: InkWell(
                         onTap: _navigateToRegisterScreen,
                         child: Text(
-                          "Don't have an account yet? Register",
+                          localizations.dont_have_an_account,
                           style: theme.textTheme.titleSmall?.copyWith(
                             color: Colors.white,
                             decoration: TextDecoration.underline,

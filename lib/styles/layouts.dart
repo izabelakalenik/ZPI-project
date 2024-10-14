@@ -44,8 +44,8 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
-      height: 70,
+      width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
