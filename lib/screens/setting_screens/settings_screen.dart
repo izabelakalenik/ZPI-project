@@ -18,7 +18,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return MainLayout(child: SettingsScreenContent());
+    return MainLayout(child: const SettingsScreenContent());
   }
 }
 
@@ -38,68 +38,83 @@ class SettingsScreenContent extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             // Account Section
-            buildSectionCard(
-              context,
+            SectionCard(
               title: AppLocalizations.of(context)!.account,
               items: [
-                buildMenuItem(Icons.person,
-                    AppLocalizations.of(context)!.edit_profile, context, () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.person,
+                  label: AppLocalizations.of(context)!.edit_profile,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => EditProfileScreen()));
-                }),
-                buildMenuItem(
-                  Icons.language,
-                  AppLocalizations.of(context)!.language,
-                  context,
-                      () {showLanguageDialog(context);},
+                          builder: (context) => EditProfileScreen()),
+                    );
+                  },
                 ),
-                buildMenuItem(Icons.notifications,
-                    AppLocalizations.of(context)!.notifications, context, () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.language,
+                  label: AppLocalizations.of(context)!.language,
+                  onTap: () {
+                    showLanguageDialog(context);
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.notifications,
+                  label: AppLocalizations.of(context)!.notifications,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => NotificationsScreen()));
-                }),
+                          builder: (context) => NotificationsScreen()),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20),
 
             // About Section
-            buildSectionCard(
-              context,
+            SectionCard(
               title: AppLocalizations.of(context)!.more,
               items: [
-                buildMenuItem(Icons.help_outline,
-                    AppLocalizations.of(context)!.authors, context, () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.help_outline,
+                  label: AppLocalizations.of(context)!.authors,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => AboutAuthorsScreen()));
-                }),
+                          builder: (context) => AboutAuthorsScreen()),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20),
 
             // Actions Section
-            buildSectionCard(
-              context,
+            SectionCard(
               title: AppLocalizations.of(context)!.actions,
               items: [
-                buildMenuItem(
-                    Icons.report, AppLocalizations.of(context)!.report, context,
-                    () {
-                  Navigator.push(
+                MenuItem(
+                  icon: Icons.report,
+                  label: AppLocalizations.of(context)!.report,
+                  onTap: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ReportProblemScreen()));
-                }),
-                buildMenuItem(
-                    Icons.logout, AppLocalizations.of(context)!.logout, context,
-                    () {
-                  // Add log out functionality
-                }),
+                          builder: (context) => ReportProblemScreen()),
+                    );
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.logout,
+                  label: AppLocalizations.of(context)!.logout,
+                  onTap: () {
+                    // Add log out functionality
+                  },
+                ),
               ],
             ),
           ],

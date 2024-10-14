@@ -1,32 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/languages/localization_utils.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    LocalizationUtils.instance.addListener(_onLocaleChanged);
+    LocalizationUtils.instance.initialize(); // Initialize the locale
+  }
+
+  @override
+  void dispose() {
+    LocalizationUtils.instance.removeListener(_onLocaleChanged);
+    super.dispose();
+  }
+
+  void _onLocaleChanged() {
+    setState(() {}); // Rebuild the widget when the locale changes
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: mainTheme,
-      /*If you want the app to automatically switch between English and Polish
-      based on the system language, you can omit the locale parameter entirely.
-      The app will automatically choose the appropriate locale from the
-      supportedLocales list based on the device's language settings.*/
-      // locale: const Locale('pl'), // Uncomment if u want a polish language
+      locale: LocalizationUtils.instance.locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('en'), // English
-        Locale('pl'), // Polish
-      ],
-      // To see other screens, change home attribute --> home: const StartScreen(),
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const HomeScreen(),
     );
   }
