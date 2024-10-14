@@ -43,6 +43,8 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: 150,
+      height: 70,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -66,12 +68,19 @@ class Button extends StatelessWidget {
 class SwipeButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
+  final String heroTag;
 
-  const SwipeButton({super.key, required this.icon, required this.onPressed});
+  const SwipeButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    required this.heroTag,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: heroTag,
       onPressed: onPressed,
       backgroundColor: Colors.black.withOpacity(0.5),
       shape: RoundedRectangleBorder(
@@ -116,14 +125,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
   final Widget? suffixIcon;
   final String? hintText;// Allow suffix icon
+  final String? initialValue;
+  final Widget? suffixIcon; // Allow suffix icon
 
   const CustomTextField({
-    required this.controller,
+    this.controller,
+    this.initialValue,
     required this.labelText,
     this.obscureText = false,
     this.suffixIcon,
@@ -134,6 +146,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
       style: const TextStyle(color: Colors.white), // Text color

@@ -2,14 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../styles/layouts.dart';
-import '../widgets/movie_card/movie_card_model.dart';
 import '../widgets/movie_card/movie_card.dart';
+import '../widgets/movie_card/movie_card_model.dart';
 import '../widgets/movie_card/swipe_utils.dart';
 import '../widgets/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -127,14 +129,17 @@ class HomeScreenContent extends StatelessWidget {
                 SwipeButton(
                   icon: CupertinoIcons.clear,
                   onPressed: () => controller.swipe(CardSwiperDirection.left),
+                  heroTag: "left_tag",
                 ),
                 SwipeButton(
                   icon: CupertinoIcons.refresh,
                   onPressed: controller.undo,
+                  heroTag: "undo_tag",
                 ),
                 SwipeButton(
                   icon: CupertinoIcons.heart,
                   onPressed: () => controller.swipe(CardSwiperDirection.right),
+                  heroTag: "heart_tag",
                 ),
               ],
             ),
