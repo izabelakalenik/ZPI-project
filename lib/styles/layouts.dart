@@ -47,7 +47,6 @@ class Button extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          // padding: const EdgeInsets.symmetric(vertical: 16.0),
           minimumSize: const Size(150, 50),
           backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
@@ -62,7 +61,6 @@ class Button extends StatelessWidget {
     );
   }
 }
-
 
 class SwipeButton extends StatelessWidget {
   final IconData icon;
@@ -89,6 +87,7 @@ class SwipeButton extends StatelessWidget {
     );
   }
 }
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
 
@@ -123,13 +122,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
+  final String? initialValue;
   final Widget? suffixIcon; // Allow suffix icon
 
   const CustomTextField({
-    required this.controller,
+    this.controller,
+    this.initialValue,
     required this.labelText,
     this.obscureText = false,
     this.suffixIcon,
@@ -139,12 +140,15 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white), // Text color
+      style: const TextStyle(color: Colors.white),
+      // Text color
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white), // Label color
+        labelStyle: const TextStyle(color: Colors.white),
+        // Label color
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
           borderSide: const BorderSide(color: Colors.white70), // Gray border

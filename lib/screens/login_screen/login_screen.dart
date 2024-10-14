@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zpi_project/styles/layouts.dart';
-import 'login_bloc.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:zpi_project/styles/layouts.dart';
+
+import 'login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

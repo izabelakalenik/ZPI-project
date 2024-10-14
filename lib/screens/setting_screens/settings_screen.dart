@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
 import 'package:zpi_project/screens/setting_screens/language_dialog.dart';
 import 'package:zpi_project/screens/setting_screens/notifications_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'edit_profile_screen.dart';
