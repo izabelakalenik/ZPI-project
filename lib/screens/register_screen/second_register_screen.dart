@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'register_bloc.dart';
-import 'package:intl/intl.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
   const SecondRegisterScreen({super.key});
@@ -15,31 +14,48 @@ class SecondRegisterScreen extends StatefulWidget {
 class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _nameController = TextEditingController();
   final _nicknameController = TextEditingController();
-  final _dateOfBirthController = TextEditingController();
+  final _yearOfBirthController = TextEditingController();
+  int? _selectedYear;
   String? _selectedOption;
-  final List<String> _options = ['cats', 'dogs'];
+  final List<String> _options = ['Female', 'Male', 'Other', 'Prefer not to say'];
 
   @override
   void dispose() {
     _nameController.dispose();
     _nicknameController.dispose();
-    _dateOfBirthController.dispose();
+    _yearOfBirthController.dispose();
     super.dispose();
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  Future<void> _selectYear(BuildContext context) async {
+    final DateTime now = DateTime.now();
+    final DateTime firstDate = DateTime(now.year - 100);
+    final DateTime lastDate = DateTime(now.year);
 
-    if (picked != null) {
-      setState(() {
-        _dateOfBirthController.text = DateFormat('dd/MM/yyyy').format(picked);
-      });
-    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Select Year'),
+          content: SizedBox(
+            height: 250,
+            width: 300,
+            child: YearPicker(
+              firstDate: firstDate,
+              lastDate: lastDate,
+              selectedDate: _selectedYear != null ? DateTime(_selectedYear!) : now,
+              onChanged: (DateTime selectedDate) {
+                setState(() {
+                  _selectedYear = selectedDate.year;
+                  _yearOfBirthController.text = _selectedYear.toString();
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -83,21 +99,20 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       labelText: 'Username',
                     ),
                     const SizedBox(height: 16),
-                    // Date of Birth Field
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
                           child: CustomTextField(
-                            controller: _dateOfBirthController,
-                            labelText: 'Date of Birth',
-                            hintText: 'dd/MM/yyyy',
-                              suffixIcon: IconButton(
-                                icon: const Icon(Icons.calendar_today),
-                                color: Colors.white.withOpacity(0.9),
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
+                            controller: _yearOfBirthController,
+                            labelText: 'Year of Birth',
+                            hintText: 'yyyy',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.calendar_today),
+                              color: Colors.white.withOpacity(0.9),
+                              onPressed: () {
+                                _selectYear(context);
+                              },
                               ),
                             ),
                         ),
@@ -107,7 +122,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             value: _selectedOption,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
-                                labelText: 'Cats Or Dogs?',
+                                labelText: 'Gender',
                                 labelStyle: const TextStyle(color: Colors.white),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
@@ -123,6 +138,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                               ),
                             ),
                             dropdownColor: Color(0xFFC96786).withOpacity(0.9),
+                            icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
                             items: _options.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import 'register_bloc.dart';
 
 class FavCategoriesScreen extends StatefulWidget {
   const FavCategoriesScreen({super.key});
