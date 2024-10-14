@@ -16,9 +16,9 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _nameController = TextEditingController();
   final _nicknameController = TextEditingController();
   final _yearOfBirthController = TextEditingController();
+
   int? _selectedYear;
   String? _selectedOption;
-  final List<String> _options = ['Female', 'Male', 'Other', 'Prefer not to say'];
 
   @override
   void dispose() {
@@ -63,6 +63,12 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
+    final List<String> genderOptions = [
+      localizations.female,
+      localizations.male,
+      localizations.other,
+      localizations.prefer_not_to_say
+    ];
 
     return MainLayout(
       child: Scaffold(
@@ -142,7 +148,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             ),
                             dropdownColor: Color(0xFFC96786).withOpacity(0.9),
                             icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                            items: _options.map((String value) {
+                            items: genderOptions.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),

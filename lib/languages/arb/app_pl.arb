@@ -26,7 +26,10 @@
   "gender": "Płeć",
   "welcome_register": "Witamy w MoviePop!",
   "swipe_to_start": "Przesuń, aby rozpocząć",
-
+  "female": "Kobieta",
+  "male": "Mężczyzna",
+  "other": "Inne",
+  "prefer_not_to_say": "Wolę nie podawać",
 
   "settings": "Ustawienia",
   "account": "Konto",
