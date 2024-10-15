@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../styles/layouts.dart';
 import '../home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -33,6 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return MainLayout(
       child: GestureDetector(
@@ -52,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                  'Welcome to MoviePop!',
+                  localizations.welcome_register,
                   style: theme.textTheme.headlineLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -64,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Column(
                   children: [
                     Text(
-                      'Swipe to start',
+                      localizations.swipe_to_start,
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: Colors.white,
                       ),

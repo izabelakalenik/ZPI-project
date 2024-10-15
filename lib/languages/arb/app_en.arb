@@ -11,6 +11,25 @@
   "password": "Password",
   "forgot_password": "Forgot Password?",
   "or": "Or",
+  "dont_have_an_account": "Don't have an account yet? Register",
+  "next": "Next",
+  "already_have_account": "Already have an account? Log in",
+  "what_do_you_like": "What do you like?",
+  "choose": "Choose at least one",
+  "create": "Create Account",
+  "select_year": "Select Year",
+  "more_about_you": "Tell us more about you!",
+  "name": "Name",
+  "username": "Username",
+  "year": "Year of Birth",
+  "year_format": "yyyy",
+  "gender": "Gender",
+  "welcome_register": "Welcome to MoviePop!",
+  "swipe_to_start": "Swipe to start",
+  "female": "Female",
+  "male": "Male",
+  "other": "Other",
+  "prefer_not_to_say": "Prefer not to say",
 
   "settings": "Settings",
   "account": "Account",
@@ -33,6 +52,10 @@
   "romance": "Romance",
   "crime": "Crime",
   "documentary": "Documentary",
-  "drama": "Drama"
+  "drama": "Drama",
 
+  "select_language": "Select Language",
+  "polish": "Polish",
+  "english": "English",
+  "cancel": "Cancel"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavCategoriesScreen extends StatefulWidget {
   const FavCategoriesScreen({super.key});
@@ -25,6 +26,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return MainLayout(
       child: Scaffold(
@@ -35,7 +37,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'What do you like?',
+                localizations.what_do_you_like,
                 style: theme.textTheme.headlineLarge?.copyWith(
                   color: Colors.white,
                 ),
@@ -43,7 +45,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Choose at least one',
+                localizations.choose,
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: Colors.white,
                 ),
@@ -96,7 +98,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
               const SizedBox(height: 20),
               Button(
                 width: 200,
-                text: Text('Create Account', textAlign: TextAlign.center),
+                text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
                   Navigator.push(

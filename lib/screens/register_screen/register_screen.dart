@@ -42,6 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final registerBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return MainLayout(
       child: Scaffold(
@@ -68,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Text('Register', style: theme.textTheme.headlineLarge),
+                    Text(localizations.register, style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -76,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         Expanded(
                           child: CustomSocialLoginButton(
-                          text: AppLocalizations.of(context)!.google,
+                          text: localizations.google,
                           buttonType: SocialLoginButtonType.google,
                           onPressed: () async {
                             // await socialAuthProvider.handleGoogleSignIn();
@@ -86,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomSocialLoginButton(
-                          text: AppLocalizations.of(context)!.facebook,
+                          text: localizations.facebook,
                           buttonType: SocialLoginButtonType.facebook,
                           onPressed: () async {
                             // await socialAuthProvider.handleGoogleSignIn();
@@ -96,18 +97,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text('Or', style: theme.textTheme.bodyLarge),
+                    Text(localizations.or, style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
-                      labelText: 'Email',
+                      labelText: localizations.email,
                     ),
                     const SizedBox(height: 16),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
-                      labelText: 'Password',
+                      labelText: localizations.password,
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -125,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 16),
                     Button(
-                      text: const Text('Next'),
+                      text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {
                         registerBloc.add(
@@ -159,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: InkWell(
                         onTap: _navigateToLoginScreen,
                         child: Text(
-                          'Already have an account? Log in',
+                          localizations.already_have_account,
                           style: theme.textTheme.titleSmall?.copyWith(
                             color: Colors.white,
                             decoration: TextDecoration.underline,

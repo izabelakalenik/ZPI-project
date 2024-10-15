@@ -13,6 +13,7 @@ final mainTheme = ThemeData(
       NavigationBarThemeData(backgroundColor: Colors.black.withOpacity(0.6)),
   iconTheme: IconThemeData(color: Colors.white, size: 30),
   textTheme: TextTheme(
+    displaySmall: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     displayMedium: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     titleLarge: TextStyle(
       color: Colors.white,

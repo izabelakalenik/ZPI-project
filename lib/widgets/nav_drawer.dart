@@ -11,6 +11,7 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return Drawer(
       backgroundColor: theme.navigationBarTheme.backgroundColor,
@@ -21,16 +22,18 @@ class NavDrawer extends StatelessWidget {
           Center(
             child: DrawerHeader(
               child: Text(
-                AppLocalizations.of(context)!.menu,
+                localizations.menu,
                 style: theme.textTheme.headlineLarge,
               ),
             ),
           ),
           ListTile(
-            title: Text(AppLocalizations.of(context)!.home,
-                style: theme.textTheme.bodyLarge),
-            // for now clicking on those buttons doesn't do anything
-            // in the future change this line to navigate to a proper screen
+            title: Text(
+              localizations.home,
+              style: theme.textTheme.bodyLarge,
+            ),
+            // For now, clicking on those buttons doesn't do anything
+            // In the future, change this line to navigate to a proper screen
             onTap: () => {
               Navigator.of(context).pop(),
               Navigator.push(
@@ -41,14 +44,14 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              AppLocalizations.of(context)!.liked,
+              localizations.liked,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             title: Text(
-              AppLocalizations.of(context)!.connect,
+              localizations.connect,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {
@@ -61,7 +64,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              AppLocalizations.of(context)!.settings,
+              localizations.settings,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {
