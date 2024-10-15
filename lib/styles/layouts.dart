@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -29,18 +30,22 @@ class Button extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
+  final double? width;
+  final double? height;
 
   const Button(
       {super.key,
       required this.text,
       required this.onPressed,
-      this.backgroundColor = Colors.white});
+      this.backgroundColor = Colors.white,
+      this.width = 150,
+      this.height = 50});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 150,
-      height: 70,
+      width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -125,8 +130,9 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String labelText;
   final bool obscureText;
+  final Widget? suffixIcon;
+  final String? hintText;// Allow suffix icon
   final String? initialValue;
-  final Widget? suffixIcon; // Allow suffix icon
 
   const CustomTextField({
     this.controller,
@@ -134,6 +140,7 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     this.obscureText = false,
     this.suffixIcon,
+    this.hintText,
     super.key,
   });
 
@@ -143,12 +150,12 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white),
-      // Text color
+      style: const TextStyle(color: Colors.white), // Text color
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.white),
-        // Label color
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.white),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
           borderSide: const BorderSide(color: Colors.white70), // Gray border
@@ -168,6 +175,33 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
+class CustomSocialLoginButton extends StatelessWidget {
+  final String text;
+  final SocialLoginButtonType buttonType;
+  final VoidCallback onPressed;
+
+  const CustomSocialLoginButton({
+    required this.text,
+    required this.buttonType,
+    required this.onPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SocialLoginButton(
+      text: text,
+      textColor: Colors.white,
+      backgroundColor: Colors.black.withOpacity(0.2),
+      buttonType: buttonType,
+      imageWidth: 20,
+      borderRadius: 15,
+      onPressed: onPressed,
+    );
+  }
+}
+
 
 
 class SectionCard extends StatelessWidget {

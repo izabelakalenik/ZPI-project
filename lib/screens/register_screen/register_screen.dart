@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import '../register_screen/register_bloc.dart';
-import '../register_screen/register_screen.dart';
-import 'login_bloc.dart';
+import '../login_screen/login_bloc.dart';
+import '../login_screen/login_screen.dart';
+import 'register_bloc.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
-  void _navigateToRegisterScreen() {
+  void _navigateToLoginScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => BlocProvider(
-          create: (context) => RegisterBloc(),
-          child: const RegisterScreen(),
+          create: (context) => LoginBloc(),
+          child: const LoginScreen(),
         ),
       ),
     );
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginBloc = BlocProvider.of<LoginBloc>(context);
+    final registerBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
 
@@ -48,9 +48,9 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
-        body: BlocListener<LoginBloc, LoginState>(
+        body: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
-            if (state is LoginFailure) {
+            if (state is RegisterFailure) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
@@ -61,15 +61,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
             }
           },
-          child: BlocBuilder<LoginBloc, LoginState>(
+          child: BlocBuilder<RegisterBloc, RegisterState>(
             builder: (context, state) {
               return Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(localizations.login_2,
-                        style: theme.textTheme.headlineLarge),
+
+                    Text(localizations.register, style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -77,28 +77,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: CustomSocialLoginButton(
-                            text: localizations.google,
-                            buttonType: SocialLoginButtonType.google,
-                            onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
-                            },
-                          ),
+                          text: localizations.google,
+                          buttonType: SocialLoginButtonType.google,
+                          onPressed: () async {
+                            // await socialAuthProvider.handleGoogleSignIn();
+                          },
+                        ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomSocialLoginButton(
-                            text: localizations.facebook,
-                            buttonType: SocialLoginButtonType.facebook,
-                            onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
-                            },
-                          ),
+                          text: localizations.facebook,
+                          buttonType: SocialLoginButtonType.facebook,
+                          onPressed: () async {
+                            // await socialAuthProvider.handleGoogleSignIn();
+                          },
+                        ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(localizations.or,
-                        style: theme.textTheme.bodyLarge),
+                    Text(localizations.or, style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
@@ -113,57 +112,55 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          _obscurePassword ? Icons.visibility_off : Icons
+                              .visibility,
                           color: theme.iconTheme.color,
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword = !_obscurePassword; // Toggle password visibility
+                            _obscurePassword =
+                            !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
                     ),
                     const SizedBox(height: 16),
-                    // Forgot Password and Login Button
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        localizations.forgot_password,
-                        style: theme.textTheme.titleSmall,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
                     Button(
-                      text: Text(localizations.login_2),
-                      onPressed: state is! LoginLoading
+                      text: Text(localizations.next),
+                      onPressed: state is! RegisterLoading
                           ? () {
-                        loginBloc.add(
-                          LoginButtonPressed(
+                        registerBloc.add(
+                          RegisterButtonPressed(
                             email: _emailController.text,
                             password: _passwordController.text,
                           ),
                         );
+
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => RegisterBloc(),
+                              child: const SecondRegisterScreen(),
+                            ),
+                          ),
                         );
                       }
                           : null,
                     ),
-                    if (state is LoginLoading)
+                    if (state is RegisterLoading)
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(),
                       ),
                     const SizedBox(height: 16),
+                    // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(
-                        onTap: _navigateToRegisterScreen,
+                        onTap: _navigateToLoginScreen,
                         child: Text(
-                          localizations.dont_have_an_account,
+                          localizations.already_have_account,
                           style: theme.textTheme.titleSmall?.copyWith(
                             color: Colors.white,
                             decoration: TextDecoration.underline,
