@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:zpi_project/screens/shake_movie_screen.dart';
+import 'package:zpi_project/languages/localization_utils.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
-import 'package:zpi_project/languages/localization_utils.dart';
-import 'package:zpi_project/widgets/movie_card/movie_card_model.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -44,7 +42,7 @@ class AppState extends State<App> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: ShakeMovieScreen(likedMovies: movies),
+      home: const StartScreen(),
     );
   }
 }

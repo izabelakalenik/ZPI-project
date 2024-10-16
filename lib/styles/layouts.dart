@@ -56,7 +56,9 @@ class Button extends StatelessWidget {
           backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
           side: BorderSide(
-              color: backgroundColor == Colors.black? Colors.transparent : Colors.white,
+              color: backgroundColor == Colors.black
+                  ? Colors.transparent
+                  : Colors.white,
               width: 1.5),
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
@@ -131,7 +133,7 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool obscureText;
   final Widget? suffixIcon;
-  final String? hintText;// Allow suffix icon
+  final String? hintText; // Allow suffix icon
   final String? initialValue;
 
   const CustomTextField({
@@ -150,7 +152,8 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white), // Text color
+      style: const TextStyle(color: Colors.white),
+      // Text color
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.white),
@@ -202,8 +205,6 @@ class CustomSocialLoginButton extends StatelessWidget {
   }
 }
 
-
-
 class SectionCard extends StatelessWidget {
   final String title;
   final List<Widget> items;
@@ -229,8 +230,8 @@ class SectionCard extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 10),
             Column(children: items),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 /// Global navigator key to get access to the BuildContext globally.
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
