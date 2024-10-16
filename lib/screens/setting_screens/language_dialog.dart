@@ -21,10 +21,10 @@ class LanguageDialog extends StatefulWidget {
   const LanguageDialog({super.key});
 
   @override
-  LanguageDialogState createState() => LanguageDialogState();
+  State<LanguageDialog> createState() => _LanguageDialogState();
 }
 
-class LanguageDialogState extends State<LanguageDialog> {
+class _LanguageDialogState extends State<LanguageDialog> {
   String? selectedLanguage;
 
   @override
