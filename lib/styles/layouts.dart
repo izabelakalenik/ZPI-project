@@ -12,7 +12,7 @@ class MainLayout extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFE7C039), Color(0xFFA80092)],
+            colors: [Color(0xFF2D0027), Color(0xFF68005A), Color(0xFFC3584B)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
