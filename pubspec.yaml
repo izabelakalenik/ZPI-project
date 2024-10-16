@@ -46,6 +46,8 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  shake_flutter: ^17.0.1
+  shake_detector: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,8 @@ flutter:
     - assets/films/interstellar.jpg
     - assets/films/hobbit.jpg
     - assets/authors/cat_avatar.png
+    - assets/shake.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
