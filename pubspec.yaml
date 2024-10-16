@@ -75,10 +75,11 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/forrest_gump.jpg
-    - assets/avengers_2.jpg
-    - assets/interstellar.jpg
-    - assets/hobbit.jpg
+    - assets/films/forrest_gump.jpg
+    - assets/films/avengers_2.jpg
+    - assets/films/interstellar.jpg
+    - assets/films/hobbit.jpg
+    - assets/authors/cat_avatar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
