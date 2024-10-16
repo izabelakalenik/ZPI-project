@@ -37,7 +37,7 @@
   "language": "Język",
   "notifications": "Powiadomienia",
   "more": "Więcej o nas c:",
-  "authors": "O autorach",
+  "about_authors": "O autorach",
   "actions": "Akcje",
   "report": "Zgłoś problem",
   "logout": "Wyloguj się",
@@ -59,6 +59,7 @@
   "english": "Angielski",
   "cancel": "Anuluj",
 
-  "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+  "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+  "authors_title": "Autorzy"
 
 }

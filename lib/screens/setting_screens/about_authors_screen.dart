@@ -25,7 +25,7 @@ class AboutAuthorsScreenContent extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: CustomAppBar(text: 'Authors'),
+      appBar: CustomAppBar(text: localizations.about_authors),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
