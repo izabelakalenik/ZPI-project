@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zpi_project/models/movie_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RandomMovieCardBack extends StatelessWidget {
+class DetailedMovieCardBack extends StatelessWidget {
   final Movie movie;
 
-  const RandomMovieCardBack({super.key, required this.movie});
+  const DetailedMovieCardBack({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
