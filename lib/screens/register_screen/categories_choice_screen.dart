@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavCategoriesScreen extends StatefulWidget {
   const FavCategoriesScreen({super.key});
@@ -62,37 +62,37 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                     border: Border.all(color: Colors.transparent, width: 0),
                   ),
                   child: ListView.builder(
-                    itemCount: _genres.length,
-                    itemBuilder: (context, index) {
-                    final genre = _genres[index];
-                      return CheckboxListTile(
-                        side: BorderSide(color: Colors.white),
-                        checkColor: Colors.white,
-                        fillColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
-                          if (states.contains(WidgetState.selected)) {
-                            return Color(0xFF91007E);
-                          }
-                          return Colors.white;
-                        }),
-                        value: _selectedGenres.contains(genre),
-                        onChanged: (isChecked) {
-                          setState(() {
-                            if (isChecked!) {
-                              _selectedGenres.add(genre);
-                            } else {
-                              _selectedGenres.remove(genre);
+                      itemCount: _genres.length,
+                      itemBuilder: (context, index) {
+                        final genre = _genres[index];
+                        return CheckboxListTile(
+                          side: BorderSide(color: Colors.white),
+                          checkColor: Colors.white,
+                          fillColor: WidgetStateProperty.resolveWith<Color>(
+                              (Set<WidgetState> states) {
+                            if (states.contains(WidgetState.selected)) {
+                              return Color(0xFF91007E);
                             }
-                          });
-                        },
-                        title: Text(
-                          genre,
-                          style: const TextStyle(
-                            color: Colors.white,
+                            return Colors.white;
+                          }),
+                          value: _selectedGenres.contains(genre),
+                          onChanged: (isChecked) {
+                            setState(() {
+                              if (isChecked!) {
+                                _selectedGenres.add(genre);
+                              } else {
+                                _selectedGenres.remove(genre);
+                              }
+                            });
+                          },
+                          title: Text(
+                            genre,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                  ),
+                        );
+                      }),
                 ),
               ),
               const SizedBox(height: 20),
@@ -101,11 +101,12 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                  );
-                }
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WelcomeScreen()),
+                        );
+                      }
                     : null, //the button disabled if nothing chosen
               ),
               const SizedBox(height: 16),

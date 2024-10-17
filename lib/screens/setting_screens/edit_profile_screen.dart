@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import 'package:zpi_project/utils/user_data.dart';
 import 'package:zpi_project/utils/const.dart';
+import 'package:zpi_project/utils/user_data.dart';
+import 'package:zpi_project/widgets/custom_dropdown.dart';
 import 'package:zpi_project/widgets/password_field.dart';
 import 'package:zpi_project/widgets/profile_picture.dart';
-import 'package:zpi_project/widgets/custom_dropdown.dart';
 
 import '../../models/user.dart';
 

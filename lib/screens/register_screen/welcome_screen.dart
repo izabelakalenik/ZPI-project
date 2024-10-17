@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../styles/layouts.dart';
 import '../home_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -14,13 +15,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _navigateToHomeScreen() {
     Navigator.of(context).push(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const HomeScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(0.0, 1.0);
           const end = Offset.zero;
           const curve = Curves.ease;
 
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           var offsetAnimation = animation.drive(tween);
           return SlideTransition(
             position: offsetAnimation,
@@ -50,15 +53,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: [
               const Spacer(),
               Center(
-                child:
-                Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                  localizations.welcome_register,
-                  style: theme.textTheme.headlineLarge,
-                  textAlign: TextAlign.center,
+                    localizations.welcome_register,
+                    style: theme.textTheme.headlineLarge,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
               ),
               const Spacer(),
               Padding(

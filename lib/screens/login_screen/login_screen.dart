@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+
 import '../register_screen/register_bloc.dart';
 import '../register_screen/register_screen.dart';
 import 'login_bloc.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -97,8 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(localizations.or,
-                        style: theme.textTheme.bodyLarge),
+                    Text(localizations.or, style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
                     // Email Field
                     CustomTextField(
@@ -120,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword = !_obscurePassword; // Toggle password visibility
+                            _obscurePassword =
+                                !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -139,17 +141,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                        loginBloc.add(
-                          LoginButtonPressed(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          ),
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                        );
-                      }
+                              loginBloc.add(
+                                LoginButtonPressed(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()),
+                              );
+                            }
                           : null,
                     ),
                     if (state is LoginLoading)

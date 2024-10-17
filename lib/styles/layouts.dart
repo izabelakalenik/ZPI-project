@@ -12,7 +12,7 @@ class MainLayout extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFE7C039), Color(0xFFA80092)],
+            colors: [Color(0xFF25011F), Color(0xFF68005A), Color(0xFFC3584B)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -119,14 +119,16 @@ class SwipeButton extends StatelessWidget {
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
+  final double? height;
 
-  const CustomAppBar({super.key, required this.text});
+  const CustomAppBar({super.key, required this.text, this.height = 60.0});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: AppBar(
+        toolbarHeight: height,
         title: Text(
           text,
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
@@ -147,7 +149,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   // Implement the preferredSize getter to define the app bar size
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height!);
 }
 
 class CustomTextField extends StatelessWidget {
@@ -157,6 +159,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;// Allow suffix icon
   final String? initialValue;
+  final int maxLines;
 
   const CustomTextField({
     this.controller,
@@ -165,6 +168,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.hintText,
+    this.maxLines = 1,
     super.key,
   });
 
@@ -174,7 +178,8 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white), // Text color
+      style: const TextStyle(color: Colors.white),
+      maxLines: maxLines,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.white),

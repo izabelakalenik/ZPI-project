@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+
 import 'register_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
   const SecondRegisterScreen({super.key});
@@ -45,7 +46,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
             child: YearPicker(
               firstDate: firstDate,
               lastDate: lastDate,
-              selectedDate: _selectedYear != null ? DateTime(_selectedYear!) : now,
+              selectedDate:
+                  _selectedYear != null ? DateTime(_selectedYear!) : now,
               onChanged: (DateTime selectedDate) {
                 setState(() {
                   _selectedYear = selectedDate.year;
@@ -59,6 +61,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -94,7 +97,9 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(localizations.more_about_you, style: theme.textTheme.headlineLarge, textAlign: TextAlign.center),
+                    Text(localizations.more_about_you,
+                        style: theme.textTheme.headlineLarge,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 20),
                     // Name Field
                     CustomTextField(
@@ -122,8 +127,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                               onPressed: () {
                                 _selectYear(context);
                               },
-                              ),
                             ),
+                          ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -131,23 +136,28 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             value: _selectedOption,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
-                                labelText: localizations.gender,
-                                labelStyle: const TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
+                              labelText: localizations.gender,
+                              labelStyle: const TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16.0),
-                                borderSide: const BorderSide(color: Colors.white70), // Gray border on focus
+                                borderSide: const BorderSide(
+                                    color:
+                                        Colors.white70), // Gray border on focus
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16.0),
-                                borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
+                                borderSide: const BorderSide(
+                                    color: Colors
+                                        .white70), // Gray border when enabled
                               ),
                             ),
                             dropdownColor: Color(0xFFC96786).withOpacity(0.9),
-                            icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
+                            icon: const Icon(Icons.arrow_drop_down,
+                                color: Colors.white),
                             items: genderOptions.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -168,16 +178,16 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => RegisterBloc(),
-                              child: const FavCategoriesScreen(),
-                            ),
-                          ),
-                        );
-                      }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => RegisterBloc(),
+                                    child: const FavCategoriesScreen(),
+                                  ),
+                                ),
+                              );
+                            }
                           : null,
                     ),
                     if (state is RegisterLoading)

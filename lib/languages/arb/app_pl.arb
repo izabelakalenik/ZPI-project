@@ -64,6 +64,20 @@
 
   "logout_text": "Czy na pewno chcesz nas opuścić?",
   "yes": "Tak",
-  "no": "Nie"
+  "no": "Nie",
 
+  "shake_movie_screen_title": "Wstrząśnij!",
+  "shake_movie_screen_description": "Wstrząśnij telefonem, żeby wylosować film.",
+  "shake_movie_screen_button": "Wstrząśnij",
+
+  "contact_info": "Kontakt do nas",
+
+  "report_problem_title": "Zgłoś nam \nswój problem",
+  "report_problem_text_us": "Napisz do nas!",
+  "report_problem_description": "Opisz swój problem, a my dołożymy wszelkich starań, aby go rozwiązać :)",
+  "report_problem_issue_description_label": "Opis problemu",
+  "report_problem_issue_description": "Opisz tutaj swój problem",
+  "report_problem_contact_info_label": "Twój kontakt",
+  "report_problem_contact_info": "Na przykład email lub numer telefonu",
+  "report_problem_submit": "Wyślij"
 }

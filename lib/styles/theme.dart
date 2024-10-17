@@ -22,9 +22,10 @@ final mainTheme = ThemeData(
     bodyLarge: TextStyle(color: Colors.white),
     headlineLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     labelLarge: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
     labelMedium: TextStyle(
         fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
     labelSmall: TextStyle(fontSize: 12, color: Colors.grey),
+    bodyMedium: TextStyle(fontSize: 18, color: Colors.white),
   ),
 );

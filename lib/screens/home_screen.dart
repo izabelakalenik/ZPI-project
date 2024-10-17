@@ -116,12 +116,12 @@ class HomeScreenContent extends StatelessWidget {
                 numberOfCardsDisplayed: 3,
                 padding: const EdgeInsets.all(15.0),
                 cardBuilder: (
-                    context,
-                    index,
-                    horizontalThresholdPercentage,
-                    verticalThresholdPercentage,
-                    ) =>
-                cards[index],
+                  context,
+                  index,
+                  horizontalThresholdPercentage,
+                  verticalThresholdPercentage,
+                ) =>
+                    cards[index],
               ),
             ),
             const SizedBox(height: 40),
