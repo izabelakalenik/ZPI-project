@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
+import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_screen.dart';
 import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
@@ -28,6 +30,19 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => BlocProvider(
           create: (context) => RegisterBloc(),
           child: const RegisterScreen(),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToForgottenPasswordScreen() {
+    //edit this
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => ForgottenPasswordBloc(),
+          child: const ForgottenPasswordScreen(),
         ),
       ),
     );
@@ -131,9 +146,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        localizations.forgot_password,
-                        style: theme.textTheme.titleSmall,
+                      child: InkWell(
+                        onTap: _navigateToForgottenPasswordScreen,
+                        child: Text(
+                          localizations.forgot_password,
+                          style: theme.textTheme.titleSmall,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),

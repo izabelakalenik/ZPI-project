@@ -12,6 +12,7 @@
   "email": "Email",
   "password": "Password",
   "forgot_password": "Forgot Password?",
+  "repeat_password" : "Repeat password",
   "or": "Or",
   "dont_have_an_account": "Don't have an account yet? Register",
   "next": "Next",
@@ -33,6 +34,10 @@
   "other": "Other",
   "prefer_not_to_say": "Prefer not to say",
   "country": "Country",
+  "create_new_password": "Create a new password",
+  "forgotten_password_message": "Don’t worry, we will send you a link to create a new one!",
+  "email_send_message" : "We've sent you a link to reset your password. If you don't receive it in a few minutes, try again",
+
 
   "settings": "Settings",
   "account": "Account",
@@ -44,6 +49,8 @@
   "actions": "Actions",
   "report": "Report a problem",
   "logout": "Log out",
+  "send": "Send",
+  "create_txt": "Create",
 
   "menu": "Menu",
   "home": "Home",
