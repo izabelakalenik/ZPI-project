@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class NewScreen extends StatelessWidget {
+class JoinedScreen extends StatelessWidget {
   final String? roomCode;
 
-  const NewScreen({super.key, required this.roomCode});
+  const JoinedScreen({super.key, required this.roomCode});
 
   @override
   Widget build(BuildContext context) {

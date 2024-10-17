@@ -47,7 +47,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NewScreen(roomCode: result!.code),
+            builder: (context) => JoinedScreen(roomCode: result!.code),
           ),
         );
       }
@@ -66,7 +66,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NewScreen(roomCode: roomCode),
+                builder: (context) => JoinedScreen(roomCode: roomCode),
               ),
             );
           }
