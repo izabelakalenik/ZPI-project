@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 
 
-
 void showLogOutDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -25,6 +24,7 @@ class LogOutDialog extends StatefulWidget {
   State<LogOutDialog> createState() => _LogOutDialogState();
 }
 
+// TODO: extract buttons, people can go back to logout popu
 class _LogOutDialogState extends State<LogOutDialog> {
 
   @override
@@ -59,7 +59,7 @@ class _LogOutDialogState extends State<LogOutDialog> {
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(width: 30),
+            const SizedBox(height: 20),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [

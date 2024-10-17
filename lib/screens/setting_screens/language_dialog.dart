@@ -27,9 +27,12 @@ class LanguageDialog extends StatefulWidget {
 class _LanguageDialogState extends State<LanguageDialog> {
   String? selectedLanguage;
 
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: const Color(0xFFFFC8DD).withOpacity(0.5),
@@ -40,7 +43,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
           children: [
             Text(
               localizations.select_language,
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
+              style: theme.textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 shadows: [
                   Shadow(
@@ -71,7 +74,7 @@ class _LanguageDialogState extends State<LanguageDialog> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
                 foregroundColor: Colors.white,
-                textStyle: Theme.of(context).textTheme.titleLarge,
+                textStyle: theme.textTheme.titleLarge,
               ),
               onPressed: () => Navigator.pop(context),
               child: Text(localizations.cancel),
