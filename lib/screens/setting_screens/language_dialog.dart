@@ -70,14 +70,9 @@ class _LanguageDialogState extends State<LanguageDialog> {
               },
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
-                foregroundColor: Colors.white,
-                textStyle: theme.textTheme.titleLarge,
-              ),
+            PopupButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(localizations.cancel),
+              text: localizations.cancel,
             ),
           ],
         ),
