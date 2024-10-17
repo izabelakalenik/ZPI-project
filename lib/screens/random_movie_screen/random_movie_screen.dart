@@ -50,7 +50,7 @@ class RandomMovieScreenContent extends StatelessWidget {
   final bool isFront;
   final VoidCallback onCardTapped;
 
-  RandomMovieScreenContent({
+  const RandomMovieScreenContent({
     super.key,
     required this.movie,
     required this.isFront,
