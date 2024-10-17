@@ -7,14 +7,14 @@ import 'package:zpi_project/widgets/random_movie_card/random_movie_card_back.dar
 import 'package:zpi_project/widgets/random_movie_card/random_movie_card_front.dart';
 import 'package:zpi_project/widgets/movie_categories_info.dart';
 
-class RandomMovieScreen extends StatefulWidget {
-  const RandomMovieScreen({super.key});
+class MovieScreen extends StatefulWidget {
+  const MovieScreen({super.key});
 
   @override
-  State<RandomMovieScreen> createState() => _RandomMovieScreenState();
+  State<MovieScreen> createState() => _MovieScreenState();
 }
 
-class _RandomMovieScreenState extends State<RandomMovieScreen> {
+class _MovieScreenState extends State<MovieScreen> {
   bool isFront = true;
 
   final movie = Movie(
@@ -33,7 +33,7 @@ class _RandomMovieScreenState extends State<RandomMovieScreen> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      child: RandomMovieScreenContent(
+      child: MovieScreenContent(
           movie: movie,
           isFront: isFront,
           onCardTapped: () {
@@ -45,12 +45,12 @@ class _RandomMovieScreenState extends State<RandomMovieScreen> {
   }
 }
 
-class RandomMovieScreenContent extends StatelessWidget {
+class MovieScreenContent extends StatelessWidget {
   final Movie movie;
   final bool isFront;
   final VoidCallback onCardTapped;
 
-  const RandomMovieScreenContent({
+  const MovieScreenContent({
     super.key,
     required this.movie,
     required this.isFront,

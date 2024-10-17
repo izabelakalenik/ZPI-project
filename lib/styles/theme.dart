@@ -23,7 +23,7 @@ final mainTheme = ThemeData(
     headlineLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     headlineSmall: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     labelLarge: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
     labelMedium: TextStyle(
         fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
     labelSmall: TextStyle(fontSize: 12, color: Colors.grey),
