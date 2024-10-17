@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/models/movie_model.dart';
 
-class RandomMovieCardFront extends StatelessWidget {
+class DetailedMovieCardFront extends StatelessWidget {
   final Movie movie;
 
-  const RandomMovieCardFront({super.key, required this.movie});
+  const DetailedMovieCardFront({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {

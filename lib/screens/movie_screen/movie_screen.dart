@@ -3,8 +3,8 @@ import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/models/movie_model.dart';
-import 'package:zpi_project/widgets/random_movie_card/random_movie_card_back.dart';
-import 'package:zpi_project/widgets/random_movie_card/random_movie_card_front.dart';
+import 'package:zpi_project/widgets/detailed_movie_card/detailed_movie_card_back.dart';
+import 'package:zpi_project/widgets/detailed_movie_card/detailed_movie_card_front.dart';
 import 'package:zpi_project/widgets/movie_categories_info.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -71,11 +71,11 @@ class MovieScreenContent extends StatelessWidget {
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 0),
                   child: isFront
-                      ? RandomMovieCardFront(
+                      ? DetailedMovieCardFront(
                           key: ValueKey('front'),
                           movie: movie,
                         )
-                      : RandomMovieCardBack(
+                      : DetailedMovieCardBack(
                           key: ValueKey('back'),
                           movie: movie,
                         ),
