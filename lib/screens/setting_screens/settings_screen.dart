@@ -83,7 +83,7 @@ class SettingsScreenContent extends StatelessWidget {
               items: [
                 MenuItem(
                   icon: Icons.help_outline,
-                  label: localizations.authors,
+                  label: localizations.about_authors,
                   onTap: () {
                     Navigator.push(
                       context,
