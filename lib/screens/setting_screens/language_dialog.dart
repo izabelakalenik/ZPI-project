@@ -1,9 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:zpi_project/widgets/dialog.dart';
 import '../../languages/localization_utils.dart';
 import '../../styles/layouts.dart';
+
 
 void showLanguageDialog(BuildContext context) {
   showDialog(
@@ -31,51 +32,31 @@ class _LanguageDialogState extends State<LanguageDialog> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final theme = Theme.of(context);
 
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      backgroundColor: const Color(0xFFFFC8DD).withOpacity(0.5),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              localizations.select_language,
-              style: theme.textTheme.displayMedium?.copyWith(
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    offset: const Offset(1.0, 2.0),
-                    blurRadius: 3.0,
-                    color: Colors.black.withOpacity(0.3),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            MenuItem(
-              icon: Icons.language,
-              label: localizations.polish,
-              onTap: () {
-                _changeLanguage(const Locale("pl"));
-              },
-            ),
-            MenuItem(
-              icon: Icons.language,
-              label: localizations.english,
-              onTap: () {
-                _changeLanguage(const Locale("en"));
-              },
-            ),
-            const SizedBox(height: 20),
-            PopupButton(
-              onPressed: () => Navigator.pop(context),
-              text: localizations.cancel,
-            ),
-          ],
-        ),
+    return PopupWindow(
+      text: localizations.select_language,
+      child: Column(
+        children: [
+          MenuItem(
+            icon: Icons.language,
+            label: localizations.polish,
+            onTap: () {
+              _changeLanguage(const Locale("pl"));
+            },
+          ),
+          MenuItem(
+            icon: Icons.language,
+            label: localizations.english,
+            onTap: () {
+              _changeLanguage(const Locale("en"));
+            },
+          ),
+          const SizedBox(height: 20),
+          PopupButton(
+            onPressed: () => Navigator.pop(context),
+            text: localizations.cancel,
+          ),
+        ],
       ),
     );
   }

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PopupWindow extends StatelessWidget {
 
+  final Widget child;
+  final String text;
+
   const PopupWindow({
     super.key,
+    required this.child,
+    required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
     return Dialog(
@@ -21,7 +24,7 @@ class PopupWindow extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              localizations.logout,
+              text,
               style: theme.textTheme.displayMedium?.copyWith(
                 color: Colors.white,
                 shadows: [
@@ -34,13 +37,7 @@ class PopupWindow extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Text(
-              localizations.logout_text,
-              style: theme.textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-
+            child,
           ],
         ),
       ),
