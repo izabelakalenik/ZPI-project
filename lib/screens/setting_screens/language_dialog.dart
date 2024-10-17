@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -83,7 +84,8 @@ class LanguageDialogState extends State<LanguageDialog> {
   }
 
   void _changeLanguage(Locale locale) {
-    LocalizationUtils.instance.changeLocale(locale: locale, systemDefault: false);
+    LocalizationUtils.instance
+        .changeLocale(locale: locale, systemDefault: false);
     Navigator.pop(context);
   }
 }
