@@ -31,6 +31,7 @@
   "male": "Mężczyzna",
   "other": "Inne",
   "prefer_not_to_say": "Wolę nie podawać",
+  "country": "Kraj",
 
   "settings": "Ustawienia",
   "account": "Konto",
@@ -64,8 +65,6 @@
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
 
   "logout_text": "Czy na pewno chcesz nas opuścić?",
-  "yes": "Tak",
-  "no": "Nie",
 
   "shake_movie_screen_title": "Wstrząśnij!",
   "shake_movie_screen_description": "Wstrząśnij telefonem, żeby wylosować film.",
@@ -82,10 +81,15 @@
   "report_problem_contact_info": "Na przykład email lub numer telefonu",
   "report_problem_submit": "Wyślij",
 
+  "edit_profile_title": "Edytuj profil",
+  "edit_profile_save_changes": "Zapisz zmiany",
+
+  "report_problem_submit": "Wyślij",
+
   "release_date": "Data wypuszczenia",
   "is_for_adults": "Czy film jest tylko dla dorosłych",
   "rating": "Ocena",
 
-  "yes": "yes",
-  "no" : "no"
+  "yes": "tak",
+  "no" : "nie"
 }
