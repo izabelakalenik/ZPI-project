@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+
 import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
 import 'register_bloc.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -31,6 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -68,8 +70,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                    Text(localizations.register, style: theme.textTheme.headlineLarge),
+                    Text(localizations.register,
+                        style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -77,22 +79,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         Expanded(
                           child: CustomSocialLoginButton(
-                          text: localizations.google,
-                          buttonType: SocialLoginButtonType.google,
-                          onPressed: () async {
-                            // await socialAuthProvider.handleGoogleSignIn();
-                          },
-                        ),
+                            text: localizations.google,
+                            buttonType: SocialLoginButtonType.google,
+                            onPressed: () async {
+                              // await socialAuthProvider.handleGoogleSignIn();
+                            },
+                          ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: CustomSocialLoginButton(
-                          text: localizations.facebook,
-                          buttonType: SocialLoginButtonType.facebook,
-                          onPressed: () async {
-                            // await socialAuthProvider.handleGoogleSignIn();
-                          },
-                        ),
+                            text: localizations.facebook,
+                            buttonType: SocialLoginButtonType.facebook,
+                            onPressed: () async {
+                              // await socialAuthProvider.handleGoogleSignIn();
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -112,14 +114,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility_off : Icons
-                              .visibility,
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: theme.iconTheme.color,
                         ),
                         onPressed: () {
                           setState(() {
                             _obscurePassword =
-                            !_obscurePassword; // Toggle password visibility
+                                !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -129,23 +132,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {
-                        registerBloc.add(
-                          RegisterButtonPressed(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          ),
-                        );
+                              registerBloc.add(
+                                RegisterButtonPressed(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => RegisterBloc(),
-                              child: const SecondRegisterScreen(),
-                            ),
-                          ),
-                        );
-                      }
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => RegisterBloc(),
+                                    child: const SecondRegisterScreen(),
+                                  ),
+                                ),
+                              );
+                            }
                           : null,
                     ),
                     if (state is RegisterLoading)

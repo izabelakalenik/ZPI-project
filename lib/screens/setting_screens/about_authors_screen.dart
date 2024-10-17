@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../styles/layouts.dart';
 
 class AboutAuthorsScreen extends StatefulWidget {
   const AboutAuthorsScreen({super.key});
