@@ -45,20 +45,20 @@ class RandomMovieCardBack extends StatelessWidget {
                             style: theme.textTheme.titleLarge,
                             textAlign: TextAlign.center),
                         SizedBox(height: 10),
-                        Text(AppLocalizations.of(context)!.rating,
+                        Text(AppLocalizations.of(context).rating,
                             style: theme.textTheme.headlineSmall),
                         Text(movie.voteAverage.toString(),
                             style: theme.textTheme.titleLarge),
-                        Text(AppLocalizations.of(context)!.release_date,
+                        Text(AppLocalizations.of(context).release_date,
                             style: theme.textTheme.headlineSmall),
                         Text(movie.releaseDate,
                             style: theme.textTheme.titleLarge),
-                        Text(AppLocalizations.of(context)!.is_for_adults,
+                        Text(AppLocalizations.of(context).is_for_adults,
                             style: theme.textTheme.headlineSmall),
                         Text(
                           movie.isForAdults
-                              ? AppLocalizations.of(context)!.yes
-                              : AppLocalizations.of(context)!.no,
+                              ? AppLocalizations.of(context).yes
+                              : AppLocalizations.of(context).no,
                           style: theme.textTheme.titleLarge,
                         )
                       ],

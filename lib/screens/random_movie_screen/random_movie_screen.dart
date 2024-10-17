@@ -61,7 +61,7 @@ class RandomMovieScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: NavDrawer(),
-        appBar: CustomAppBar(text: AppLocalizations.of(context)!.likedMovies),
+        appBar: CustomAppBar(text: AppLocalizations.of(context).likedMovies),
         body: Padding(
           padding: const EdgeInsets.all(35.0),
           child: Column(

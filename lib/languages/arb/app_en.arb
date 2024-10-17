@@ -3,6 +3,7 @@
   "welcomeMessage": "Swipe to find movies you and your friends both want to watch.",
   "login_1": "Log in",
   "register": "Register",
+  "likedMovies": "Liked Movies",
 
   "login_2": "Login",
   "google": "Google",
@@ -75,5 +76,12 @@
 
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
-  "shake_movie_screen_button": "Shake"
+  "shake_movie_screen_button": "Shake",
+
+  "release_date": "Release date",
+  "is_for_adults": "Is it only for adults",
+  "rating": "Rating",
+
+  "yes": "yes",
+  "no" : "no"
 }
