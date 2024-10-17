@@ -96,7 +96,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Button(
+              CustomButton(
                 width: 200,
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty

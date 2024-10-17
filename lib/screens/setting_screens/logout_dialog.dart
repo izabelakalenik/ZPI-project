@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/start_screen.dart';
+import 'package:zpi_project/styles/layouts.dart';
 
 
 void showLogOutDialog(BuildContext context) {
@@ -24,7 +25,6 @@ class LogOutDialog extends StatefulWidget {
   State<LogOutDialog> createState() => _LogOutDialogState();
 }
 
-// TODO: extract buttons, people can go back to logout popu
 class _LogOutDialogState extends State<LogOutDialog> {
 
   @override
@@ -63,29 +63,19 @@ class _LogOutDialogState extends State<LogOutDialog> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
-                    foregroundColor: Colors.white,
-                    textStyle: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const StartScreen()),
-                    );
-                  },
-                  child: Text(localizations.yes), // Provide a valid child widget
+                PopupButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const StartScreen()),
+                      );
+                    },
+                    text: localizations.yes,
                 ),
                 const SizedBox(width: 30),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
-                    foregroundColor: Colors.white,
-                    textStyle: Theme.of(context).textTheme.titleLarge,
-                  ),
+                PopupButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text(localizations.no),
+                  text: localizations.no,
                 ),
               ],
             ),
