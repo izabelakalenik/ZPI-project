@@ -62,6 +62,17 @@
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
   "authors_title": "Authors",
 
+  "contact_info": "Our contact info",
+
+  "report_problem_title": "Report \na problem",
+  "report_problem_text_us": "Text us!",
+  "report_problem_description": "Please describe the issue you're facing, and we will do our best to resolve it :)",
+  "report_problem_issue_description_label": "Issue description",
+  "report_problem_issue_description": "Describe your problem here",
+  "report_problem_contact_info_label": "Your contact info",
+  "report_problem_contact_info": "For example email or phone number",
+  "report_problem_submit": "Submit",
+
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
   "shake_movie_screen_button": "Shake"
