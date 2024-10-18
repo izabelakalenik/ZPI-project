@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordField extends StatelessWidget {
   final TextEditingController controller;
@@ -16,9 +17,10 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return CustomTextField(
-      labelText: 'Password',
+      labelText: localizations.password,
       controller: controller,
       obscureText: obscurePassword,
       suffixIcon: IconButton(

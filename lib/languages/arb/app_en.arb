@@ -31,6 +31,7 @@
   "male": "Male",
   "other": "Other",
   "prefer_not_to_say": "Prefer not to say",
+  "country": "Country",
 
   "settings": "Settings",
   "account": "Account",
@@ -64,8 +65,6 @@
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
 
   "logout_text": "Are you sure you want to leave us?",
-  "yes": "Yes",
-  "no": "No",
 
   "contact_info": "Our contact info",
 
@@ -80,6 +79,10 @@
 
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
+  "shake_movie_screen_button": "Shake",
+
+  "edit_profile_title": "Edit profile",
+  "edit_profile_save_changes": "Save changes",
   "shake_movie_screen_button": "Shake",
 
   "release_date": "Release date",
