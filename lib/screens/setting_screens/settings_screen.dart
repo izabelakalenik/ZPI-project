@@ -8,6 +8,7 @@ import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'edit_profile_screen.dart';
+import 'logout_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -115,7 +116,7 @@ class SettingsScreenContent extends StatelessWidget {
                   icon: Icons.logout,
                   label: localizations.logout,
                   onTap: () {
-                    // Add log out functionality
+                    showLogOutDialog(context);
                   },
                 ),
               ],

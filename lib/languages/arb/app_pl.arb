@@ -60,9 +60,12 @@
   "english": "Angielski",
   "cancel": "Anuluj",
 
+  "authors": "Autorzy",
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-  "authors_title": "Autorzy",
-  "authors_title": "Autorzy",
+
+  "logout_text": "Czy na pewno chcesz nas opuścić?",
+  "yes": "Tak",
+  "no": "Nie",
 
   "shake_movie_screen_title": "Wstrząśnij!",
   "shake_movie_screen_description": "Wstrząśnij telefonem, żeby wylosować film.",

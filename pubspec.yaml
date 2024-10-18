@@ -84,7 +84,6 @@ flutter:
     - assets/authors/cat_avatar.png
     - assets/shake.png
 
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

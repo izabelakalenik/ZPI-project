@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../widgets/contact_info.dart';
 
 class AboutAuthorsScreen extends StatefulWidget {
@@ -27,7 +26,7 @@ class AboutAuthorsScreenContent extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: CustomAppBar(text: localizations.about_authors),
+      appBar: CustomAppBar(text: localizations.authors),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(

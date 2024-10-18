@@ -18,7 +18,7 @@ class LikedMoviesScreen extends StatelessWidget {
             appBar: CustomAppBar(text: "Liked movies"),
             // im not extracting it since this whole screen will be changed
             body: Center(
-              child: Button(
+              child: CustomButton(
                 text: Text("go shake"),
                 // im not extracting it since this whole screen will be changed
                 onPressed: () {

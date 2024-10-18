@@ -26,14 +26,14 @@ class MainLayout extends StatelessWidget {
   }
 }
 
-class Button extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
   final double? width;
   final double? height;
 
-  const Button(
+  const CustomButton(
       {super.key,
       required this.text,
       required this.onPressed,
@@ -63,6 +63,30 @@ class Button extends StatelessWidget {
         ),
         child: text,
       ),
+    );
+  }
+}
+
+class PopupButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String text;
+
+  const PopupButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
+        foregroundColor: Colors.white,
+        textStyle: Theme.of(context).textTheme.titleLarge,
+      ),
+      onPressed: onPressed,
+      child: Text(text),
     );
   }
 }

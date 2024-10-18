@@ -63,7 +63,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                       hintText: localizations.report_problem_contact_info,
                     ),
                     SizedBox(height: 20),
-                    Button(
+                    CustomButton(
                       onPressed: _submitReport,
                       text: Text(localizations.report_problem_submit),
                     ),

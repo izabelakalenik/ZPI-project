@@ -42,7 +42,7 @@ class AppState extends State<App> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const StartScreen(),
+      home: StartScreen(),
     );
   }
 }

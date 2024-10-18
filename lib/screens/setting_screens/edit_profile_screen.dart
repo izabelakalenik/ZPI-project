@@ -98,7 +98,7 @@ class _EditProfileState extends State<EditProfileScreen> {
               },
             ),
             SizedBox(height: 24),
-            Button(
+            CustomButton(
               text: Text("Save changes"),
               onPressed: onSaveChangesPressed,
             ),
