@@ -43,6 +43,7 @@ class AppState extends State<App> {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       home: StartScreen(),
+
     );
   }
 }

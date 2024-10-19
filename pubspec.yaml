@@ -48,6 +48,9 @@ dependencies:
     sdk: flutter
   shake_flutter: ^17.0.1
   shake_detector: ^0.1.2
+  feedback: ^3.1.0
+  flutter_email_sender: ^6.0.3
+  path_provider: ^2.1.4
 
 dev_dependencies:
   flutter_test:
