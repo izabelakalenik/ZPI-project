@@ -18,6 +18,7 @@ class ReportProblemScreen extends StatefulWidget {
 
 class _ReportProblemScreenState extends State<ReportProblemScreen> {
   void _feedback(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     BetterFeedback.of(context).show(
           (UserFeedback feedback) async {
         try {
@@ -25,7 +26,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
           final email = Email(
             attachmentPaths: [attachmentPath],
             body: feedback.text,
-            recipients: ['moviepopapp@gmail.com'],
+            recipients: [localizations.moviepopapp_email],
             subject: feedback.text.split(' ').take(7).toList().join(' '),
           );
 
@@ -60,16 +61,19 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   items: [
                     Text(
                       localizations.report_problem_description,
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyMedium,
                     ),
                     SizedBox(height: 20),
                     CustomButton(
                       onPressed: () => _feedback(context),
-                      text:  Text('Give Feedback'),
+                      text:  Text(localizations.report_problem),
                       width: 350,
                     ),
                     SizedBox(height: 20),
-
+                    Text(
+                      localizations.report_problem_instructions,
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
                 SizedBox(height: 20),

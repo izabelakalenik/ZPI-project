@@ -6,7 +6,7 @@ import 'package:zpi_project/languages/localization_utils.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 
-import 'languages/feedback_language.dart';
+import 'languages/feedback/custom_delegate.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

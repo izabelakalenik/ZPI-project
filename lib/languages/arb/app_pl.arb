@@ -74,13 +74,10 @@
   "contact_info": "Kontakt do nas",
 
   "report_problem_title": "Zgłoś nam \nswój problem",
+  "report_problem": "Zgłoś problem",
   "report_problem_text_us": "Napisz do nas!",
   "report_problem_description": "Opisz swój problem, a my dołożymy wszelkich starań, aby go rozwiązać :)",
-  "report_problem_issue_description_label": "Opis problemu",
-  "report_problem_issue_description": "Opisz tutaj swój problem",
-  "report_problem_contact_info_label": "Twój kontakt",
-  "report_problem_contact_info": "Na przykład email lub numer telefonu",
-  "report_problem_submit": "Wyślij",
+  "report_problem_instructions": "Możesz przełączać się między trybem rysowania a nawigacji, aby zaznaczać konkretne obszary lub poruszać się po aplikacji. Wpisz szczegóły problemu i naciśnij 'Wyślij'. Zostaniesz przekierowany do aplikacji pocztowej z załączoną opinią i zrzutem ekranu. Wystarczy wysłać wiadomość, aby zakończyć.",
 
   "edit_profile_title": "Edytuj profil",
   "edit_profile_save_changes": "Zapisz zmiany",
