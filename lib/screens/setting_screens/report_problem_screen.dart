@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/contact_info.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feedback/feedback.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:path_provider/path_provider.dart';
 
 class ReportProblemScreen extends StatefulWidget {
   const ReportProblemScreen({super.key});
@@ -12,24 +17,33 @@ class ReportProblemScreen extends StatefulWidget {
 }
 
 class _ReportProblemScreenState extends State<ReportProblemScreen> {
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _contactController = TextEditingController();
+  void _feedback(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    BetterFeedback.of(context).show(
+          (UserFeedback feedback) async {
+        try {
+          final attachmentPath = await _writeScreenshotToStorage(feedback.screenshot);
+          final email = Email(
+            attachmentPaths: [attachmentPath],
+            body: feedback.text,
+            recipients: [localizations.moviepopapp_email],
+            subject: feedback.text.split(' ').take(7).toList().join(' '),
+          );
 
-  Future<void> _submitReport() async {
-    // it will be used later:)
-
-    // String description = _descriptionController.text;
-    // String contact = _contactController.text;
-
-    // Save report to Firestore
-    // await FirebaseFirestore.instance.collection('reports').add({
-    //   'description': description,
-    //   'contact': contact,
-    //   'timestamp': FieldValue.serverTimestamp(),
-    // });
-    debugPrint("Report has been submitted.");
+          await FlutterEmailSender.send(email);
+        } catch (e) {
+          debugPrint("Error occured during sending emai.");
+        }
+      });
   }
 
+  Future<String> _writeScreenshotToStorage(Uint8List screenshot) async {
+    final directory = await getTemporaryDirectory();
+    final filePath = '${directory.path}/feedback.png';
+    final file = File(filePath);
+    await file.writeAsBytes(screenshot);
+    return filePath;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,28 +61,22 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                   items: [
                     Text(
                       localizations.report_problem_description,
-                      style: theme.textTheme.bodyLarge,
-                    ),
-                    SizedBox(height: 20),
-                    CustomTextField(
-                      labelText: localizations.report_problem_issue_description_label,
-                      controller: _descriptionController,
-                      hintText: localizations.report_problem_issue_description,
-                      maxLines: 5,
-                    ),
-                    SizedBox(height: 20),
-                    CustomTextField(
-                      labelText: localizations.report_problem_contact_info_label,
-                      controller: _contactController,
-                      hintText: localizations.report_problem_contact_info,
+                      style: theme.textTheme.bodyMedium,
                     ),
                     SizedBox(height: 20),
                     CustomButton(
-                      onPressed: _submitReport,
-                      text: Text(localizations.report_problem_submit),
+                      onPressed: () => _feedback(context),
+                      text:  Text(localizations.report_problem),
+                      width: 350,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      localizations.report_problem_instructions,
+                      style: theme.textTheme.bodySmall,
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
                 ContactInfo(),
               ]),
             )));

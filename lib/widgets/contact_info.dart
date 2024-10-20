@@ -17,7 +17,7 @@ class ContactInfo extends StatelessWidget{
             color: Colors.white.withOpacity(0.7), size: 50),
           SizedBox(width: 20),
           Text(
-            "moviepop@gmail.com",
+            localizations.moviepopapp_email,
             style: theme.textTheme.bodyLarge,
           ),],)
 

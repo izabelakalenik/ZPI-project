@@ -35,11 +35,14 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
     return MainLayout(
       child: Scaffold(
         appBar: CustomAppBar(text: localizations.shake_movie_screen_title),
-        body: Stack(
+        body: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Stack(
           children: <Widget>[
             _buildImageSection(likedMovies),
             _buildBottomSection(likedMovies),
           ],
+        ),
         ),
       ),
     );
