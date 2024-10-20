@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:zpi_project/languages/localization_utils.dart';
-import 'package:zpi_project/screens/setting_screens/policy_screen.dart';
-import 'package:zpi_project/screens/setting_screens/settings_screen.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 
@@ -50,7 +48,7 @@ class AppState extends State<App> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          home: PolicyScreen(),
+          home: StartScreen(),
         )
     );
   }
