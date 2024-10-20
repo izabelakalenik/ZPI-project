@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "699990478658",
+    "project_id": "moviepop-e2b95",
+    "storage_bucket": "moviepop-e2b95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699990478658:android:35619bbb12b907794602db",
+        "android_client_info": {
+          "package_name": "com.example.zpi_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699990478658-qotn5r602k4g6og7k3cl85nulc7ekr9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWaXmJs8o48EF5Z5wICu7Q9Xa1_Lbhvbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699990478658-qotn5r602k4g6og7k3cl85nulc7ekr9u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "699990478658-7mibcesp23e2f9hqa1kjankiaek2j4f4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zpiProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
