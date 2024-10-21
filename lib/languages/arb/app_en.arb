@@ -79,7 +79,6 @@
 
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
-  "shake_movie_screen_button": "Shake",
 
   "edit_profile_title": "Edit profile",
   "edit_profile_save_changes": "Save changes",
@@ -92,5 +91,8 @@
   "yes": "yes",
   "no" : "no",
 
-  "liked_movies_title": "Liked Movies"
+  "liked_movies_title": "Liked Movies",
+
+  "privacy_policy": "Privacy Policy"
+
 }
