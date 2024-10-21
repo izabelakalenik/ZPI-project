@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/screens/shake_movie_screen.dart';
 import '../models/movie_model.dart';
 import '../styles/layouts.dart';
 import '../widgets/category_selector.dart';
@@ -36,6 +37,38 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       releaseDate: '1994-07-06',
       isForAdults: false,
       categories: ['Drama', 'Romance'],
+    ),
+    Movie(
+      id: 533535,
+      title: 'Deadpool & Wolverine',
+      overview: 'Wolverine teams up with Deadpool...',
+      posterPath: 'https://image.tmdb.org/t/p/w500/7Hi6mRLsQtTaEtKiHqSeRFR1TQ2.jpg',
+      voteAverage: 7.722,
+      releaseDate: "2024-07-26",
+      isForAdults: false,
+      categories: ['Action', 'Comedy', 'Documentary'],
+    ),
+    Movie(
+      id: 3,
+      title: 'The Notebook',
+      overview:
+      'A poor yet passionate young man falls in love with a rich young woman, giving her a sense of freedom. They enjoy a romantic summer together but are soon separated.',
+      posterPath: 'https://image.tmdb.org/t/p/original/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg',
+      voteAverage: 7.8,
+      releaseDate: '2004-06-25',
+      isForAdults: false,
+      categories: ['Drama', 'Romance'],
+    ),
+    Movie(
+      id: 4,
+      title: 'Mean Girls',
+      overview:
+      'Cady Heron is a hit with The Plastics, the A-list girl clique at her new school. But her popularity comes with a price.',
+      posterPath: 'https://image.tmdb.org/t/p/original/fXm3YKXAEjx7d2tIWDg9TfRZtsU.jpg',
+      voteAverage: 7.0,
+      releaseDate: '2004-04-30',
+      isForAdults: false,
+      categories: ['Comedy', 'Teen'],
     ),
     Movie(
       id: 533535,
@@ -148,9 +181,31 @@ class LikedMoviesScreenContent extends StatelessWidget {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top:10, bottom: 0),
+              child: Center(
+                child: CustomButton(
+                  text: Text(""),
+                  icon: Image.asset(
+                    'assets/dices.png',
+                    width: 24,
+                    height: 24,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ShakeMovieScreen(likedMovies: movies)),
+                    );
+                  },
+                  backgroundColor: Colors.black,
+                  width: 70,
+                  height: 70,
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+

@@ -28,18 +28,21 @@ class MainLayout extends StatelessWidget {
 
 class CustomButton extends StatelessWidget {
   final Widget text;
+  final Widget? icon;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
   final double? width;
   final double? height;
 
-  const CustomButton(
-      {super.key,
-      required this.text,
-      required this.onPressed,
-      this.backgroundColor = Colors.white,
-      this.width = 150,
-      this.height = 50});
+  const CustomButton({
+    super.key,
+    required this.text,
+    this.icon,
+    required this.onPressed,
+    this.backgroundColor = Colors.white,
+    this.width = 150,
+    this.height = 50,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +59,21 @@ class CustomButton extends StatelessWidget {
           backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
           side: BorderSide(
-              color: backgroundColor == Colors.black? Colors.transparent : Colors.white,
+              color: backgroundColor == Colors.black ? Colors.transparent : Colors.white,
               width: 1.5),
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
         ),
-        child: text,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) ...[
+              icon!,
+              const SizedBox(width: 8), // Space between icon and text
+            ],
+            text,
+          ],
+        ),
       ),
     );
   }
