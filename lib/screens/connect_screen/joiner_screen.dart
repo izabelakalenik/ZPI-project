@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import '../../widgets/qr_scanner_view.dart';
+import '../../widgets/qr_code_scanner.dart';
 import 'joined_screen.dart';
 
 class JoinerScreen extends StatefulWidget {
@@ -16,9 +15,6 @@ class JoinerScreen extends StatefulWidget {
 class _JoinerScreenState extends State<JoinerScreen> {
 
   late TextEditingController _roomController;
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  Barcode? result;
-  QRViewController? controller;
 
   @override
   void initState() {
@@ -33,25 +29,22 @@ class _JoinerScreenState extends State<JoinerScreen> {
   @override
   void dispose() {
     _roomController.dispose();
-    controller?.dispose();
     super.dispose();
   }
 
-  void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
-      if (result != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => JoinedScreen(roomCode: result!.code),
-          ),
-        );
-      }
-    });
+  void _navigateToQRScanner(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QrCodeScanner(
+          onCodeScanned: (code) {
+            setState(() {
+              _roomController.text = code;
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -74,14 +67,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
             //error handling
           }
         },
-        onQrPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => QRScannerView(onQRViewCreated: _onQRViewCreated),
-            ),
-          );
-        },
+        onQrPressed: () => _navigateToQRScanner(context)
       ),
     );
   }
