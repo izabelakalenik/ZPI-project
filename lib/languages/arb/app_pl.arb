@@ -56,6 +56,8 @@
   "crime": "Kryminał",
   "documentary": "Dokument",
   "drama": "Dramat",
+  "fantasy": "Fantasy",
+  "scifi": "Sci-Fi",
 
   "select_language": "Wybierz Język",
   "polish": "Polski",
@@ -110,5 +112,7 @@
   "your_room": "Twój kod pokoju",
   "joined_friends": "Dołączyli: "
 
+  "liked_movies_title": "Lubiane filmy",
 
+  "privacy_policy": "Polityka Prywatności"
 }

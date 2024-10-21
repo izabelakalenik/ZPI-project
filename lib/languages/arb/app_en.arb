@@ -56,6 +56,8 @@
   "crime": "Crime",
   "documentary": "Documentary",
   "drama": "Drama",
+  "fantasy": "Fantasy",
+  "scifi": "Sci-Fi",
 
   "select_language": "Select Language",
   "polish": "Polish",
@@ -77,7 +79,6 @@
 
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
-  "shake_movie_screen_button": "Shake",
 
   "edit_profile_title": "Edit profile",
   "edit_profile_save_changes": "Save changes",
@@ -86,6 +87,10 @@
   "release_date": "Release date",
   "is_for_adults": "Is it only for adults",
   "rating": "Rating",
+
+  "liked_movies_title": "Liked Movies",
+
+  "privacy_policy": "Privacy Policy"
 
   "yes": "Yes",
   "no" : "No",

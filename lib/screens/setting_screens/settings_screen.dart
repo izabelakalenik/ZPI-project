@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
 import 'package:zpi_project/screens/setting_screens/language_dialog.dart';
 import 'package:zpi_project/screens/setting_screens/notifications_screen.dart';
+import 'package:zpi_project/screens/setting_screens/policy_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
 
 import '../../styles/layouts.dart';
@@ -71,6 +72,17 @@ class SettingsScreenContent extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => NotificationsScreen()),
+                    );
+                  },
+                ),
+                MenuItem(
+                  icon: Icons.privacy_tip,
+                  label: localizations.privacy_policy,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PolicyScreen()),
                     );
                   },
                 ),
