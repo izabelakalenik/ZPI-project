@@ -1,9 +1,12 @@
+import 'package:feedback/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:zpi_project/languages/localization_utils.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
+
+import 'languages/feedback/custom_delegate.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -32,17 +35,21 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: mainTheme,
-      locale: LocalizationUtils.instance.locale,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const StartScreen(),
+    return BetterFeedback(
+        localeOverride: LocalizationUtils.instance.locale,
+        localizationsDelegates: [CustomFeedbackLocalizationsDelegate()],
+        child: MaterialApp(
+          theme: mainTheme,
+          locale: LocalizationUtils.instance.locale,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: StartScreen(),
+        )
     );
   }
 }

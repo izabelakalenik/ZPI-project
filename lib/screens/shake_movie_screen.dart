@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shake_detector/shake_detector.dart';
@@ -36,11 +35,14 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
     return MainLayout(
       child: Scaffold(
         appBar: CustomAppBar(text: localizations.shake_movie_screen_title),
-        body: Stack(
+        body: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Stack(
           children: <Widget>[
             _buildImageSection(likedMovies),
             _buildBottomSection(likedMovies),
           ],
+        ),
         ),
       ),
     );
@@ -85,7 +87,7 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),
-          Button(
+          CustomButton(
             onPressed: () => _selectRandomMovie(likedMovies),
             text: Text(localizations.shake_movie_screen_button),
           ),

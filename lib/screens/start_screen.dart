@@ -45,6 +45,7 @@ class _StartScreenState extends State<StartScreen> {
           );
         },
       ),
+
     ));
   }
 }
@@ -82,12 +83,12 @@ class StartScreenContent extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Button(
+            CustomButton(
               text: Text(localizations.login_1),
               onPressed: onLoginPressed,
             ),
             const SizedBox(width: 30),
-            Button(
+            CustomButton(
               text: Text(
                 localizations.register,
                 textAlign: TextAlign.center,

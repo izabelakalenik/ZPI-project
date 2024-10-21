@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../styles/layouts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../widgets/contact_info.dart';
 
 class AboutAuthorsScreen extends StatefulWidget {
   const AboutAuthorsScreen({super.key});
@@ -26,7 +26,7 @@ class AboutAuthorsScreenContent extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: CustomAppBar(text: localizations.about_authors),
+      appBar: CustomAppBar(text: localizations.authors),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -44,6 +44,8 @@ class AboutAuthorsScreenContent extends StatelessWidget {
               textAlign: TextAlign.center,
               style: theme.textTheme.titleLarge,
             ),
+            const SizedBox(height: 50),
+            ContactInfo(),
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:zpi_project/utils/user_data.dart';
 import 'package:zpi_project/widgets/custom_dropdown.dart';
 import 'package:zpi_project/widgets/password_field.dart';
 import 'package:zpi_project/widgets/profile_picture.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/user.dart';
 
@@ -61,9 +62,11 @@ class _EditProfileState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(text: 'Edit profile'),
+        appBar: CustomAppBar(text: localizations.edit_profile_title),
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
           physics: BouncingScrollPhysics(),
@@ -72,12 +75,12 @@ class _EditProfileState extends State<EditProfileScreen> {
             ProfilePicture(),
             SizedBox(height: 24),
             CustomTextField(
-              labelText: 'Username',
+              labelText: localizations.username,
               controller: _usernameController,
             ),
             SizedBox(height: 24),
             CustomTextField(
-              labelText: 'Email',
+              labelText: localizations.email,
               controller: _emailController,
             ),
             SizedBox(height: 24),
@@ -88,7 +91,7 @@ class _EditProfileState extends State<EditProfileScreen> {
             ),
             SizedBox(height: 24),
             CustomDropdown(
-              labelText: 'Country',
+              labelText: localizations.country,
               value: _selectedCountry.isNotEmpty ? _selectedCountry : null,
               items: COUNTRIES,
               onChanged: (value) {
@@ -98,8 +101,8 @@ class _EditProfileState extends State<EditProfileScreen> {
               },
             ),
             SizedBox(height: 24),
-            Button(
-              text: Text("Save changes"),
+            CustomButton(
+              text: Text(localizations.edit_profile_save_changes),
               onPressed: onSaveChangesPressed,
             ),
           ],

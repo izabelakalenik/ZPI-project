@@ -1,8 +1,10 @@
 {
+  "moviepopapp_email": "moviepopapp@gmail.com",
   "appTitle": "MoviePop",
   "welcomeMessage": "Swipe to find movies you and your friends both want to watch.",
   "login_1": "Log in",
   "register": "Register",
+  "likedMovies": "Liked Movies",
 
   "login_2": "Login",
   "google": "Google",
@@ -30,6 +32,7 @@
   "male": "Male",
   "other": "Other",
   "prefer_not_to_say": "Prefer not to say",
+  "country": "Country",
 
   "settings": "Settings",
   "account": "Account",
@@ -59,10 +62,31 @@
   "english": "English",
   "cancel": "Cancel",
 
+  "authors": "Authors",
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-  "authors_title": "Authors",
+
+  "logout_text": "Are you sure you want to leave us?",
+
+  "contact_info": "Our contact info",
+
+  "report_problem_title": "Report \nyour problem",
+  "report_problem": "Report problem",
+  "report_problem_text_us": "Text us!",
+  "report_problem_description": "Please describe the issue you're facing, and we will do our best to resolve it :)",
+  "report_problem_instructions": "You can switch between draw and navigation modes to highlight areas or navigate the app. Enter the issue details and press 'Submit'. You’ll be redirected to your email app with feedback and a screenshot attached. Just send the email to finish.",
 
   "shake_movie_screen_title": "Shake it!",
   "shake_movie_screen_description": "Shake your phone to select a random movie!",
-  "shake_movie_screen_button": "Shake"
+  "shake_movie_screen_button": "Shake",
+
+  "edit_profile_title": "Edit profile",
+  "edit_profile_save_changes": "Save changes",
+  "shake_movie_screen_button": "Shake",
+
+  "release_date": "Release date",
+  "is_for_adults": "Is it only for adults",
+  "rating": "Rating",
+
+  "yes": "yes",
+  "no" : "no"
 }

@@ -12,7 +12,7 @@ class MainLayout extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF2D0027), Color(0xFF68005A), Color(0xFFC3584B)],
+            colors: [Color(0xFF25011F), Color(0xFF68005A), Color(0xFFC3584B)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -26,14 +26,14 @@ class MainLayout extends StatelessWidget {
   }
 }
 
-class Button extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
   final double? width;
   final double? height;
 
-  const Button(
+  const CustomButton(
       {super.key,
       required this.text,
       required this.onPressed,
@@ -56,15 +56,37 @@ class Button extends StatelessWidget {
           backgroundColor: backgroundColor.withOpacity(0.3),
           foregroundColor: Colors.white,
           side: BorderSide(
-              color: backgroundColor == Colors.black
-                  ? Colors.transparent
-                  : Colors.white,
+              color: backgroundColor == Colors.black? Colors.transparent : Colors.white,
               width: 1.5),
           textStyle: Theme.of(context).textTheme.titleLarge,
           elevation: 0,
         ),
         child: text,
       ),
+    );
+  }
+}
+
+class PopupButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final String text;
+
+  const PopupButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF4C0024).withOpacity(0.3),
+        foregroundColor: Colors.white,
+        textStyle: Theme.of(context).textTheme.titleLarge,
+      ),
+      onPressed: onPressed,
+      child: Text(text),
     );
   }
 }
@@ -97,14 +119,16 @@ class SwipeButton extends StatelessWidget {
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
+  final double? height;
 
-  const CustomAppBar({super.key, required this.text});
+  const CustomAppBar({super.key, required this.text, this.height = 60.0});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: AppBar(
+        toolbarHeight: height,
         title: Text(
           text,
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
@@ -125,7 +149,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   // Implement the preferredSize getter to define the app bar size
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height!);
 }
 
 class CustomTextField extends StatelessWidget {
@@ -136,6 +160,7 @@ class CustomTextField extends StatelessWidget {
   final String? hintText; // Allow suffix icon
   final String? initialValue;
   final bool readOnly;
+  final int maxLines;
 
   const CustomTextField({
     this.controller,
@@ -144,6 +169,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.hintText,
+    this.maxLines = 1,
     this.readOnly = false,
     super.key,
   });
@@ -154,6 +180,8 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
+      style: const TextStyle(color: Colors.white),
+      maxLines: maxLines,
       readOnly: readOnly,
       style: const TextStyle(color: Colors.white), // Text color
       decoration: InputDecoration(
@@ -232,8 +260,8 @@ class SectionCard extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 10),
             Column(children: items),

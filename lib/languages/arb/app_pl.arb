@@ -1,8 +1,10 @@
 {
+  "moviepopapp_email": "moviepopapp@gmail.com",
   "appTitle": "MoviePop",
   "welcomeMessage": "Przesuń, aby znaleźć filmy, które Ty i Twoi znajomi chcecie obejrzeć.",
   "login_1": "Zaloguj się",
   "register": "Zarejestruj się",
+  "likedMovies": "Polubione filmy",
 
   "login_2": "Zaloguj się",
   "google": "Google",
@@ -30,6 +32,7 @@
   "male": "Mężczyzna",
   "other": "Inne",
   "prefer_not_to_say": "Wolę nie podawać",
+  "country": "Kraj",
 
   "settings": "Ustawienia",
   "account": "Konto",
@@ -59,11 +62,32 @@
   "english": "Angielski",
   "cancel": "Anuluj",
 
+  "authors": "Autorzy",
   "authors_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-  "authors_title": "Autorzy",
+
+  "logout_text": "Czy na pewno chcesz nas opuścić?",
 
   "shake_movie_screen_title": "Wstrząśnij!",
   "shake_movie_screen_description": "Wstrząśnij telefonem, żeby wylosować film.",
-  "shake_movie_screen_button": "Wstrząśnij"
+  "shake_movie_screen_button": "Wstrząśnij",
 
+  "contact_info": "Kontakt do nas",
+
+  "report_problem_title": "Zgłoś nam \nswój problem",
+  "report_problem": "Zgłoś problem",
+  "report_problem_text_us": "Napisz do nas!",
+  "report_problem_description": "Opisz swój problem, a my dołożymy wszelkich starań, aby go rozwiązać :)",
+  "report_problem_instructions": "Możesz przełączać się między trybem rysowania a nawigacji, aby zaznaczać konkretne obszary lub poruszać się po aplikacji. Wpisz szczegóły problemu i naciśnij 'Wyślij'. Zostaniesz przekierowany do aplikacji pocztowej z załączoną opinią i zrzutem ekranu. Wystarczy wysłać wiadomość, aby zakończyć.",
+
+  "edit_profile_title": "Edytuj profil",
+  "edit_profile_save_changes": "Zapisz zmiany",
+
+  "report_problem_submit": "Wyślij",
+
+  "release_date": "Data wypuszczenia",
+  "is_for_adults": "Czy film jest tylko dla dorosłych",
+  "rating": "Ocena",
+
+  "yes": "tak",
+  "no" : "nie"
 }

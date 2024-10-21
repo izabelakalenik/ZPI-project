@@ -19,13 +19,15 @@ final mainTheme = ThemeData(
       color: Colors.white,
     ),
     titleSmall: TextStyle(color: Colors.white),
-    bodyLarge: TextStyle(color: Colors.white),
     headlineLarge: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+    headlineSmall: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     labelLarge: TextStyle(
-        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
     labelMedium: TextStyle(
         fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
     labelSmall: TextStyle(fontSize: 12, color: Colors.grey),
+    bodyLarge: TextStyle(color: Colors.white),
     bodyMedium: TextStyle(fontSize: 18, color: Colors.white),
+    bodySmall: TextStyle(fontSize: 14, color: Colors.white),
   ),
 );
