@@ -71,7 +71,7 @@ class ConnectScreenContent extends StatelessWidget {
           Column(
             children: [
               Button(
-                text: Text(localizations.create, textAlign: TextAlign.center),
+                text: Text(localizations.create_room, textAlign: TextAlign.center),
                 onPressed: onCreateRoomPressed,
                 width: 200,
               ),
