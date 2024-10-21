@@ -83,12 +83,12 @@ class StartScreenContent extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomButton(
+            Button(
               text: Text(localizations.login_1),
               onPressed: onLoginPressed,
             ),
             const SizedBox(width: 30),
-            CustomButton(
+            Button(
               text: Text(
                 localizations.register,
                 textAlign: TextAlign.center,

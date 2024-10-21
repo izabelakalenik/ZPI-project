@@ -101,7 +101,7 @@ class _EditProfileState extends State<EditProfileScreen> {
               },
             ),
             SizedBox(height: 24),
-            CustomButton(
+            Button(
               text: Text(localizations.edit_profile_save_changes),
               onPressed: onSaveChangesPressed,
             ),

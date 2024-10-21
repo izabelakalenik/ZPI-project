@@ -26,14 +26,14 @@ class MainLayout extends StatelessWidget {
   }
 }
 
-class CustomButton extends StatelessWidget {
+class Button extends StatelessWidget {
   final Widget text;
   final VoidCallback? onPressed; // Allow null for onPressed
   final Color backgroundColor;
   final double? width;
   final double? height;
 
-  const CustomButton(
+  const Button(
       {super.key,
       required this.text,
       required this.onPressed,
@@ -180,10 +180,9 @@ class CustomTextField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       obscureText: obscureText,
-      style: const TextStyle(color: Colors.white),
       maxLines: maxLines,
       readOnly: readOnly,
-      style: const TextStyle(color: Colors.white), // Text color
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.white),

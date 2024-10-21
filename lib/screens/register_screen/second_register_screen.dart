@@ -174,7 +174,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    CustomButton(
+                    Button(
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {

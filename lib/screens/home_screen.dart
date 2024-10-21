@@ -68,35 +68,35 @@ class HomeScreenContent extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
                   // This will be derived from API
-                  CustomButton(
+                  Button(
                     text: Text(
                       localizations.comedy,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
-                  CustomButton(
+                  Button(
                     text: Text(
                       localizations.romance,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
-                  CustomButton(
+                  Button(
                     text: Text(
                       localizations.crime,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
-                  CustomButton(
+                  Button(
                     text: Text(
                       localizations.documentary,
                       style: theme.textTheme.titleSmall,
                     ),
                     onPressed: someAction,
                   ),
-                  CustomButton(
+                  Button(
                     text: Text(
                       localizations.drama,
                       style: theme.textTheme.titleSmall,
