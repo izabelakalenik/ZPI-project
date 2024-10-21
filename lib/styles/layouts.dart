@@ -303,3 +303,56 @@ class MenuItem extends StatelessWidget {
     );
   }
 }
+
+class HorizontalLists extends StatelessWidget {
+  final List<String> friends;
+
+  const HorizontalLists({
+    super.key,
+    required this.friends,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.transparent),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: friends.isNotEmpty
+          ? SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: friends
+              .map(
+                (friend) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: Text(
+                  friend,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          )
+              .toList(),
+        ),
+      )
+          : Center(
+        child: Text(
+          'No friends joined yet.',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.8)),
+        ),
+      ),
+    );
+  }
+}

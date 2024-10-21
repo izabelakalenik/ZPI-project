@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/layouts.dart';
+import '../../widgets/nav_drawer.dart';
 
 class JoinedScreen extends StatefulWidget {
   final String? roomCode;
@@ -39,44 +40,37 @@ class JoinedScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Joined room with code: $roomCode',
-          style: const TextStyle(fontSize: 20),
-        ),
-        const SizedBox(height: 20),
-        const Text(
-          'Friends in the room:',
-          style: TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: friends
-              .map(
-                (friend) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Text(
-                  friend,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
+    final theme = Theme.of(context);
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      drawer: NavDrawer(),
+      appBar: CustomAppBar(text: "Connect"),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text(
+              'Joined a room with code: $roomCode',
+              style: theme.textTheme.titleLarge,
+              textAlign: TextAlign.center,
             ),
-          )
-              .toList(),
+            const SizedBox(height: 200),
+            Text(
+              'Friends in the room:',
+              style: theme.textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            HorizontalLists(friends: friends),
+            const Spacer(),
+            Text(
+              'Waiting for the host to start session...',
+              style: theme.textTheme.bodyLarge,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
