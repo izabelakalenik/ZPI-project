@@ -8,7 +8,9 @@ import 'package:zpi_project/widgets/detailed_movie_card/detailed_movie_card_fron
 import 'package:zpi_project/widgets/movie_categories_info.dart';
 
 class MovieScreen extends StatefulWidget {
-  const MovieScreen({super.key});
+  final Movie movie;
+
+  const MovieScreen({super.key, required this.movie});
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();
@@ -17,30 +19,18 @@ class MovieScreen extends StatefulWidget {
 class _MovieScreenState extends State<MovieScreen> {
   bool isFront = true;
 
-  final movie = Movie(
-    id: 533535,
-    title: 'Deadpool & Wolverine',
-    overview:
-        'Dochodzacy do siebie Wolverine spotyka pyskatego Deadpoola, z którym łączy siły, by stawić czoła wspólnemu wrogowi.Deadpool to sarkastyczny antybohater, który po eksperymentalnym leczeniu zyskuje zdolności regeneracyjne. Uzbrojony w cięty humor i niezwykłe moce, wyrusza na misję zemsty, nie oszczędzając nikogo po drodze.',
-    posterPath:
-        'https://image.tmdb.org/t/p/w500//7Hi6mRLsQtTaEtKiHqSeRFR1TQ2.jpg',
-    voteAverage: 7.722,
-    releaseDate: "2024-07-26",
-    isForAdults: false,
-    categories: ['Action', 'Comedy', 'Documentary'],
-  );
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: MovieScreenContent(
-          movie: movie,
-          isFront: isFront,
-          onCardTapped: () {
-            setState(() {
-              isFront = !isFront;
-            });
-          }),
+        movie: widget.movie,
+        isFront: isFront,
+        onCardTapped: () {
+          setState(() {
+            isFront = !isFront;
+          });
+        },
+      ),
     );
   }
 }

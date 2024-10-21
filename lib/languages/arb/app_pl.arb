@@ -56,6 +56,8 @@
   "crime": "Kryminał",
   "documentary": "Dokument",
   "drama": "Dramat",
+  "fantasy": "Fantasy",
+  "scifi": "Sci-Fi",
 
   "select_language": "Wybierz Język",
   "polish": "Polski",
@@ -89,5 +91,8 @@
   "rating": "Ocena",
 
   "yes": "tak",
-  "no" : "nie"
+  "no" : "nie",
+
+  "liked_movies_title": "Lubiane filmy"
+
 }
