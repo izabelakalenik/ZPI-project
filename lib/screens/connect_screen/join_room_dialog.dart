@@ -22,11 +22,11 @@ class _JoinRoomDialogState extends State<JoinRoomDialog> {
     final theme = Theme.of(context);
 
     return PopupWindow(
-      text: 'Join Room',
+      text: localizations.join,
       child: Column(
         children: [
           Text(
-            'Are you sure you want to join the room with code: ${widget.roomCode}?',
+            '${localizations.are_you_sure_room}${widget.roomCode}?',
             style: theme.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),

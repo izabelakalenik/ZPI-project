@@ -87,6 +87,27 @@
   "is_for_adults": "Is it only for adults",
   "rating": "Rating",
 
-  "yes": "yes",
-  "no" : "no"
+  "yes": "Yes",
+  "no" : "No",
+
+  "connect": "Connect",
+  "lets": "Let's Find Movies You All Want To Watch!",
+  "create": "Create a room",
+  "join": "Join a room",
+  "joined": "Joined a room with code: ",
+  "are_you_sure_room": "Are you sure you want to join the room with code: ",
+  "friends_in": "Friends in the room:",
+  "waiting": "Waiting for the host to start session...",
+  "error_room": "Invalid room code. It must be 8 characters long and can't contain links.",
+  "error": "Error",
+  "ok": "OK",
+  "to_join": "To Join A Room",
+  "scan": "Scan QR Code",
+  "room_code": "Room Code",
+  "no_friends": "No friends joined yet.",
+  "your_qr": "Your QR Code",
+  "your_room": "Your Room Code",
+  "joined_friends": "Joined Friends"
+
+
 }

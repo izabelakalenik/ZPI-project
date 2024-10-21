@@ -54,10 +54,11 @@ class _JoinerScreenState extends State<JoinerScreen> {
   }
 
   void _validateAndShowDialog(BuildContext context, String roomCode) {
+    final localizations = AppLocalizations.of(context);
     if (_isValidRoomCode(roomCode)) {
       showJoinRoomDialog(context, roomCode);
     } else {
-      _showErrorDialog(context, 'Invalid room code. It must be 8 characters long and not contain links.');
+      _showErrorDialog(context, localizations.error_room);
     }
   }
 
@@ -71,13 +72,14 @@ class _JoinerScreenState extends State<JoinerScreen> {
   }
 
   void _showErrorDialog(BuildContext context, String message) {
+    final localizations = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text(
-            'Error',
-            style: TextStyle(color: Color(0xFFC3584B)),
+          title: Text(
+            localizations.error,
+            style: const TextStyle(color: Color(0xFFC3584B)),
           ),
           content: Text(
             message,
@@ -86,8 +88,8 @@ class _JoinerScreenState extends State<JoinerScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
-                  'OK',
+              child: Text(
+                  localizations.ok,
                 style: TextStyle(color: Color(0xFFC3584B)),
               ),
             ),
@@ -144,14 +146,14 @@ class JoinerScreenContent extends StatelessWidget {
     return
       Scaffold(
         drawer: NavDrawer(),
-        appBar: CustomAppBar(text: "Connect"),
+        appBar: CustomAppBar(text: localizations.connect),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'To Join A Room',
+                localizations.to_join,
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -159,21 +161,21 @@ class JoinerScreenContent extends StatelessWidget {
               Button(
                 width: 200,
                 onPressed: onQrPressed,
-                text: Text('Scan QR Code'),
+                text: Text(localizations.scan),
               ),
               SizedBox(height: 30),
               Text(localizations.or,
                   style: theme.textTheme.bodyLarge),
               SizedBox(height: 30),
               CustomTextField(
-                labelText: "Room Code",
+                labelText: localizations.room_code,
                 controller: roomController,
               ),
               SizedBox(height: 50),
               Button(
                 width: 200,
                 onPressed: onConnectPressed,
-                text: Text('Connect'),
+                text: Text(localizations.connect),
               ),
             ],
           ),

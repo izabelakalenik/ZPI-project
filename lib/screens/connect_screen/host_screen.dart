@@ -3,6 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
@@ -73,11 +74,12 @@ class HostScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
 
     return
       Scaffold(
         drawer: NavDrawer(),
-        appBar: CustomAppBar(text: "Connect"),
+        appBar: CustomAppBar(text: localizations.connect),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -85,7 +87,7 @@ class HostScreenContent extends StatelessWidget {
             children: [
               SizedBox(height: 30),
               Text(
-                'Your QR Code',
+                localizations.your_qr,
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -111,19 +113,19 @@ class HostScreenContent extends StatelessWidget {
               SizedBox(height: 30),
               // Room Code Display
               Text(
-                'Your Room Code',
+                localizations.your_room,
                 style: theme.textTheme.bodyLarge,
               ),
               SizedBox(height: 10),
               CustomTextField(
                 readOnly: true,
-                labelText: "Room Code",
+                labelText: localizations.room_code,
                 controller: roomController,
               ),
               SizedBox(height: 30),
               // Friends Section
               Text(
-                'Joined Friends',
+                localizations.joined_friends,
                 style: theme.textTheme.bodyLarge,
               ),
               const SizedBox(height: 10),
@@ -132,7 +134,7 @@ class HostScreenContent extends StatelessWidget {
               // Connect Button
               Button(
                 onPressed: onConnectPressed,
-                text: Text('Connect'),
+                text: Text(localizations.connect),
               ),
             ],
           ),

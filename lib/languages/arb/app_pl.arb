@@ -88,6 +88,27 @@
   "is_for_adults": "Czy film jest tylko dla dorosłych",
   "rating": "Ocena",
 
-  "yes": "tak",
-  "no" : "nie"
+  "yes": "Tak",
+  "no" : "Nie",
+
+  "connect": "Połącz",
+  "lets": "Znajdźmy filmy, które wszyscy chcecie obejrzeć!",
+  "create": "Utwórz pokój",
+  "join": "Dołącz do pokoju",
+  "joined": "Dołączono do pokoju z kodem: ",
+  "are_you_sure_room": "Czy na pewno chcesz dołączyć do pokoju z kodem: ",
+  "friends_in": "Znajomi w pokoju:",
+  "waiting": "Czekam na gospodarza, aby rozpocząć sesję...",
+  "error_room": "Nieprawidłowy kod pokoju. Musi mieć 8 znaków i nie może zawierać linków.",
+  "error": "Błąd",
+  "ok": "OK",
+  "to_join": "Aby dołączyć do pokoju",
+  "scan": "Skanuj kod QR",
+  "room_code": "Kod pokoju",
+  "no_friends": "Jeszcze nikt nie dołączył.",
+  "your_qr": "Twój kod QR",
+  "your_room": "Twój kod pokoju",
+  "joined_friends": "Dołączyli: "
+
+
 }

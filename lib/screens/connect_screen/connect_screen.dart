@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/connect_screen/host_screen.dart';
 import 'package:zpi_project/screens/connect_screen/joiner_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
 
@@ -47,6 +48,7 @@ class ConnectScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -55,13 +57,13 @@ class ConnectScreenContent extends StatelessWidget {
         children: [
           const SizedBox(height: 30),
           Text(
-            "Connect",
+            localizations.connect,
             style: theme.textTheme.displayMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 130),
           Text(
-            "Let's Find Movies You All Want To Watch!",
+            localizations.lets,
             style: theme.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
@@ -69,15 +71,15 @@ class ConnectScreenContent extends StatelessWidget {
           Column(
             children: [
               Button(
-                text: Text('Create a room', textAlign: TextAlign.center),
+                text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: onCreateRoomPressed,
                 width: 200,
               ),
               const SizedBox(height: 30),
-              Text('Or', style: theme.textTheme.bodyLarge),
+              Text(localizations.or, style: theme.textTheme.bodyLarge),
               const SizedBox(height: 30),
               Button(
-                text: Text('Join a room', textAlign: TextAlign.center),
+                text: Text(localizations.join, textAlign: TextAlign.center),
                 onPressed: onJoinRoomPressed,
                 width: 200,
               ),

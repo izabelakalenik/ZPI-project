@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
@@ -40,23 +41,25 @@ class JoinedScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: "Connect"),
+      appBar: CustomAppBar(text: localizations.connect),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Text(
-              'Joined a room with code: $roomCode',
+              '${localizations.joined} $roomCode',
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 200),
             Text(
-              'Friends in the room:',
+              localizations.friends_in,
               style: theme.textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
@@ -64,7 +67,7 @@ class JoinedScreenContent extends StatelessWidget {
             HorizontalLists(friends: friends),
             const Spacer(),
             Text(
-              'Waiting for the host to start session...',
+              localizations.waiting,
               style: theme.textTheme.bodyLarge,
               textAlign: TextAlign.center,
             ),
