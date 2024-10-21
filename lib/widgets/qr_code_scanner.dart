@@ -19,7 +19,6 @@ class QrCodeScanner extends StatelessWidget {
             final qrCode = barcodes.first.rawValue;
             if (qrCode != null) {
               onCodeScanned(qrCode);
-              Navigator.pop(context); // Close the scanner after a successful scan
             }
           }
         },

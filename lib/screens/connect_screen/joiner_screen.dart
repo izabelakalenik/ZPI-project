@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/qr_code_scanner.dart';
-import 'joined_screen.dart';
+import 'join_room_dialog.dart';
 
 class JoinerScreen extends StatefulWidget {
   const JoinerScreen({super.key});
@@ -38,6 +40,8 @@ class _JoinerScreenState extends State<JoinerScreen> {
       MaterialPageRoute(
         builder: (context) => QrCodeScanner(
           onCodeScanned: (code) {
+            Navigator.pop(context);
+            showJoinRoomDialog(context, code);
             setState(() {
               _roomController.text = code;
             });
@@ -47,24 +51,29 @@ class _JoinerScreenState extends State<JoinerScreen> {
     );
   }
 
+  void showJoinRoomDialog(BuildContext context, String roomCode) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+          child: JoinRoomDialog(roomCode: roomCode),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: JoinerScreenContent(
         roomController: _roomController,
-
         onConnectPressed: () {
           String roomCode = _roomController.text;
           if (roomCode.isNotEmpty) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => JoinedScreen(roomCode: roomCode),
-              ),
-            );
-          }
-          else {
-            //error handling
+            showJoinRoomDialog(context, roomCode);
+          } else {
+            // Error handling: show a message or alert
           }
         },
         onQrPressed: () => _navigateToQRScanner(context)

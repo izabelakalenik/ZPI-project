@@ -70,7 +70,6 @@ class HostScreenContent extends StatelessWidget {
     required this.onConnectPressed,
   });
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -139,6 +138,5 @@ class HostScreenContent extends StatelessWidget {
           ),
         ),
       );
-
   }
 }
