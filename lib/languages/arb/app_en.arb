@@ -56,6 +56,8 @@
   "crime": "Crime",
   "documentary": "Documentary",
   "drama": "Drama",
+  "fantasy": "Fantasy",
+  "scifi": "Sci-Fi",
 
   "select_language": "Select Language",
   "polish": "Polish",
@@ -89,5 +91,8 @@
   "yes": "yes",
   "no" : "no",
 
+  "liked_movies_title": "Liked Movies",
+
   "privacy_policy": "Privacy Policy"
+
 }

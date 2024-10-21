@@ -56,6 +56,8 @@
   "crime": "Kryminał",
   "documentary": "Dokument",
   "drama": "Dramat",
+  "fantasy": "Fantasy",
+  "scifi": "Sci-Fi",
 
   "select_language": "Wybierz Język",
   "polish": "Polski",
@@ -90,6 +92,8 @@
 
   "yes": "tak",
   "no" : "nie",
+
+  "liked_movies_title": "Lubiane filmy",
 
   "privacy_policy": "Polityka Prywatności"
 }

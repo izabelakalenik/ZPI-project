@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/screens/home_screen.dart';
+
+import '../screens/liked_movies_screen.dart';
 import '../screens/setting_screens/settings_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/screens/liked_movies_screen.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
