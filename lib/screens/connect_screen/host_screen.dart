@@ -20,7 +20,7 @@ class _HostScreenState extends State<HostScreen> {
   void initState() {
     super.initState();
     // Generate a unique room code
-    roomCode = Uuid().v4().substring(0, 12);
+    roomCode = Uuid().v4().substring(0, 8);
     _initializeControllers();
   }
 

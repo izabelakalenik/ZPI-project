@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../styles/layouts.dart';
+
 class QrCodeScanner extends StatelessWidget {
   final Function(String) onCodeScanned;
 
@@ -8,9 +10,16 @@ class QrCodeScanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final theme = Theme.of(context);
+    return MainLayout(
+    child: Scaffold(
       appBar: AppBar(
-        title: const Text('QR Code Scanner'),
+        title: Text(
+          'QR Code Scanner',
+          style: theme.textTheme.bodyLarge,
+          textAlign: TextAlign.center,
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: MobileScanner(
         onDetect: (BarcodeCapture capture) async {
@@ -23,6 +32,7 @@ class QrCodeScanner extends StatelessWidget {
           }
         },
       ),
+    ),
     );
   }
 }

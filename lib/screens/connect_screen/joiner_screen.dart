@@ -40,14 +40,60 @@ class _JoinerScreenState extends State<JoinerScreen> {
       MaterialPageRoute(
         builder: (context) => QrCodeScanner(
           onCodeScanned: (code) {
-            Navigator.pop(context);
-            showJoinRoomDialog(context, code);
-            setState(() {
-              _roomController.text = code;
-            });
+            if(_isValidRoomCode(code)) {
+              Navigator.pop(context);
+              showJoinRoomDialog(context, code);
+              setState(() {
+                _roomController.text = code;
+              });
+            }
           },
         ),
       ),
+    );
+  }
+
+  void _validateAndShowDialog(BuildContext context, String roomCode) {
+    if (_isValidRoomCode(roomCode)) {
+      showJoinRoomDialog(context, roomCode);
+    } else {
+      _showErrorDialog(context, 'Invalid room code. It must be 8 characters long and not contain links.');
+    }
+  }
+
+  bool _isValidRoomCode(String roomCode) {
+    // Check length
+    if (roomCode.length != 8) return false;
+    // Check if it contains "http" or "https"
+    if (roomCode.contains('http') || roomCode.contains('https')) return false;
+
+    return true;
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Error',
+            style: TextStyle(color: Color(0xFFC3584B)),
+          ),
+          content: Text(
+            message,
+            style: const TextStyle(color: Color(0xFF25011F)),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text(
+                  'OK',
+                style: TextStyle(color: Color(0xFFC3584B)),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -70,11 +116,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
         roomController: _roomController,
         onConnectPressed: () {
           String roomCode = _roomController.text;
-          if (roomCode.isNotEmpty) {
-            showJoinRoomDialog(context, roomCode);
-          } else {
-            // Error handling: show a message or alert
-          }
+          _validateAndShowDialog(context, roomCode);
         },
         onQrPressed: () => _navigateToQRScanner(context)
       ),
