@@ -95,7 +95,7 @@
 
   "connect": "Połącz",
   "lets": "Znajdźmy filmy, które wszyscy chcecie obejrzeć!",
-  "create": "Utwórz pokój",
+  "create_room": "Utwórz pokój",
   "join": "Dołącz do pokoju",
   "joined": "Dołączono do pokoju z kodem: ",
   "are_you_sure_room": "Czy na pewno chcesz dołączyć do pokoju z kodem: ",
@@ -110,7 +110,7 @@
   "no_friends": "Jeszcze nikt nie dołączył.",
   "your_qr": "Twój kod QR",
   "your_room": "Twój kod pokoju",
-  "joined_friends": "Dołączyli: "
+  "joined_friends": "Dołączyli: ",
 
   "liked_movies_title": "Lubiane filmy",
 

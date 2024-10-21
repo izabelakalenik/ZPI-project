@@ -90,14 +90,14 @@
 
   "liked_movies_title": "Liked Movies",
 
-  "privacy_policy": "Privacy Policy"
+  "privacy_policy": "Privacy Policy",
 
   "yes": "Yes",
   "no" : "No",
 
   "connect": "Connect",
   "lets": "Let's Find Movies You All Want To Watch!",
-  "create": "Create a room",
+  "create_room": "Create a room",
   "join": "Join a room",
   "joined": "Joined a room with code: ",
   "are_you_sure_room": "Are you sure you want to join the room with code: ",
