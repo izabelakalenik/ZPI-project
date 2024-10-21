@@ -64,7 +64,7 @@ class _ReportProblemScreenState extends State<ReportProblemScreen> {
                       style: theme.textTheme.bodyMedium,
                     ),
                     SizedBox(height: 20),
-                    CustomButton(
+                    Button(
                       onPressed: () => _feedback(context),
                       text:  Text(localizations.report_problem),
                       width: 350,

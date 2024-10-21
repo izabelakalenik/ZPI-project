@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    CustomButton(
+                    Button(
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {

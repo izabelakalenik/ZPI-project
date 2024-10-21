@@ -87,7 +87,7 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),
-          CustomButton(
+          Button(
             onPressed: () => _selectRandomMovie(likedMovies),
             text: Text(localizations.shake_movie_screen_button),
           ),
