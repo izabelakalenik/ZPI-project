@@ -89,5 +89,7 @@
   "rating": "Ocena",
 
   "yes": "tak",
-  "no" : "nie"
+  "no" : "nie",
+
+  "privacy_policy": "Polityka Prywatności"
 }

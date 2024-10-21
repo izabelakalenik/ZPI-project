@@ -22,9 +22,9 @@ class MovieCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 3,
+            spreadRadius: 0,
             blurRadius: 7,
-            offset: const Offset(0, 3),
+            offset: const Offset(0, 0),
           ),
         ],
       ),
