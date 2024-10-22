@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zpi_project/screens/reset_password_screen/reset_password_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

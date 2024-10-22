@@ -9,15 +9,15 @@ abstract class ResetPasswordEvent extends Equatable {
 
 class ResetPasswordButtonPressed extends ResetPasswordEvent {
   final String password;
-  final String repeated_password;
+  final String repeatedPassword;
 
   const ResetPasswordButtonPressed(
-      {required this.password, required this.repeated_password});
+      {required this.password, required this.repeatedPassword});
 
   @override
-  List<Object> get props => [password, repeated_password];
+  List<Object> get props => [password, repeatedPassword];
 
   @override
   String toString() =>
-      'ResetPasswordButtonPressed { password: $password, repeated_password: $repeated_password}';
+      'ResetPasswordButtonPressed { password: $password, repeated_password: $repeatedPassword}';
 }
