@@ -16,7 +16,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     emit(ResetPasswordLoading());
 
     // chcecking if password match
-    if (event.password != event.repeated_password) {
+    if (event.password != event.repeatedPassword) {
       emit(ResetPasswordFailure(error: "Password is repeated"));
       return;
     }
