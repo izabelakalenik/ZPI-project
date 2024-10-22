@@ -76,18 +76,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
+            } else if (state is LoginSuccess) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
             }
           },
-          child: BlocBuilder<LoginBloc, LoginState>(
+        child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
               return Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(localizations.login_2,
                         style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 16),
                     // Social Login Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -113,9 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     Text(localizations.or, style: theme.textTheme.bodyLarge),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
@@ -159,23 +166,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                              loginBloc.add(
-                                LoginButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()),
-                              );
-                            }
+                        final email = _emailController.text;
+                        final password = _passwordController.text;
+
+                        if (email.isNotEmpty && password.isNotEmpty) {
+                          loginBloc.add(LoginButtonPressed(
+                            email: email,
+                            password: password,
+                          ));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please fill in both email and password'))
+                          );
+                        }
+                      }
                           : null,
                     ),
                     if (state is LoginLoading)
                       const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(5.0),
                         child: CircularProgressIndicator(),
                       ),
                     const SizedBox(height: 16),
