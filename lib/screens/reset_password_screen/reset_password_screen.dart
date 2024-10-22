@@ -116,7 +116,7 @@ class _ResetPasswordScreen extends State<ResetPasswordScreen> {
                                   resetPasswordBloc.add(
                                     (ResetPasswordButtonPressed(
                                         password: _passwordController.text,
-                                        repeated_password:
+                                        repeatedPassword:
                                             _passwordRepeatController.text)),
                                   );
                                   _navigateToLogin();
