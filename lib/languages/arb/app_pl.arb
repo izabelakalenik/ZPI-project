@@ -121,5 +121,11 @@
 
   "liked_movies_title": "Lubiane filmy",
 
-  "privacy_policy": "Polityka Prywatności"
+  "privacy_policy": "Polityka Prywatności",
+
+  "fill_both": "Proszę wypełnić oba pola: e-mail i hasło",
+  "not_email": "To nie wygląda na prawidłowy adres e-mail",
+  "invalid_credentials": "Nieprawidłowe hasło lub adres e-mail",
+  "unknown_error": "Wystąpił nieznany błąd"
+
 }
