@@ -173,10 +173,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           loginBloc.add(LoginButtonPressed(
                             email: email,
                             password: password,
+                            localizations: localizations
                           ));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Please fill in both email and password'))
+                              SnackBar(content: Text(localizations.fill_both))
                           );
                         }
                       }
