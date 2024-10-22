@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shake_detector/shake_detector.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import 'package:zpi_project/widgets/movie_card/movie_card_model.dart';
+import '../models/movie_model.dart';
 
 class ShakeMovieScreen extends StatefulWidget {
-  final List<MovieCardModel> likedMovies;
+  final List<Movie> likedMovies;
 
   const ShakeMovieScreen({super.key, required this.likedMovies});
 
@@ -15,7 +15,7 @@ class ShakeMovieScreen extends StatefulWidget {
 }
 
 class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
-  void _selectRandomMovie(List<MovieCardModel> movies) {
+  void _selectRandomMovie(List<Movie> movies) {
     final random = Random();
     final randomMovie = movies[random.nextInt(movies.length)];
 
@@ -36,19 +36,19 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
       child: Scaffold(
         appBar: CustomAppBar(text: localizations.shake_movie_screen_title),
         body: Padding(
-    padding: const EdgeInsets.all(16.0),
-    child: Stack(
-          children: <Widget>[
-            _buildImageSection(likedMovies),
-            _buildBottomSection(likedMovies),
-          ],
-        ),
+          padding: const EdgeInsets.all(16.0),
+          child: Stack(
+            children: <Widget>[
+              _buildImageSection(likedMovies),
+              _buildBottomSection(likedMovies),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildImageSection(List<MovieCardModel> likedMovies) {
+  Widget _buildImageSection(List<Movie> likedMovies) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -71,7 +71,7 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
     );
   }
 
-  Widget _buildBottomSection(List<MovieCardModel> likedMovies) {
+  Widget _buildBottomSection(List<Movie> likedMovies) {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
 
@@ -97,10 +97,9 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
   }
 }
 
-// this is a simplified version of the Movie Screen
-// it was created just to maintain flow between screens
+// Simplified version of the Movie Screen
 class MovieScreen extends StatelessWidget {
-  final MovieCardModel movie;
+  final Movie movie;
 
   const MovieScreen({super.key, required this.movie});
 
@@ -110,7 +109,6 @@ class MovieScreen extends StatelessWidget {
     return MainLayout(
       child: Scaffold(
         appBar: CustomAppBar(text: "Your movie"),
-        // im not extracting it since this whole screen will be changed
         body: Center(
           child: Text(
             movie.title,

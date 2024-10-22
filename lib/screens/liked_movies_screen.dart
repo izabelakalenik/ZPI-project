@@ -3,7 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/movie_model.dart';
 import '../styles/layouts.dart';
 import '../widgets/category_selector.dart';
-import '../widgets/movie_tile.dart';
+import '../widgets/liked_movies/movie_grid.dart';
+import '../widgets/liked_movies/random_movie_button.dart';
 import '../widgets/nav_drawer.dart';
 
 class LikedMoviesScreen extends StatefulWidget {
@@ -133,24 +134,13 @@ class LikedMoviesScreenContent extends StatelessWidget {
               onCategorySelected: onCategoriesSelected,
             ),
             const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.all(5.0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  childAspectRatio: 2 / 3,
-                ),
-                itemCount: movies.length,
-                itemBuilder: (context, index) {
-                  return MovieTile(movie: movies[index]);
-                },
-              ),
-            ),
+            MovieGrid(movies: movies),
+            RandomMovieButton(movies: movies),
           ],
         ),
       ),
     );
   }
 }
+
+
