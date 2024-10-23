@@ -5,6 +5,8 @@ import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/widgets/dialog.dart';
 
+import '../../database_configuration/authentication_service.dart';
+
 
 void showLogOutDialog(BuildContext context) {
   showDialog(
@@ -28,6 +30,23 @@ class LogOutDialog extends StatefulWidget {
 
 class _LogOutDialogState extends State<LogOutDialog> {
 
+  final AuthenticationService _authService = AuthenticationService(); // Initialize service
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await _authService.signOutUser();
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const StartScreen()),
+                (route) => false,
+        );
+      }
+    } catch (error) {
+      debugPrint("ERROR DURING LOGOUT: {$error}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -47,12 +66,7 @@ class _LogOutDialogState extends State<LogOutDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               PopupButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const StartScreen()),
-                  );
-                },
+                onPressed: () => _signOut(context), // Call sign out method
                 text: localizations.yes,
               ),
               const SizedBox(width: 30),
@@ -63,7 +77,7 @@ class _LogOutDialogState extends State<LogOutDialog> {
             ],
           ),
         ],
-      )
+      ),
     );
   }
 }
