@@ -7,7 +7,7 @@ import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/theme.dart';
 
-import 'database_configuration/authentication/authentication_service.dart';
+import 'database_configuration/authentication_service.dart';
 import 'languages/feedback/custom_delegate.dart';
 
 class App extends StatefulWidget {

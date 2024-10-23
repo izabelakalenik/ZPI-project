@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/database_configuration/authentication/authentication_service.dart';
+import 'package:zpi_project/database_configuration/authentication_service.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

@@ -5,7 +5,7 @@ import 'package:zpi_project/screens/start_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/widgets/dialog.dart';
 
-import '../../database_configuration/authentication/authentication_service.dart';
+import '../../database_configuration/authentication_service.dart';
 
 
 void showLogOutDialog(BuildContext context) {
