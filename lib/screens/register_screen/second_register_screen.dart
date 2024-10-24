@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
+import 'package:zpi_project/screens/register_screen/register_event.dart';
+import 'package:zpi_project/screens/register_screen/register_state.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import 'register_bloc.dart';
@@ -15,8 +17,9 @@ class SecondRegisterScreen extends StatefulWidget {
 
 class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _nameController = TextEditingController();
-  final _nicknameController = TextEditingController();
-  final _yearOfBirthController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _birthYearController = TextEditingController();
+  String? gender;
 
   int? _selectedYear;
   String? _selectedOption;
@@ -24,8 +27,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   @override
   void dispose() {
     _nameController.dispose();
-    _nicknameController.dispose();
-    _yearOfBirthController.dispose();
+    _usernameController.dispose();
+    _birthYearController.dispose();
     super.dispose();
   }
 
@@ -51,7 +54,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
               onChanged: (DateTime selectedDate) {
                 setState(() {
                   _selectedYear = selectedDate.year;
-                  _yearOfBirthController.text = _selectedYear.toString();
+                  _birthYearController.text = _selectedYear.toString();
                 });
                 Navigator.pop(context);
               },
@@ -109,7 +112,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     const SizedBox(height: 16),
                     // Username Field
                     CustomTextField(
-                      controller: _nicknameController,
+                      controller: _usernameController,
                       labelText: localizations.username,
                     ),
                     const SizedBox(height: 16),
@@ -118,7 +121,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       children: [
                         Expanded(
                           child: CustomTextField(
-                            controller: _yearOfBirthController,
+                            controller: _birthYearController,
                             labelText: localizations.year,
                             hintText: localizations.year_format,
                             suffixIcon: IconButton(
@@ -178,11 +181,20 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
                           ? () {
+                              BlocProvider.of<RegisterBloc>(context).add(
+                                RegisterAdditionalInfo(
+                                  name: _nameController.text,
+                                  username: _usernameController.text,
+                                  birthYear: _birthYearController.text,
+                                  gender: _selectedOption ?? 'Male',
+                                ),
+                              );
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
+                                  builder: (context) => BlocProvider.value(
+                                    value: BlocProvider.of<RegisterBloc>(context),
                                     child: const FavCategoriesScreen(),
                                   ),
                                 ),

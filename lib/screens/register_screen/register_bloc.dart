@@ -1,26 +1,87 @@
-import 'package:equatable/equatable.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-part 'register_event.dart';
-part 'register_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:path/path.dart';
+import 'package:zpi_project/screens/register_screen/register_event.dart';
+import 'package:zpi_project/screens/register_screen/register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterInitial()) {
-    on<RegisterButtonPressed>(_onRegisterButtonPressed);
+    // Register event handlers
+    on<RegisterWithEmailAndPassword>(_onRegisterWithEmailAndPassword);
+    on<RegisterAdditionalInfo>(_onRegisterAdditionalInfo);
+    on<RegisterFavoriteGenres>(_onRegisterFavoriteGenres);
   }
 
-  Future<void> _onRegisterButtonPressed(
-    RegisterButtonPressed event,
-    Emitter<RegisterState> emit,
-  ) async {
-    emit(RegisterLoading());
-
+  // Event handler for RegisterWithEmailAndPassword
+  Future<void> _onRegisterWithEmailAndPassword(
+      RegisterWithEmailAndPassword event, Emitter<RegisterState> emit) async {
+    emit(RegisterInProgress());
     try {
-      // Replace this with your own login logic
-      await Future.delayed(const Duration(seconds: 2));
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+          email: event.email, password: event.password);
+
+      String uid = userCredential.user!.uid;
+
+      // Store additional user data in Firestore using the UID as the document ID
+      //await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      //  'email': event.email,
+      //  'createdAt': FieldValue.serverTimestamp(),
+      //  // Add other fields as necessary
+      //});
+
       emit(RegisterSuccess());
-    } catch (error) {
-      emit(RegisterFailure(error: error.toString()));
+    } catch (e) {
+      emit(RegisterFailure(error: e.toString()));
+    }
+  }
+
+
+  // Event handler for RegisterAdditionalInfo
+  Future<void> _onRegisterAdditionalInfo(
+
+      RegisterAdditionalInfo event, Emitter<RegisterState> emit) async {
+      emit(RegisterInProgress());
+      try {
+        User? currentUser = FirebaseAuth.instance.currentUser;
+
+        if (currentUser != null){
+          await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set({
+            'name': event.name,
+            'username': event.username,
+            'birthYear': event.birthYear,
+            'gender': event.gender,
+          });
+        }
+
+
+        emit(RegisterSuccess());
+      } catch (e) {
+      emit(RegisterFailure(error: e.toString()));
+    }
+  }
+
+  // Event handler for RegisterFavoriteGenres
+  Future<void> _onRegisterFavoriteGenres(
+      RegisterFavoriteGenres event, Emitter<RegisterState> emit) async {
+    emit(RegisterInProgress());
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .update({
+          'favoriteGenres': event.favoriteGenres,
+        });
+
+        emit(RegisterSuccess());
+      } else {
+        emit(RegisterFailure(error: "User not logged in"));
+      }
+    } catch (e) {
+      emit(RegisterFailure(error: e.toString()));
     }
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/screens/register_screen/register_bloc.dart';
+import 'package:zpi_project/screens/register_screen/register_event.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
@@ -101,13 +104,20 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WelcomeScreen()),
-                        );
-                      }
-                    : null, //the button disabled if nothing chosen
+                  // Dispatch the event to save the favorite genres
+                  BlocProvider.of<RegisterBloc>(context).add(
+                    RegisterFavoriteGenres(favoriteGenres: _selectedGenres),
+                  );
+
+                  // Navigate to the welcome screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WelcomeScreen(),
+                    ),
+                  );
+                }
+                    : null, // Disable the button if no genres are selected
               ),
               const SizedBox(height: 16),
             ],

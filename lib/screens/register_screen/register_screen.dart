@@ -1,13 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:zpi_project/screens/register_screen/register_bloc.dart';
+import 'package:zpi_project/screens/register_screen/register_event.dart';
+import 'package:zpi_project/screens/register_screen/register_state.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-
+import '../../database_configuration/authentication_service.dart';
 import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
-import 'register_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -20,6 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  final authServiceInstance = AuthenticationService();
 
   void _navigateToLoginScreen() {
     Navigator.push(
@@ -52,6 +56,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         resizeToAvoidBottomInset: true,
         body: BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
+            if (state is RegisterSuccess) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => RegisterBloc(),
+                    child: const SecondRegisterScreen(),
+                  ),
+                ),
+              );
+            }
             if (state is RegisterFailure) {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
@@ -70,8 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(localizations.register,
-                        style: theme.textTheme.headlineLarge),
+                    Text(localizations.register, style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
                     // Social Login Buttons
                     Row(
@@ -114,15 +128,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureText: _obscurePassword,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
                           color: theme.iconTheme.color,
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword =
-                                !_obscurePassword; // Toggle password visibility
+                            _obscurePassword = !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -131,24 +142,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Button(
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
-                          ? () {
-                              registerBloc.add(
-                                RegisterButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
+                          ? () async {
+                        // Check if the email is already registered
+                        final signInMethods = await FirebaseAuth.instance
+                            .fetchSignInMethodsForEmail(_emailController.text);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
-                                    child: const SecondRegisterScreen(),
-                                  ),
-                                ),
-                              );
-                            }
+                        if (signInMethods.isNotEmpty) {
+                          // Show an error message if the email is already in use
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("email in use"),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
+                          return; // Stop further processing
+                        }
+
+                        // Proceed with registration
+                        BlocProvider.of<RegisterBloc>(context).add(
+                          RegisterWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+
+                        // Navigate to the next screen only after successful registration
+                        // This will be handled in the BlocListener
+                      }
                           : null,
                     ),
                     if (state is RegisterLoading)
