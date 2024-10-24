@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/languages/l10n.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/screens/register_screen/register_event.dart';
 import 'package:zpi_project/screens/register_screen/register_state.dart';
