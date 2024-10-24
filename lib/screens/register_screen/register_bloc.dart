@@ -14,7 +14,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   // Event handler for RegisterWithEmailAndPassword
   Future<void> _onRegisterWithEmailAndPassword(
       RegisterWithEmailAndPassword event, Emitter<RegisterState> emit) async {
-    emit(RegisterInProgress());
+    emit(RegisterLoading());
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -35,12 +35,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
-
   // Event handler for RegisterAdditionalInfo
   Future<void> _onRegisterAdditionalInfo(
 
       RegisterAdditionalInfo event, Emitter<RegisterState> emit) async {
-      emit(RegisterInProgress());
+      emit(RegisterLoading());
       try {
         User? currentUser = FirebaseAuth.instance.currentUser;
 
@@ -53,7 +52,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           });
         }
 
-
         emit(RegisterSuccess());
       } catch (e) {
       emit(RegisterFailure(error: e.toString()));
@@ -63,7 +61,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   // Event handler for RegisterFavoriteGenres
   Future<void> _onRegisterFavoriteGenres(
       RegisterFavoriteGenres event, Emitter<RegisterState> emit) async {
-    emit(RegisterInProgress());
+    emit(RegisterLoading());
     try {
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {

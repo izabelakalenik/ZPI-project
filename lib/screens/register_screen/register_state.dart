@@ -1,10 +1,14 @@
 abstract class RegisterState {}
 
-class RegisterInitial extends RegisterState {}
+class RegisterInitial extends RegisterState {
 
-class RegisterInProgress extends RegisterState {}
+}
 
-class RegisterSuccess extends RegisterState {}
+
+
+class RegisterSuccess extends RegisterState {
+
+}
 
 class RegisterLoading extends RegisterState {}
 
