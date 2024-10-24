@@ -3,9 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:zpi_project/utils/screen_brightness_manager.dart';
 import '../../styles/layouts.dart';
-import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
