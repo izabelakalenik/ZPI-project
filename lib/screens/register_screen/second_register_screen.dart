@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/languages/l10n.dart';
 import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
 import 'package:zpi_project/screens/register_screen/register_event.dart';
 import 'package:zpi_project/screens/register_screen/register_state.dart';
@@ -94,15 +95,14 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
 
       if (!_isUsernameUnique) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("username taken"),
-            duration: Duration(seconds: 3),
-          ),
+            SnackBar(
+              content: Text(AppLocalizations.of(context).username_taken),
+              duration: const Duration(seconds: 3),
+            )
         );
       }
     });
   }
-
 
   void _validateForm() {
     if (_birthYearDebounce?.isActive ?? false) {
@@ -119,7 +119,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
         if (!isBirthYearValid && _birthYearController.text.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("That don't look like no year"),
+              content: Text(AppLocalizations.of(context).not_year),
               duration: const Duration(seconds: 3),
             ),
           );

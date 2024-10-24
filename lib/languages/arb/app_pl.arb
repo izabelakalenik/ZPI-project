@@ -127,6 +127,7 @@
   "fill_both": "Proszę wypełnić oba pola: e-mail i hasło",
   "not_email": "To nie wygląda na prawidłowy adres e-mail",
   "invalid_credentials": "Nieprawidłowe hasło lub adres e-mail",
-  "unknown_error": "Wystąpił nieznany błąd"
-
+  "unknown_error": "Wystąpił nieznany błąd",
+  "username_taken": "Nazwa użytkownika jest już zajęta",
+  "not_year": "To nie wygląda na prawudłowy rok"
 }
