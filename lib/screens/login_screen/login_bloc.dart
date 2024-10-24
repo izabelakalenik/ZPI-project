@@ -2,12 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/database_configuration/authentication_service.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthenticationService _authService = AuthenticationService();
 
   LoginBloc() : super(LoginInitial()) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
@@ -22,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final localizations = event.localizations;
     try {
       // UserCredential userCredential =
-      await _auth.signInWithEmailAndPassword(
+      await _authService.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
