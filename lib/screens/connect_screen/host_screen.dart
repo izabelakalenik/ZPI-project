@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
+import 'package:zpi_project/utils/screen_brightness_manager.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
@@ -16,6 +18,7 @@ class _HostScreenState extends State<HostScreen> {
   String roomCode = '';
   List<String> friends = [];
   late TextEditingController _roomController;
+  final ScreenBrightnessManager _brightnessManager = ScreenBrightnessManager(); // Instance of ScreenBrightnessManager
 
   @override
   void initState() {
@@ -23,6 +26,8 @@ class _HostScreenState extends State<HostScreen> {
     // Generate a unique room code
     roomCode = Uuid().v4().substring(0, 8);
     _initializeControllers();
+    _increaseBrightness();
+
   }
 
   // Function to simulate adding friends when they join by entering the code
@@ -39,7 +44,18 @@ class _HostScreenState extends State<HostScreen> {
   @override
   void dispose() {
     _roomController.dispose();
+    _restoreBrightness();
     super.dispose();
+  }
+
+  // Call the manager to increase brightness
+  Future<void> _increaseBrightness() async {
+    await _brightnessManager.increaseBrightness();
+  }
+
+  // Call the manager to restore brightness
+  Future<void> _restoreBrightness() async {
+    await _brightnessManager.restoreBrightness();
   }
 
   @override
