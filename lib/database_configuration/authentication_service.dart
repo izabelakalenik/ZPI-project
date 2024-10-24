@@ -61,7 +61,6 @@ class AuthenticationService {
     return userCredential;
   }
 
-  //  update favorite genres for an existing user
   Future<void> updateFavoriteGenres(List<String> favoriteGenres) async {
     final User? firebaseUser = _firebaseAuth.currentUser;
     if (firebaseUser != null) {

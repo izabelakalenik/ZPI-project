@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,7 +7,6 @@ import 'package:zpi_project/screens/register_screen/register_event.dart';
 import 'package:zpi_project/screens/register_screen/register_state.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
-import '../../database_configuration/authentication_service.dart';
 import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
 
@@ -23,7 +21,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
-  final authServiceInstance = AuthenticationService();
 
   void _navigateToLoginScreen() {
     Navigator.push(
@@ -46,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final registerBloc = BlocProvider.of<RegisterBloc>(context);
+    //final registerBloc = BlocProvider.of<RegisterBloc>(context);
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
 
@@ -87,41 +84,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Text(localizations.register, style: theme.textTheme.headlineLarge),
                     const SizedBox(height: 30),
-                    // Social Login Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: CustomSocialLoginButton(
-                            text: localizations.google,
-                            buttonType: SocialLoginButtonType.google,
-                            onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: CustomSocialLoginButton(
-                            text: localizations.facebook,
-                            buttonType: SocialLoginButtonType.facebook,
-                            onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                    _buildSocialLoginButtons(localizations),
                     const SizedBox(height: 20),
                     Text(localizations.or, style: theme.textTheme.bodyLarge),
                     const SizedBox(height: 20),
-                    // Email Field
                     CustomTextField(
                       controller: _emailController,
                       labelText: localizations.email,
+                      // Add validation logic here if necessary
                     ),
                     const SizedBox(height: 16),
-                    // Password Field
                     CustomTextField(
                       controller: _passwordController,
                       labelText: localizations.password,
@@ -141,35 +113,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 16),
                     Button(
                       text: Text(localizations.next),
-                      onPressed: state is! RegisterLoading
-                          ? () async {
-                        // Check if the email is already registered
-                        final signInMethods = await FirebaseAuth.instance
-                            .fetchSignInMethodsForEmail(_emailController.text);
-
-                        if (signInMethods.isNotEmpty) {
-                          // Show an error message if the email is already in use
+                      onPressed: state is! RegisterLoading ? ()  {
+                        final email = _emailController.text; // Store email in a local variable
+                        try {
+                            BlocProvider.of<RegisterBloc>(context).add(
+                            RegisterWithEmailAndPassword(
+                              email: email,
+                              password: _passwordController.text,
+                            ),
+                          );
+                        } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text("email in use"),
+                              content: Text("This email is already registered."),
                               duration: const Duration(seconds: 3),
                             ),
                           );
-                          return; // Stop further processing
                         }
-
-                        // Proceed with registration
-                        BlocProvider.of<RegisterBloc>(context).add(
-                          RegisterWithEmailAndPassword(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          ),
-                        );
-
-                        // Navigate to the next screen only after successful registration
-                        // This will be handled in the BlocListener
-                      }
-                          : null,
+                      } : null,
                     ),
                     if (state is RegisterLoading)
                       const Padding(
@@ -177,7 +138,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: CircularProgressIndicator(),
                       ),
                     const SizedBox(height: 16),
-                    // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(
@@ -199,6 +159,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSocialLoginButtons(AppLocalizations localizations) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: CustomSocialLoginButton(
+            text: localizations.google,
+            buttonType: SocialLoginButtonType.google,
+            onPressed: () async {
+              // Handle Google Sign-In
+            },
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: CustomSocialLoginButton(
+            text: localizations.facebook,
+            buttonType: SocialLoginButtonType.facebook,
+            onPressed: () async {
+              // Handle Facebook Sign-In
+            },
+          ),
+        ),
+      ],
     );
   }
 }

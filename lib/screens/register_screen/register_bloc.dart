@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:path/path.dart';
 import 'package:zpi_project/screens/register_screen/register_event.dart';
 import 'package:zpi_project/screens/register_screen/register_state.dart';
 
@@ -25,11 +24,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       String uid = userCredential.user!.uid;
 
       // Store additional user data in Firestore using the UID as the document ID
-      //await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      //  'email': event.email,
-      //  'createdAt': FieldValue.serverTimestamp(),
-      //  // Add other fields as necessary
-      //});
+       await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'email': event.email,
+        'createdAt': FieldValue.serverTimestamp(),
+        // Add other fields as necessary
+      });
 
       emit(RegisterSuccess());
     } catch (e) {
@@ -47,7 +46,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         User? currentUser = FirebaseAuth.instance.currentUser;
 
         if (currentUser != null){
-          await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).set({
+          await FirebaseFirestore.instance.collection('users').doc(currentUser.uid).update({
             'name': event.name,
             'username': event.username,
             'birthYear': event.birthYear,
