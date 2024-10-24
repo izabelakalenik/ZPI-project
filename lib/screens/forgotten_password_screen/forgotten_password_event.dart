@@ -9,8 +9,9 @@ abstract class ForgottenPasswordEvent extends Equatable {
 
 class SendButtonPressed extends ForgottenPasswordEvent {
   final String email;
+  final AppLocalizations localizations;
 
-  const SendButtonPressed({required this.email});
+  const SendButtonPressed({required this.email, required this.localizations});
 
   @override
   List<Object> get props => [

@@ -37,6 +37,7 @@
   "create_new_password": "Stwórz nowe hasło",
   "forgotten_password_message": "Nie przejmuj się, wyślemy Ci linka abyś mógł stworzyć nowe!",
   "email_send_message" : "Wysłaliśmy Ci link do zresetowania hasła. Jeśli go nie otrzymasz w ciągu kilku minut, spróbuj ponownie.",
+  "send_email_error" : "Wystąpił błąd, sprawdź proszę, czy wprowadziłeś poprawny adres e-mail",
 
 
   "settings": "Ustawienia",

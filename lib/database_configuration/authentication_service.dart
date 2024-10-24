@@ -8,7 +8,8 @@ class AuthenticationService {
     required String email,
     required String password,
   }) async {
-    return await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    return await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
   }
 
   Future<void> signOutUser() async {
@@ -17,6 +18,12 @@ class AuthenticationService {
       await FirebaseAuth.instance.signOut();
       debugPrint("User logged out");
     }
+  }
+
+  Future<void> sendPasswordResetEmail({
+    required String email,
+  }) async {
+    return await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   // Check if a user is currently signed in
