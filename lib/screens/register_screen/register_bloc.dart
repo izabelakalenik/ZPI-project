@@ -6,7 +6,6 @@ import 'package:zpi_project/screens/register_screen/register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterInitial()) {
-    // Register event handlers
     on<RegisterWithEmailAndPassword>(_onRegisterWithEmailAndPassword);
     on<RegisterAdditionalInfo>(_onRegisterAdditionalInfo);
     on<RegisterFavoriteGenres>(_onRegisterFavoriteGenres);

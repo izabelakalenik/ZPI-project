@@ -71,4 +71,11 @@ class AuthenticationService {
       throw Exception("User not logged in");
     }
   }
+
+  Future<bool> isUsernameUnique(String username) async {
+    final users = await FirebaseFirestore.instance.collection('users')
+        .where('username', isEqualTo: username)
+        .get();
+    return users.docs.isEmpty;
+  }
 }
