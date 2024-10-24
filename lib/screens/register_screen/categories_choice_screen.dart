@@ -104,12 +104,10 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                  // Dispatch the event to save the favorite genres
                   BlocProvider.of<RegisterBloc>(context).add(
                     RegisterFavoriteGenres(favoriteGenres: _selectedGenres),
                   );
 
-                  // Navigate to the welcome screen
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -117,7 +115,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                     ),
                   );
                 }
-                    : null, // Disable the button if no genres are selected
+                    : null,
               ),
               const SizedBox(height: 16),
             ],

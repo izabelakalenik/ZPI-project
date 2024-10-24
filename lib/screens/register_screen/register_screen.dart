@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text("This email is already registered."),
+                              content: Text(localizations.email_taken),
                               duration: const Duration(seconds: 3),
                             ),
                           );

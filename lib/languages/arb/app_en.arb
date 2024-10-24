@@ -127,6 +127,7 @@
   "invalid_credentials": "The password or the e-mail address is incorrect",
   "unknown_error": "An unknown error occurred",
   "username_taken": "Username taken",
+  "email_taken": "This email is already registered",
   "not_year": "That don't look like no year"
 
 
