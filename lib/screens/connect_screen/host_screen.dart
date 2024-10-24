@@ -94,9 +94,8 @@ class HostScreenContent extends StatelessWidget {
 
     return
       Scaffold(
-        drawer: NavDrawer(),
-        appBar: CustomAppBar(text: localizations.connect),
-        body: Padding(
+          appBar: CustomAppBar(text: localizations.connect),
+          body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

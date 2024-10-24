@@ -4,6 +4,7 @@ import 'package:zpi_project/screens/connect_screen/joiner_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
+import '../../widgets/nav_drawer.dart';
 
 class ConnectScreen extends StatefulWidget {
   const ConnectScreen({super.key});
@@ -50,17 +51,20 @@ class ConnectScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    return Padding(
+    return Scaffold(
+        drawer: NavDrawer(),
+        appBar: CustomAppBar(text: localizations.connect),
+      body:  Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 30),
-          Text(
-            localizations.connect,
-            style: theme.textTheme.displayMedium,
-            textAlign: TextAlign.center,
-          ),
+          // const SizedBox(height: 30),
+          // Text(
+          //   localizations.connect,
+          //   style: theme.textTheme.displayMedium,
+          //   textAlign: TextAlign.center,
+          // ),
           const SizedBox(height: 130),
           Text(
             localizations.lets,
@@ -87,6 +91,7 @@ class ConnectScreenContent extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 }
