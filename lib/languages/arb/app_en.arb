@@ -37,6 +37,7 @@
   "create_new_password": "Create a new password",
   "forgotten_password_message": "Don’t worry, we will send you a link to create a new one!",
   "email_send_message" : "We've sent you a link to reset your password. If you don't receive it in a few minutes, try again",
+  "send_email_error" : "There is an error, please check if you entered a valid email",
 
 
   "settings": "Settings",

@@ -79,8 +79,8 @@ class ForgottenPasswordScreenContent extends StatelessWidget {
                         ? () {
                             forgottenPasswordBloc.add(
                               SendButtonPressed(
-                                email: _emailController.text,
-                              ),
+                                  email: _emailController.text,
+                                  localizations: localizations),
                             );
                           }
                         : null,
