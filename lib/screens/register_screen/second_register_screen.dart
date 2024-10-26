@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/screens/register_screen/categories_choice_screen.dart';
+import 'package:zpi_project/screens/register_screen/fav_categories_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import 'register_bloc.dart';
@@ -15,16 +15,23 @@ class SecondRegisterScreen extends StatefulWidget {
 
 class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _nameController = TextEditingController();
-  final _nicknameController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _yearOfBirthController = TextEditingController();
+  late RegisterBloc registerBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    registerBloc = BlocProvider.of<RegisterBloc>(context);
+  }
 
   int? _selectedYear;
-  String? _selectedOption;
+  String? _selectedGender;
 
   @override
   void dispose() {
     _nameController.dispose();
-    _nicknameController.dispose();
+    _usernameController.dispose();
     _yearOfBirthController.dispose();
     super.dispose();
   }
@@ -110,7 +117,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     const SizedBox(height: 14),
                     // Username Field
                     CustomTextField(
-                      controller: _nicknameController,
+                      controller: _usernameController,
                       labelText: localizations.username,
                     ),
                     const SizedBox(height: 14),
@@ -134,7 +141,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         const SizedBox(width: 14),
                         Expanded(
                           child: DropdownButtonFormField<String>(
-                            value: _selectedOption,
+                            value: _selectedGender,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                               labelText: localizations.gender,
@@ -167,7 +174,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                _selectedOption = newValue;
+                                _selectedGender = newValue;
                               });
                             },
                           ),
@@ -177,25 +184,34 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
-                      onPressed: state is! RegisterLoading
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
-                                    child: const FavCategoriesScreen(),
-                                  ),
-                                ),
-                              );
-                            }
-                          : null,
+                      onPressed: () {
+                        // Dispatch EmailPasswordEntered event
+                        registerBloc.add(
+                          UserDetailsEntered(
+                            name: _nameController.text,
+                            username: _usernameController.text,
+                            birthYear: int.parse(_yearOfBirthController.text),
+                            country: "Poland",
+                            gender: _selectedGender == null ? "" : _selectedGender! ,
+                          ),
+                        );
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: registerBloc,
+                              child: const FavCategoriesScreen(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    if (state is RegisterLoading)
-                      const Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: CircularProgressIndicator(),
-                      ),
+                    //if (state is RegisterLoading)
+                    //  const Padding(
+                    //    padding: EdgeInsets.all(8.0),
+                    //   child: CircularProgressIndicator(),
+                    //  ),
                     const SizedBox(height: 14),
                   ],
                 ),

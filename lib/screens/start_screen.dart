@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/database_configuration/authentication_service.dart';
 import 'package:zpi_project/screens/register_screen/register_bloc.dart';
 import 'package:zpi_project/screens/register_screen/register_screen.dart';
 
@@ -38,7 +39,7 @@ class _StartScreenState extends State<StartScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => BlocProvider(
-                create: (context) => RegisterBloc(),
+                create: (context) => RegisterBloc(AuthenticationService()),
                 child: const RegisterScreen(),
               ),
             ),

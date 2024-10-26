@@ -131,34 +131,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
-                      onPressed: state is! RegisterLoading
-                          ? () {
-                              registerBloc.add(
-                                RegisterButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
+                      onPressed: () {
+                        // Dispatch EmailPasswordEntered event
+                        registerBloc.add(
+                          EmailPasswordEntered(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
-                                    child: const SecondRegisterScreen(),
-                                  ),
-                                ),
-                              );
-                            }
-                          : null,
+                        // Navigate to the next screen while passing the existing bloc
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: registerBloc,
+                              child: const SecondRegisterScreen(),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    if (state is RegisterLoading)
-                      const Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    const SizedBox(height: 14),
-                    // Forgot Password and Login Button
+                    const SizedBox(height: 14), // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(
