@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(text: ""),
+        appBar: CustomAppBar(text: "", height: 35),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<RegisterBloc, RegisterState>(
@@ -73,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Text(localizations.register,
                         style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 14),
                     // Social Login Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14),
                         Expanded(
                           child: CustomSocialLoginButton(
                             text: localizations.facebook,
@@ -99,15 +99,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
                     Text(localizations.or, style: theme.textTheme.bodyLarge),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
                       labelText: localizations.email,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
@@ -128,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
@@ -154,10 +154,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     if (state is RegisterLoading)
                       const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(5.0),
                         child: CircularProgressIndicator(),
                       ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,

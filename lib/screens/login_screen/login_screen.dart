@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(text: ""),
+        appBar: CustomAppBar(text: "", height: 35),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<LoginBloc, LoginState>(
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(localizations.login_2,
                         style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Social Login Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14),
                         Expanded(
                           child: CustomSocialLoginButton(
                             text: localizations.facebook,
@@ -121,15 +121,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Text(localizations.or, style: theme.textTheme.bodyLarge),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
                       labelText: localizations.email,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.all(5.0),
                         child: CircularProgressIndicator(),
                       ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(

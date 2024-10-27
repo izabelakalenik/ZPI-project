@@ -75,7 +75,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
 
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(text: ""),
+        appBar: CustomAppBar(text: "", height: 35),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<RegisterBloc, RegisterState>(
@@ -94,26 +94,26 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
           child: BlocBuilder<RegisterBloc, RegisterState>(
             builder: (context, state) {
               return Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(localizations.more_about_you,
                         style: theme.textTheme.headlineLarge,
                         textAlign: TextAlign.center),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
                     // Name Field
                     CustomTextField(
                       controller: _nameController,
                       labelText: localizations.name,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Username Field
                     CustomTextField(
                       controller: _nicknameController,
                       labelText: localizations.username,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -131,7 +131,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14),
                         Expanded(
                           child: DropdownButtonFormField<String>(
                             value: _selectedOption,
@@ -174,7 +174,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
                       onPressed: state is! RegisterLoading
@@ -193,10 +193,10 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     ),
                     if (state is RegisterLoading)
                       const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(5.0),
                         child: CircularProgressIndicator(),
                       ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                   ],
                 ),
               );
