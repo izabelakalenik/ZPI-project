@@ -30,6 +30,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
 
     return MainLayout(
       child: Scaffold(
+        appBar: CustomAppBar(text: ""),
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(20.0),

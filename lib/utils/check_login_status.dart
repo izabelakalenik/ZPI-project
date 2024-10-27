@@ -8,9 +8,11 @@ final AuthenticationService _authService = AuthenticationService();
 Future<void> checkLoginStatus(context) async {
   final user = _authService.getCurrentUser();
   if (user == null) {
+    Future.delayed(Duration.zero, () {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => StartScreen()),
-          (Route<dynamic> route) => false,
+          (Route<dynamic> route) => route.isFirst,
     );
+    });
   }
 }

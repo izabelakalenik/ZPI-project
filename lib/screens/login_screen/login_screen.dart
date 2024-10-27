@@ -63,6 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return MainLayout(
       child: Scaffold(
+        appBar: CustomAppBar(text: ""),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<LoginBloc, LoginState>(

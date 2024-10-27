@@ -62,44 +62,45 @@ class ConnectScreenContent extends StatelessWidget {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: CustomAppBar(text: localizations.connect),
-      body:  Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // const SizedBox(height: 30),
-          // Text(
-          //   localizations.connect,
-          //   style: theme.textTheme.displayMedium,
-          //   textAlign: TextAlign.center,
-          // ),
-          const SizedBox(height: 130),
-          Text(
-            localizations.lets,
-            style: theme.textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 70),
-          Column(
+        body:  Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Button(
-                text: Text(localizations.create_room, textAlign: TextAlign.center),
-                onPressed: onCreateRoomPressed,
-                width: 200,
+              // const SizedBox(height: 30),
+              // Text(
+              //   localizations.connect,
+              //   style: theme.textTheme.displayMedium,
+              //   textAlign: TextAlign.center,
+              // ),
+              const SizedBox(height: 130),
+              Text(
+                localizations.lets,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 30),
-              Text(localizations.or, style: theme.textTheme.bodyLarge),
-              const SizedBox(height: 30),
-              Button(
-                text: Text(localizations.join, textAlign: TextAlign.center),
-                onPressed: onJoinRoomPressed,
-                width: 200,
+              const SizedBox(height: 70),
+              Column(
+                children: [
+                  Button(
+                    text: Text(localizations.create_room, textAlign: TextAlign.center),
+                    onPressed: onCreateRoomPressed,
+                    width: 200,
+                  ),
+                  const SizedBox(height: 30),
+                  Text(localizations.or, style: theme.textTheme.bodyLarge),
+                  const SizedBox(height: 30),
+                  Button(
+                    text: Text(localizations.join, textAlign: TextAlign.center),
+                    onPressed: onJoinRoomPressed,
+                    width: 200,
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
-    )
+        )
     );
   }
 }
+

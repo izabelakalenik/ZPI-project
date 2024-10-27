@@ -75,6 +75,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
 
     return MainLayout(
       child: Scaffold(
+        appBar: CustomAppBar(text: ""),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<RegisterBloc, RegisterState>(
