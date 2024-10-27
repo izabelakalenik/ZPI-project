@@ -159,7 +159,7 @@ class JoinerScreenContent extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Button(
-                width: 200,
+                width: 230,
                 onPressed: onQrPressed,
                 text: Text(localizations.scan),
               ),
@@ -173,7 +173,7 @@ class JoinerScreenContent extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Button(
-                width: 200,
+                width: 230,
                 onPressed: onConnectPressed,
                 text: Text(localizations.connect),
               ),
