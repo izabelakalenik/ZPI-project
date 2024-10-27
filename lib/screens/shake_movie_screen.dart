@@ -6,6 +6,8 @@ import 'package:zpi_project/styles/layouts.dart';
 import '../models/movie_model.dart';
 import 'package:zpi_project/screens/movie_screen/movie_screen.dart';
 
+import '../utils/check_login_status.dart';
+
 class ShakeMovieScreen extends StatefulWidget {
   final List<Movie> likedMovies;
 
@@ -16,6 +18,13 @@ class ShakeMovieScreen extends StatefulWidget {
 }
 
 class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   void _selectRandomMovie(List<Movie> movies) {
     final random = Random();
     final randomMovie = movies[random.nextInt(movies.length)];
