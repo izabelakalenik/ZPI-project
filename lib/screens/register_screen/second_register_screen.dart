@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/register_screen/fav_categories_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
+import 'input_validation.dart';
 import 'register_bloc.dart';
 
 class SecondRegisterScreen extends StatefulWidget {
@@ -18,6 +21,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
   final _usernameController = TextEditingController();
   final _yearOfBirthController = TextEditingController();
   late RegisterBloc registerBloc;
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -33,7 +37,20 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
     _nameController.dispose();
     _usernameController.dispose();
     _yearOfBirthController.dispose();
+    _debounce?.cancel();
     super.dispose();
+  }
+
+  void _navigateToFavGenresScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: registerBloc,
+          child: const FavCategoriesScreen(),
+        ),
+      ),
+    );
   }
 
   Future<void> _selectYear(BuildContext context) async {
@@ -53,8 +70,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
             child: YearPicker(
               firstDate: firstDate,
               lastDate: lastDate,
-              selectedDate:
-                  _selectedYear != null ? DateTime(_selectedYear!) : now,
+              selectedDate: _selectedYear != null ? DateTime(_selectedYear!) : now,
               onChanged: (DateTime selectedDate) {
                 setState(() {
                   _selectedYear = selectedDate.year;
@@ -68,6 +84,14 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
       },
     );
   }
+
+//  void _checkUsernameAvailability() {
+//   if (_debounce?.isActive ?? false) _debounce!.cancel();
+//
+//    _debounce = Timer(const Duration(seconds: 1), () {
+//  registerBloc.add(CheckUsernameAvailability(_usernameController.text));
+//    });
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +120,8 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
+            } else if (state is RegisterProceedToFavGenresScreen) {
+              _navigateToFavGenresScreen();
             }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -119,6 +145,9 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     CustomTextField(
                       controller: _usernameController,
                       labelText: localizations.username,
+                      onChanged: (username) {
+                        // Dispatch the CheckUsernameAvailability event when the username changes
+                      },
                     ),
                     const SizedBox(height: 14),
                     Row(
@@ -152,20 +181,15 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16.0),
-                                borderSide: const BorderSide(
-                                    color:
-                                        Colors.white70), // Gray border on focus
+                                borderSide: const BorderSide(color: Colors.white70),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16.0),
-                                borderSide: const BorderSide(
-                                    color: Colors
-                                        .white70), // Gray border when enabled
+                                borderSide: const BorderSide(color: Colors.white70),
                               ),
                             ),
                             dropdownColor: Color(0xFFC96786).withOpacity(0.9),
-                            icon: const Icon(Icons.arrow_drop_down,
-                                color: Colors.white),
+                            icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
                             items: genderOptions.map((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -185,33 +209,33 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     Button(
                       text: Text(localizations.next),
                       onPressed: () {
-                        // Dispatch EmailPasswordEntered event
+                        bool allFieldsValid = InputValidation.validateFields({
+                          'name': _nameController.text,
+                          'username': _usernameController.text,
+                          'year': _yearOfBirthController.text,
+                          'gender': _selectedGender ?? '',
+                        });
+                        if (!allFieldsValid) {
+                          ScaffoldMessenger.of(context).showSnackBar(InputValidation.errorMessage(localizations.fill_all));
+                          return;
+                        }
+                        bool validYear = InputValidation.validateYear(_yearOfBirthController.text);
+                        if (!validYear) {
+                          ScaffoldMessenger.of(context).showSnackBar(InputValidation.errorMessage(localizations.not_year));
+                          return;
+                        }
+
                         registerBloc.add(
                           UserDetailsEntered(
                             name: _nameController.text,
                             username: _usernameController.text,
                             birthYear: int.parse(_yearOfBirthController.text),
                             country: "Poland",
-                            gender: _selectedGender == null ? "" : _selectedGender! ,
-                          ),
-                        );
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider.value(
-                              value: registerBloc,
-                              child: const FavCategoriesScreen(),
-                            ),
+                            gender: _selectedGender!,
                           ),
                         );
                       },
                     ),
-                    //if (state is RegisterLoading)
-                    //  const Padding(
-                    //    padding: EdgeInsets.all(8.0),
-                    //   child: CircularProgressIndicator(),
-                    //  ),
                     const SizedBox(height: 14),
                   ],
                 ),

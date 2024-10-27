@@ -1,5 +1,6 @@
 part of 'register_bloc.dart';
 
+@immutable
 class RegisterState extends Equatable {
   final String email;
   final String password;
@@ -10,7 +11,7 @@ class RegisterState extends Equatable {
   final String country;
   final List<String> genres;
 
-  RegisterState({
+  const RegisterState({
     this.email = '',
     this.password = '',
     this.name = '',
@@ -38,17 +39,94 @@ class RegisterState extends Equatable {
       username: username ?? this.username,
       birthYear: birthYear ?? this.birthYear,
       gender: gender ?? this.gender,
-      country: country?? this.country,
+      country: country ?? this.country,
       genres: genres ?? this.genres,
     );
   }
 
   @override
-  List<Object?> get props => [email, password, name, username, birthYear, gender, genres];
+  List<Object?> get props => [email, password, name, username, birthYear, gender, country, genres];
+}
+
+class RegisterProceedToSecondScreen extends RegisterState {
+  const RegisterProceedToSecondScreen({
+    required String email,
+    required String password,
+    String name = '',
+    String username = '',
+    int birthYear = 0,
+    String gender = '',
+    String country = 'Poland',
+    List<String> genres = const [],
+  }) : super(
+    email: email,
+    password: password,
+    name: name,
+    username: username,
+    birthYear: birthYear,
+    gender: gender,
+    country: country,
+    genres: genres,
+  );
+}
+
+class RegisterProceedToFavGenresScreen extends RegisterProceedToSecondScreen {
+  const RegisterProceedToFavGenresScreen({
+    required String email,
+    required String password,
+    required String name,
+    required String username,
+    required int birthYear,
+    required String country,
+    required String gender,
+    List<String> genres = const [],
+  }) : super(
+    email: email,
+    password: password,
+    name: name,
+    username: username,
+    birthYear: birthYear,
+    country: country,
+    gender: gender,
+    genres: genres,
+  );
+}
+
+class RegisterComplete extends RegisterProceedToFavGenresScreen {
+  const RegisterComplete({
+    required String email,
+    required String password,
+    required String name,
+    required String username,
+    required int birthYear,
+    required String country,
+    required String gender,
+    required List<String> genres,
+  }) : super(
+    email: email,
+    password: password,
+    name: name,
+    username: username,
+    birthYear: birthYear,
+    country: country,
+    gender: gender,
+    genres: genres,
+  );
+}
+
+class RegisterInitial extends RegisterState {
+  const RegisterInitial() : super();
+}
+
+class RegisterLoading extends RegisterState {
+  const RegisterLoading() : super();
 }
 
 class RegisterFailure extends RegisterState {
   final String error;
 
-  RegisterFailure({required this.error});
+  const RegisterFailure({required this.error}) : super();
+
+  @override
+  List<Object?> get props => super.props + [error];
 }

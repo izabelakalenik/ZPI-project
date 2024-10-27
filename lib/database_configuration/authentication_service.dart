@@ -35,13 +35,11 @@ class AuthenticationService {
   }
 
   Future<UserCredential> registerUser(String email, String password, String name, String username, int birthYear, String gender, String country, List<String> favoriteGenres) async {
-    // Register the user in Firebase Authentication
     UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    // Save additional user details to Firestore
     await _firestore.collection('users').doc(userCredential.user!.uid).set({
       'name': name,
       'username': username,
@@ -55,5 +53,20 @@ class AuthenticationService {
     return userCredential;
   }
 
-}
+  Future<bool> isUsernameUnique(String username) async {
+    final users = await FirebaseFirestore.instance.collection('users')
+        .where('username', isEqualTo: username)
+        .get();
+    return users.docs.isEmpty;
+  }
 
+  Future<bool> isEmailUnique(String email) async {
+    final users = await FirebaseFirestore.instance.collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+    return users.docs.isEmpty;
+  }
+
+
+
+}
