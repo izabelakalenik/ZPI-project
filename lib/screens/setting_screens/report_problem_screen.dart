@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../utils/check_login_status.dart';
 import '../../widgets/contact_info.dart';
 import 'package:feedback/feedback.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,12 @@ class ReportProblemScreen extends StatefulWidget {
 }
 
 class _ReportProblemScreenState extends State<ReportProblemScreen> {
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   void _feedback(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     BetterFeedback.of(context).show(

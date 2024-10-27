@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
+import '../../utils/check_login_status.dart';
+
 class PolicyScreen extends StatefulWidget {
   const PolicyScreen({super.key});
 
@@ -12,6 +14,12 @@ class PolicyScreen extends StatefulWidget {
 }
 
 class _PolicyScreenState extends State<PolicyScreen> {
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(child: const PolicyScreenContent());

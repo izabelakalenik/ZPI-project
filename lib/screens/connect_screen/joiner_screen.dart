@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:zpi_project/utils/check_login_status.dart';
 import '../../styles/layouts.dart';
 import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,6 +23,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
   void initState() {
     super.initState();
     _initializeControllers();
+    checkLoginStatus(context);
   }
 
   void _initializeControllers() {

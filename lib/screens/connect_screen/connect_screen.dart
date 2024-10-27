@@ -4,6 +4,7 @@ import 'package:zpi_project/screens/connect_screen/joiner_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
+import '../../utils/check_login_status.dart';
 import '../../widgets/nav_drawer.dart';
 
 class ConnectScreen extends StatefulWidget {
@@ -14,6 +15,13 @@ class ConnectScreen extends StatefulWidget {
 }
 
 class _ConnectScreenState extends State<ConnectScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(

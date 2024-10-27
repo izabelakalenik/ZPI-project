@@ -101,10 +101,11 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => WelcomeScreen()),
+                              (Route<dynamic> route) => route.isFirst,
                         );
                       }
                     : null, //the button disabled if nothing chosen

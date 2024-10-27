@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../utils/check_login_status.dart';
 import '../../widgets/contact_info.dart';
 
 class AboutAuthorsScreen extends StatefulWidget {
@@ -12,9 +13,16 @@ class AboutAuthorsScreen extends StatefulWidget {
 
 class _AboutAuthorsScreenState extends State<AboutAuthorsScreen> {
   @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MainLayout(child: const AboutAuthorsScreenContent());
   }
+
 }
 
 class AboutAuthorsScreenContent extends StatelessWidget {
