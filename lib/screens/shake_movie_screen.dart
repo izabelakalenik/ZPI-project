@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shake_detector/shake_detector.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import '../models/movie_model.dart';
+import 'package:zpi_project/screens/movie_screen/movie_screen.dart';
 
 class ShakeMovieScreen extends StatefulWidget {
   final List<Movie> likedMovies;
@@ -92,29 +93,6 @@ class _ShakeMovieScreenState extends State<ShakeMovieScreen> {
             text: Text(localizations.shake_movie_screen_button),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Simplified version of the Movie Screen
-class MovieScreen extends StatelessWidget {
-  final Movie movie;
-
-  const MovieScreen({super.key, required this.movie});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return MainLayout(
-      child: Scaffold(
-        appBar: CustomAppBar(text: "Your movie"),
-        body: Center(
-          child: Text(
-            movie.title,
-            style: theme.textTheme.displayMedium,
-          ),
-        ),
       ),
     );
   }
