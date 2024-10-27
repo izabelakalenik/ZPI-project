@@ -98,7 +98,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
               ),
               const SizedBox(height: 20),
               Button(
-                width: 200,
+                width: 220,
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
