@@ -5,6 +5,7 @@ import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_screen.dart';
 import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import '../register_screen/register_bloc.dart';
@@ -78,11 +79,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
             } else if (state is LoginSuccess) {
-              Navigator.pushReplacement(
+              Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(
+                  builder: (context) => WelcomeScreen(),
+                ),
+                    (route) => false,
+              );
+
+              Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(),
                 ),
+                    (route) => route.isFirst,
               );
             }
           },
