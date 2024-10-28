@@ -125,8 +125,13 @@
   "privacy_policy": "Polityka Prywatności",
 
   "fill_both": "Proszę wypełnić oba pola: e-mail i hasło",
+  "fill_all": "Proszę wypełnić wszystkie pola",
   "not_email": "To nie wygląda na prawidłowy adres e-mail",
   "invalid_credentials": "Nieprawidłowe hasło lub adres e-mail",
-  "unknown_error": "Wystąpił nieznany błąd"
+  "unknown_error": "Wystąpił nieznany błąd",
+  "username_taken": "Nazwa użytkownika jest już zajęta",
+  "email_taken": "Ten email jest już zajęty",
+  "invalid_password": "Hasło musi mieć co najmniej 6 znaków, zawierać co najmniej jedną cyfrę oraz jeden znak specjalny.",
+  "not_year": "To nie wygląda na prawidłowy rok"
 
 }

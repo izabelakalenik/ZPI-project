@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:zpi_project/screens/register_screen/register_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
@@ -11,6 +13,14 @@ class FavCategoriesScreen extends StatefulWidget {
 }
 
 class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
+  late RegisterBloc registerBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    registerBloc = BlocProvider.of<RegisterBloc>(context);
+  }
+
   final List<String> _genres = [
     'Romantic Comedy',
     'Adventure',
@@ -102,7 +112,14 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                        Navigator.pushAndRemoveUntil(
+                  registerBloc.add(
+                    GenresSelected(
+                      genres: _selectedGenres,
+                      localizations: localizations
+                    ),
+                  );
+                  registerBloc.add(SubmitRegistration(localizations: localizations),);
+                  Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => WelcomeScreen()),

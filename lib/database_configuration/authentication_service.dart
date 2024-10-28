@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/user.dart';
+
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -30,4 +32,13 @@ class AuthenticationService {
   User? getCurrentUser() {
     return _firebaseAuth.currentUser;
   }
+
+  Future<UserCredential> registerUser(UserModel user) async {
+    UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: user.email,
+      password: user.password,);
+
+    return userCredential;
+  }
+
 }

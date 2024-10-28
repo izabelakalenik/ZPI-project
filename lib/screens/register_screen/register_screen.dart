@@ -33,6 +33,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  void _navigateToSecondRegisterScreen(RegisterBloc registerBloc) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: registerBloc,
+          child: const SecondRegisterScreen(),
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -62,6 +74,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
+            } else if (state is RegisterProceed) {
+              _navigateToSecondRegisterScreen(registerBloc);
             }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -122,8 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword =
-                                !_obscurePassword; // Toggle password visibility
+                            _obscurePassword = !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -131,34 +144,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
-                      onPressed: state is! RegisterLoading
-                          ? () {
-                              registerBloc.add(
-                                RegisterButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
-                                    child: const SecondRegisterScreen(),
-                                  ),
-                                ),
-                              );
-                            }
-                          : null,
+                      onPressed: () {
+                        registerBloc.add(
+                          EmailPasswordEntered(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            localizations: localizations,
+                          ));
+                      },
                     ),
-                    if (state is RegisterLoading)
-                      const Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    const SizedBox(height: 14),
-                    // Forgot Password and Login Button
+                    const SizedBox(height: 14), // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(
