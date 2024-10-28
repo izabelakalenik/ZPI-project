@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../styles/layouts.dart';
 import '../widgets/movie_card/movie_card.dart';
 import '../widgets/movie_card/movie_card_model.dart';
 import '../widgets/movie_card/swipe_utils.dart';
 import '../widgets/nav_drawer.dart';
-import '../widgets/category_selector.dart'; // Import the CategorySelector
+import '../widgets/category_selector.dart';
+import '../utils/check_login_status.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,6 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
   final List<MovieCard> cards = movies.map(MovieCard.new).toList();
   //List<String> _selectedCategories = []; //will be needed when implementing filtering
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
 
   @override
   void dispose() {

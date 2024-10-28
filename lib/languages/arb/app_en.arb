@@ -21,7 +21,7 @@
   "choose": "Choose at least one",
   "create": "Create Account",
   "select_year": "Select Year",
-  "more_about_you": "Tell us more about you!",
+  "more_about_you": "Tell us about you!",
   "name": "Name",
   "username": "Username",
   "year": "Year of Birth",
@@ -96,7 +96,7 @@
   "is_for_adults": "Is it only for adults",
   "rating": "Rating",
 
-  "liked_movies_title": "Liked Movies",
+  "liked_movies_title": "Liked",
 
   "privacy_policy": "Privacy Policy",
 

@@ -30,6 +30,7 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
 
     return MainLayout(
       child: Scaffold(
+        appBar: CustomAppBar(text: "", height: 35),
         backgroundColor: Colors.transparent,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -97,14 +98,15 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
               ),
               const SizedBox(height: 20),
               Button(
-                width: 200,
+                width: 220,
                 text: Text(localizations.create, textAlign: TextAlign.center),
                 onPressed: _selectedGenres.isNotEmpty
                     ? () {
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => WelcomeScreen()),
+                              (Route<dynamic> route) => route.isFirst,
                         );
                       }
                     : null, //the button disabled if nothing chosen

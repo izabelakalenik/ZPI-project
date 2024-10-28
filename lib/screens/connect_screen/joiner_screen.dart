@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:zpi_project/utils/check_login_status.dart';
 import '../../styles/layouts.dart';
-import '../../widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/qr_code_scanner.dart';
 import 'join_room_dialog.dart';
@@ -22,6 +22,7 @@ class _JoinerScreenState extends State<JoinerScreen> {
   void initState() {
     super.initState();
     _initializeControllers();
+    checkLoginStatus(context);
   }
 
   void _initializeControllers() {
@@ -145,7 +146,6 @@ class JoinerScreenContent extends StatelessWidget {
 
     return
       Scaffold(
-        drawer: NavDrawer(),
         appBar: CustomAppBar(text: localizations.connect),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -159,7 +159,7 @@ class JoinerScreenContent extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Button(
-                width: 200,
+                width: 230,
                 onPressed: onQrPressed,
                 text: Text(localizations.scan),
               ),
@@ -173,7 +173,7 @@ class JoinerScreenContent extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Button(
-                width: 200,
+                width: 230,
                 onPressed: onConnectPressed,
                 text: Text(localizations.connect),
               ),

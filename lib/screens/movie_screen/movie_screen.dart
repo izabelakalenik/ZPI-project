@@ -6,6 +6,7 @@ import 'package:zpi_project/models/movie_model.dart';
 import 'package:zpi_project/widgets/detailed_movie_card/detailed_movie_card_back.dart';
 import 'package:zpi_project/widgets/detailed_movie_card/detailed_movie_card_front.dart';
 import 'package:zpi_project/widgets/movie_categories_info.dart';
+import '../../utils/check_login_status.dart';
 
 class MovieScreen extends StatefulWidget {
   final Movie movie;
@@ -18,6 +19,12 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   bool isFront = true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
 
   @override
   Widget build(BuildContext context) {

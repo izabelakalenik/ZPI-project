@@ -143,7 +143,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         toolbarHeight: height,
         title: Text(
           text,
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
             shadows: [
               Shadow(
                 offset: Offset(1.0, 2.0),
