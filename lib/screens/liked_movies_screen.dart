@@ -22,7 +22,8 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       id: 1,
       title: 'Avengers',
       overview: 'Avengers saving the world...',
-      posterPath: 'https://image.tmdb.org/t/p/original/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg',
+      posterPath:
+          'https://image.tmdb.org/t/p/original/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg',
       voteAverage: 8.5,
       releaseDate: '2012-05-04',
       isForAdults: false,
@@ -32,7 +33,8 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       id: 2,
       title: 'Forrest Gump',
       overview: 'Life story of Forrest...',
-      posterPath: 'https://image.tmdb.org/t/p/original/iixrNXX79OR7knBx1i9S51PfVlz.jpg',
+      posterPath:
+          'https://image.tmdb.org/t/p/original/iixrNXX79OR7knBx1i9S51PfVlz.jpg',
       voteAverage: 8.8,
       releaseDate: '1994-07-06',
       isForAdults: false,
@@ -42,7 +44,8 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       id: 533535,
       title: 'Deadpool & Wolverine',
       overview: 'Wolverine teams up with Deadpool...',
-      posterPath: 'https://image.tmdb.org/t/p/w500/7Hi6mRLsQtTaEtKiHqSeRFR1TQ2.jpg',
+      posterPath:
+          'https://image.tmdb.org/t/p/w500/7Hi6mRLsQtTaEtKiHqSeRFR1TQ2.jpg',
       voteAverage: 7.722,
       releaseDate: "2024-07-26",
       isForAdults: false,
@@ -52,8 +55,9 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       id: 3,
       title: 'The Notebook',
       overview:
-      'A poor yet passionate young man falls in love with a rich young woman, giving her a sense of freedom. They enjoy a romantic summer together but are soon separated.',
-      posterPath: 'https://image.tmdb.org/t/p/original/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg',
+          'A poor yet passionate young man falls in love with a rich young woman, giving her a sense of freedom. They enjoy a romantic summer together but are soon separated.',
+      posterPath:
+          'https://image.tmdb.org/t/p/original/rNzQyW4f8B8cQeg7Dgj3n6eT5k9.jpg',
       voteAverage: 7.8,
       releaseDate: '2004-06-25',
       isForAdults: false,
@@ -63,8 +67,9 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
       id: 4,
       title: 'Mean Girls',
       overview:
-      'Cady Heron is a hit with The Plastics, the A-list girl clique at her new school. But her popularity comes with a price.',
-      posterPath: 'https://image.tmdb.org/t/p/original/fXm3YKXAEjx7d2tIWDg9TfRZtsU.jpg',
+          'Cady Heron is a hit with The Plastics, the A-list girl clique at her new school. But her popularity comes with a price.',
+      posterPath:
+          'https://image.tmdb.org/t/p/original/fXm3YKXAEjx7d2tIWDg9TfRZtsU.jpg',
       voteAverage: 7.0,
       releaseDate: '2004-04-30',
       isForAdults: false,
@@ -75,7 +80,8 @@ class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
   List<Movie> get _filteredMovies {
     if (_selectedCategories.isEmpty) return _allMovies;
     return _allMovies.where((movie) {
-      return movie.categories.any((category) => _selectedCategories.contains(category));
+      return movie.categories
+          .any((category) => _selectedCategories.contains(category));
     }).toList();
   }
 
@@ -142,5 +148,3 @@ class LikedMoviesScreenContent extends StatelessWidget {
     );
   }
 }
-
-

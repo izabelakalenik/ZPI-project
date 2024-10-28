@@ -72,9 +72,9 @@ class MovieScreenContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 35),
-              MovieCategoriesInfo(
-                categories: movie.categories,
-              )
+              // MovieCategoriesInfo(
+              //   categories: movie.categories,
+              // )
             ],
           ),
         ));
