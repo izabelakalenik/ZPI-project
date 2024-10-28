@@ -63,6 +63,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       UserCredential userCredential = await authService.registerUser(state.user);
       firestoreService.saveUser(state.user, userCredential);
+      await authService.signInWithEmailAndPassword(email: state.user.email, password: state.user.password);
+
       emit(RegisterInitial()); // Reset state
 
     });
