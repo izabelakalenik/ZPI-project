@@ -17,12 +17,26 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final FirestoreService firestoreService = FirestoreService();
 
     on<EmailPasswordEntered>((event, emit) async {
+      final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+      final passwordRegex = RegExp(r'^(?=.*[0-9])(?=.*[!@#$%^&*\.])[A-Za-z\d!@#$%^&*\.]{6,}$');
+
+      if (!emailRegex.hasMatch(event.email)) {
+        emit(RegisterFailure(error: event.localizations.not_email, user: state.user));
+        emit(RegisterInitial());
+        return;}
+
       final isUnique = await firestoreService.isEmailUnique(event.email);
       if (!isUnique) {
         emit(RegisterFailure(error: event.localizations.email_taken, user: state.user));
-      } else {
-        emit(RegisterProceed(state.user.copyWith(email: event.email, password: event.password)));
-      }
+        emit(RegisterInitial());
+        return;}
+
+      if (!passwordRegex.hasMatch(event.password)) {
+        emit(RegisterFailure(error: event.localizations.invalid_password, user: state.user));
+        emit(RegisterInitial());
+        return;}
+
+      emit(RegisterProceed(state.user.copyWith(email: event.email, password: event.password)));
     });
 
     on<UserDetailsEntered>((event, emit) async{

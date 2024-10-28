@@ -129,7 +129,8 @@
   "unknown_error": "An unknown error occurred",
   "username_taken": "Username taken",
   "email_taken": "This email is already registered",
-  "not_year": "That don't look like no year"
+  "not_year": "That doesn't look like a valid year",
+  "invalid_password":  "Password must be at least 6 characters long, contain at least one number, and include a special character."
 
 
 }

@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
                   SnackBar(
-                    content: Text(localizations.email_taken),
+                    content: Text(state.error),
                     duration: const Duration(seconds: 3),
                   ),
                 );

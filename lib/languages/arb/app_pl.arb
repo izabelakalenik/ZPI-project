@@ -131,7 +131,7 @@
   "unknown_error": "Wystąpił nieznany błąd",
   "username_taken": "Nazwa użytkownika jest już zajęta",
   "email_taken": "Ten email jest już zajęty",
-
+  "invalid_password": "Hasło musi mieć co najmniej 6 znaków, zawierać co najmniej jedną cyfrę oraz jeden znak specjalny.",
   "not_year": "To nie wygląda na prawidłowy rok"
 
 }
