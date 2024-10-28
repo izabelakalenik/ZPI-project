@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
-import 'package:zpi_project/database_configuration/authentication_service.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_screen.dart';
 import 'package:zpi_project/screens/home_screen.dart';
@@ -30,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => BlocProvider(
-          create: (context) => RegisterBloc(AuthenticationService()),
+          create: (context) => RegisterBloc(),
           child: const RegisterScreen(),
         ),
       ),

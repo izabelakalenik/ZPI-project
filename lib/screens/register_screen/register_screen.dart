@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
-            } else if (state is RegisterProceedToSecondScreen) {
+            } else if (state is RegisterProceed) {
               _navigateToSecondRegisterScreen(registerBloc);
             }
           },
@@ -149,6 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           EmailPasswordEntered(
                             email: _emailController.text,
                             password: _passwordController.text,
+                            localizations: localizations,
                           ));
                       },
                     ),

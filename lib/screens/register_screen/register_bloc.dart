@@ -1,53 +1,65 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:zpi_project/database_configuration/firestore_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../database_configuration/authentication_service.dart';
+import '../../models/user.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final AuthenticationService authService;
 
-  RegisterBloc(this.authService) : super(RegisterInitial()) {
+  RegisterBloc() : super(RegisterInitial()) {
+    final AuthenticationService authService = AuthenticationService();
+    final FirestoreService firestoreService = FirestoreService();
+
     on<EmailPasswordEntered>((event, emit) async {
-      final isUnique = await authService.isEmailUnique(event.email);
+      final isUnique = await firestoreService.isEmailUnique(event.email);
       if (!isUnique) {
-        emit(RegisterFailure(error: 'Email is already in use.'));
+        emit(RegisterFailure(error: event.localizations.email_taken, user: state.user));
       } else {
-        emit(RegisterProceedToSecondScreen(email: event.email, password: event.password));
+        emit(RegisterProceed(state.user.copyWith(email: event.email, password: event.password)));
       }
     });
 
     on<UserDetailsEntered>((event, emit) async{
-      final isUnique = await authService.isUsernameUnique(event.username);
+      final isUnique = await firestoreService.isUsernameUnique(event.username);
       if (!isUnique) {
-        emit(RegisterFailure(error: 'Username is already in use.'));
+        emit(RegisterFailure(error: event.localizations.username_taken, user: state.user));
       } else {
-          emit(RegisterProceedToFavGenresScreen(
-          email: state.email,
-          password: state.password,
-          name: event.name,
-          username: event.username,
-          birthYear: event.birthYear,
-          country: "Poland",
-          gender: event.gender,));
+          emit(RegisterProceed( state.user.copyWith(
+              name: event.name,
+              username: event.username,
+              birthYear: event.birthYear,
+              country: "Poland",
+              gender: event.gender)
+          ));
       }
     });
 
     on<GenresSelected>((event, emit) {
-      emit(state.copyWith(genres: event.genres));
+      final updatedUser = state.user.copyWith(favoriteGenres: event.genres);
+      emit(state.copyWith(user: updatedUser));
     });
 
     on<SubmitRegistration>((event, emit) async {
-      try {
-        await authService.registerUser(state.email, state.password, state.name, state.username, state.birthYear,state.gender, state.country, state.genres );
-        emit(RegisterInitial()); // Reset state
-      } catch (error) {
-        // Handle error emit(RegisterFailure(error: 'Registration failed. Please try again.'));
+
+      UserCredential userCredential = await authService.registerUser(state.user);
+      firestoreService.saveUser(state.user, userCredential);
+      emit(RegisterInitial()); // Reset state
+
+    });
+
+    on<CheckUsernameAvailability>((event, emit) async {
+      final isUnique = await firestoreService.isUsernameUnique(event.username);
+      if (!isUnique) {
+        emit(RegisterUsernameTaken(error: event.localizations.username_taken, user: state.user));
       }
     });
 
   }
 }
+

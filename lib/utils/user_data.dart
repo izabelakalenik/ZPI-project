@@ -1,7 +1,7 @@
 import '../models/user.dart';
 
 class UserData {
-  static User myUser = User(
+  static UserModel myUser = UserModel(
     username: 'somename',
     email: 'some@gmail.com',
     password: 'mypassword',

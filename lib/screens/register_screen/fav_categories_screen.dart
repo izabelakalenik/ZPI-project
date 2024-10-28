@@ -114,10 +114,11 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                     ? () {
                   registerBloc.add(
                     GenresSelected(
-                      genres: _selectedGenres
+                      genres: _selectedGenres,
+                      localizations: localizations
                     ),
                   );
-                  registerBloc.add(SubmitRegistration(),);
+                  registerBloc.add(SubmitRegistration(localizations: localizations),);
                   Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

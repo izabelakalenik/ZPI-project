@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   String email;
   String password;
   String name;
@@ -8,7 +8,7 @@ class User {
   String country;
   List<String> favoriteGenres;
 
-  User({
+  UserModel({
     required this.email,
     required this.password,
     required this.name,
@@ -19,7 +19,7 @@ class User {
     required this.favoriteGenres,
   });
 
-  User copyWith({
+  UserModel copyWith({
     String? email,
     String? password,
     String? name,
@@ -29,7 +29,7 @@ class User {
     String? country,
     List<String>? favoriteGenres,
   }) {
-    return User(
+    return UserModel(
       email: email ?? this.email,
       password: password ?? this.password,
       name: name ?? this.name,

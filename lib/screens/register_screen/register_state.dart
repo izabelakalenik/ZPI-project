@@ -1,131 +1,60 @@
 part of 'register_bloc.dart';
 
+
+final defaultUser = UserModel(
+  email: '',
+  password: '',
+  name: '',
+  username: '',
+  birthYear: 0,
+  gender: '',
+  country: 'Poland',
+  favoriteGenres: [],
+);
+
 @immutable
 class RegisterState extends Equatable {
-  final String email;
-  final String password;
-  final String name;
-  final String username;
-  final int birthYear;
-  final String gender;
-  final String country;
-  final List<String> genres;
+  final UserModel user;
 
-  const RegisterState({
-    this.email = '',
-    this.password = '',
-    this.name = '',
-    this.username = '',
-    this.birthYear = 0,
-    this.gender = '',
-    this.country = 'Poland',
-    this.genres = const [],
-  });
+  const RegisterState({required this.user});
 
-  RegisterState copyWith({
-    String? email,
-    String? password,
-    String? name,
-    String? username,
-    int? birthYear,
-    String? gender,
-    String? country,
-    List<String>? genres,
-  }) {
-    return RegisterState(
-      email: email ?? this.email,
-      password: password ?? this.password,
-      name: name ?? this.name,
-      username: username ?? this.username,
-      birthYear: birthYear ?? this.birthYear,
-      gender: gender ?? this.gender,
-      country: country ?? this.country,
-      genres: genres ?? this.genres,
-    );
+  RegisterState copyWith({UserModel? user}) {
+    return RegisterState(user: user ?? this.user);
   }
 
   @override
-  List<Object?> get props => [email, password, name, username, birthYear, gender, country, genres];
+  List<Object?> get props => [user];
 }
 
-class RegisterProceedToSecondScreen extends RegisterState {
-  const RegisterProceedToSecondScreen({
-    required String email,
-    required String password,
-    String name = '',
-    String username = '',
-    int birthYear = 0,
-    String gender = '',
-    String country = 'Poland',
-    List<String> genres = const [],
-  }) : super(
-    email: email,
-    password: password,
-    name: name,
-    username: username,
-    birthYear: birthYear,
-    gender: gender,
-    country: country,
-    genres: genres,
-  );
+class RegisterProceed extends RegisterState {
+  const RegisterProceed(UserModel user) : super(user: user);
 }
 
-class RegisterProceedToFavGenresScreen extends RegisterProceedToSecondScreen {
-  const RegisterProceedToFavGenresScreen({
-    required String email,
-    required String password,
-    required String name,
-    required String username,
-    required int birthYear,
-    required String country,
-    required String gender,
-    List<String> genres = const [],
-  }) : super(
-    email: email,
-    password: password,
-    name: name,
-    username: username,
-    birthYear: birthYear,
-    country: country,
-    gender: gender,
-    genres: genres,
-  );
-}
-
-class RegisterComplete extends RegisterProceedToFavGenresScreen {
-  const RegisterComplete({
-    required String email,
-    required String password,
-    required String name,
-    required String username,
-    required int birthYear,
-    required String country,
-    required String gender,
-    required List<String> genres,
-  }) : super(
-    email: email,
-    password: password,
-    name: name,
-    username: username,
-    birthYear: birthYear,
-    country: country,
-    gender: gender,
-    genres: genres,
-  );
+class RegisterComplete extends RegisterState {
+  const RegisterComplete(UserModel user) : super(user: user);
 }
 
 class RegisterInitial extends RegisterState {
-  const RegisterInitial() : super();
+  RegisterInitial() : super(user: defaultUser);
 }
 
 class RegisterLoading extends RegisterState {
-  const RegisterLoading() : super();
+  const RegisterLoading(UserModel user) : super(user: user);
 }
 
 class RegisterFailure extends RegisterState {
   final String error;
 
-  const RegisterFailure({required this.error}) : super();
+  const RegisterFailure({required this.error, required super.user});
+
+  @override
+  List<Object?> get props => super.props + [error];
+}
+
+class RegisterUsernameTaken extends RegisterState {
+  final String error;
+
+  const RegisterUsernameTaken({required this.error, required super.user});
 
   @override
   List<Object?> get props => super.props + [error];

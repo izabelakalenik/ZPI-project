@@ -85,13 +85,13 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
     );
   }
 
-//  void _checkUsernameAvailability() {
-//   if (_debounce?.isActive ?? false) _debounce!.cancel();
-//
-//    _debounce = Timer(const Duration(seconds: 1), () {
-//  registerBloc.add(CheckUsernameAvailability(_usernameController.text));
-//    });
-//  }
+  void _checkUsernameAvailability() {
+   if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+  registerBloc.add(CheckUsernameAvailability(username: _usernameController.text, localizations: AppLocalizations.of(context)));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +120,10 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
-            } else if (state is RegisterProceedToFavGenresScreen) {
+            } else if (state is RegisterProceed) {
               _navigateToFavGenresScreen();
+            } else if (state is RegisterUsernameTaken) {
+              ScaffoldMessenger.of(context).showSnackBar(InputValidation.errorMessage(state.error));
             }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -146,7 +148,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                       controller: _usernameController,
                       labelText: localizations.username,
                       onChanged: (username) {
-                        // Dispatch the CheckUsernameAvailability event when the username changes
+                        _checkUsernameAvailability();
                       },
                     ),
                     const SizedBox(height: 14),
@@ -224,6 +226,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                           ScaffoldMessenger.of(context).showSnackBar(InputValidation.errorMessage(localizations.not_year));
                           return;
                         }
+                        registerBloc.add(CheckUsernameAvailability(username: _usernameController.text, localizations: localizations));
 
                         registerBloc.add(
                           UserDetailsEntered(
@@ -232,6 +235,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
                             birthYear: int.parse(_yearOfBirthController.text),
                             country: "Poland",
                             gender: _selectedGender!,
+                            localizations: localizations
                           ),
                         );
                       },

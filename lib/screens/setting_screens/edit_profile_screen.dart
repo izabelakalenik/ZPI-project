@@ -19,7 +19,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfileScreen> {
-  User user = UserData.myUser;
+  UserModel user = UserData.myUser;
   late TextEditingController _passwordController;
   late TextEditingController _emailController;
   late TextEditingController _usernameController;
@@ -38,7 +38,7 @@ class _EditProfileState extends State<EditProfileScreen> {
     _emailController = TextEditingController(text: user.email);
     _usernameController = TextEditingController(text: user.username);
     _selectedCountry =
-        COUNTRIES.contains(user.country) ? user.country! : COUNTRIES.first;
+        COUNTRIES.contains(user.country) ? user.country : COUNTRIES.first;
   }
 
   @override
