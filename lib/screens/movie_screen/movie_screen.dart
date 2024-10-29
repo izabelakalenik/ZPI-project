@@ -9,7 +9,6 @@ import 'package:zpi_project/widgets/movie_card/movie_card.dart';
 
 class MovieScreen extends StatefulWidget {
   final Movie movie;
-
   const MovieScreen({super.key, required this.movie});
 
   @override
@@ -47,7 +46,6 @@ class MovieScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
@@ -68,10 +66,12 @@ class MovieScreenContent extends StatelessWidget {
               //           )
               //   ),
               // ),
+              // const SizedBox(height: 10),
               MovieCard(movie: movie),
-              // MovieCategoriesInfo(
-              //   categories: movie.categories,
-              // )
+              const SizedBox(height: 10),
+              MovieCategoriesInfo(
+                categories: movie.categories,
+              )
             ],
           ),
         ));

@@ -102,7 +102,7 @@ class HomeScreenContent extends StatelessWidget {
                 onSwipe: SwipeUtils.onSwipe,
                 onUndo: SwipeUtils.onUndo,
                 numberOfCardsDisplayed: 2,
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 cardBuilder: (
                     context,
                     index,
@@ -112,7 +112,7 @@ class HomeScreenContent extends StatelessWidget {
                 cards[index],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
