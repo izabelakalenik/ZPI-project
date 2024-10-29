@@ -22,7 +22,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
 
     final genres = await remoteDataSource.fetchGenres();
-    GenreCache.instance.genres = genres;
+    GenreCache.instance.setGenres(genres);
     return genres;
   }
 }

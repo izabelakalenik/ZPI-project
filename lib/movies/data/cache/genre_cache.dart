@@ -7,5 +7,8 @@ class GenreCache {
   static GenreCache get instance => _instance;
 
   Map<int, String>? get genres => _genres;
-  set genres(Map<int, String>? genres) => _genres = genres;
+  //set genres(Map<int, String>? genres) => _genres = genres;
+  void setGenres(Map<int, String>? genres) {
+    _genres = genres;
+  }
 }
