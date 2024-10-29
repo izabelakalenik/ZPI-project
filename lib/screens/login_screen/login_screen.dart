@@ -4,7 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_screen.dart';
-import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
@@ -89,7 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => BlocProvider(
+                    create: (_) => HomeBloc()..add(LoadInitialCards()),
+                    child: const HomeScreen(),
+                  ),
                 ),
                     (route) => route.isFirst,
               );
