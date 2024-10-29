@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../styles/layouts.dart';
-import '../home_screen.dart';
+import '../home_screen/home_screen.dart';
+import '../home_screen/home_bloc.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -15,8 +17,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void _navigateToHomeScreen() {
     Navigator.of(context).push(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const HomeScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+          create: (_) => HomeBloc()..add(LoadInitialCards()),
+          child: const HomeScreen(),
+        ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(0.0, 1.0);
           const end = Offset.zero;

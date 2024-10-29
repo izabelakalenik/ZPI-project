@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/connect_screen/connect_screen.dart';
-import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../screens/liked_movies_screen.dart';
 import '../screens/setting_screens/settings_screen.dart';
 
@@ -38,7 +40,11 @@ class NavDrawer extends StatelessWidget {
               Navigator.of(context).pop(),
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                          create: (_) => HomeBloc()..add(LoadInitialCards()),
+                          child: const HomeScreen(),
+                        )),
               ),
             },
           ),

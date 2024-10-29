@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
 
 import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';

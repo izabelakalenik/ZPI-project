@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/movie_model.dart';
+//import '../../models/movie_model.dart';
+import 'package:zpi_project/movies/domain/entities/movie.dart';
 import 'movie_tile.dart';
 
 class MovieGrid extends StatelessWidget {

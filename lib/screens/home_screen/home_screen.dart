@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../styles/layouts.dart';
-import '../widgets/movie_card/movie_card.dart';
-import '../widgets/movie_card/movie_card_model.dart';
-import '../widgets/movie_card/swipe_utils.dart';
-import '../widgets/nav_drawer.dart';
-import '../widgets/category_selector.dart';
-import '../utils/check_login_status.dart';
+import 'package:zpi_project/screens/home_screen/home_bloc.dart';
+
+import '../../styles/layouts.dart';
+import '../../widgets/detailed_movie_card/detailed_movie_card_front.dart';
+import '../../widgets/movie_card/swipe_utils.dart';
+import '../../widgets/nav_drawer.dart';
+import '../../widgets/category_selector.dart'; // Import the CategorySelector
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,14 +20,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
-  final List<MovieCard> cards = movies.map(MovieCard.new).toList();
+  //final List<MovieCard> cards = movies.map(MovieCard.new).toList();
   //List<String> _selectedCategories = []; //will be needed when implementing filtering
-
-  @override
-  void initState() {
-    super.initState();
-    checkLoginStatus(context);
-  }
 
   @override
   void dispose() {
@@ -37,16 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onCategoriesSelected(List<String> selectedCategories) {
     setState(() {
       //_selectedCategories = selectedCategories;
-
     });
     // Additional logic can go here (like filtering cards by category).
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(LoadInitialCards());
   }
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: HomeScreenContent(
-        cards: cards,
         controller: controller,
         onCategoriesSelected: _onCategoriesSelected,
       ),
@@ -55,18 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenContent extends StatelessWidget {
-  final List<MovieCard> cards;
   final CardSwiperController controller;
   final ValueChanged<List<String>> onCategoriesSelected;
 
   const HomeScreenContent({
     super.key,
-    required this.cards,
     required this.controller,
     required this.onCategoriesSelected,
   });
 
-  @override // Add the @override annotation here
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context);
@@ -79,6 +76,7 @@ class HomeScreenContent extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // categories
             Text(
               localizations.categories,
               style: theme.textTheme.titleLarge,
@@ -94,23 +92,28 @@ class HomeScreenContent extends StatelessWidget {
               ],
               onCategorySelected: onCategoriesSelected,
             ),
+
+            // end of categories
             const SizedBox(height: 10),
             Flexible(
-              child: CardSwiper(
-                controller: controller,
-                cardsCount: cards.length,
-                onSwipe: SwipeUtils.onSwipe,
-                onUndo: SwipeUtils.onUndo,
-                numberOfCardsDisplayed: 3,
-                padding: const EdgeInsets.all(15.0),
-                cardBuilder: (
-                    context,
-                    index,
-                    horizontalThresholdPercentage,
-                    verticalThresholdPercentage,
-                    ) =>
-                cards[index],
-              ),
+              child:
+                  BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+                if (state is InitializeNotFinished) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (state.movies.isEmpty) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return CardSwiper(
+                  controller: controller,
+                  cardsCount: state.movies.length,
+                  onSwipe: SwipeUtils.onSwipe,
+                  numberOfCardsDisplayed: 1,
+                  padding: const EdgeInsets.all(15.0),
+                  cardBuilder: (context, index, _, __) =>
+                      DetailedMovieCardFront(movie: state.movies[index]),
+                );
+              }),
             ),
             const SizedBox(height: 40),
             Row(

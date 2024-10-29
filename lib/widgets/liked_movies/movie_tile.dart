@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/movie_model.dart';
+//import '../../models/movie_model.dart';
+import 'package:zpi_project/movies/domain/entities/movie.dart';
 import '../../screens/movie_screen/movie_screen.dart';
 
 class MovieTile extends StatelessWidget {
@@ -27,7 +28,8 @@ class MovieTile extends StatelessWidget {
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(15), bottom: Radius.circular(15)),
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(15), bottom: Radius.circular(15)),
                 child: AspectRatio(
                   aspectRatio: 2 / 3,
                   child: Image.network(
