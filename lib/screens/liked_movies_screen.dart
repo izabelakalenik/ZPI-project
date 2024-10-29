@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 //import '../models/movie_model.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
 import '../styles/layouts.dart';
+import '../utils/check_login_status.dart';
 import '../widgets/category_selector.dart';
 import '../widgets/liked_movies/movie_grid.dart';
 import '../widgets/liked_movies/random_movie_button.dart';
@@ -17,6 +18,12 @@ class LikedMoviesScreen extends StatefulWidget {
 
 class _LikedMoviesScreenState extends State<LikedMoviesScreen> {
   List<String> _selectedCategories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
 
   final List<Movie> _allMovies = [
     Movie(

@@ -34,6 +34,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  void _navigateToSecondRegisterScreen(RegisterBloc registerBloc) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: registerBloc,
+          child: const SecondRegisterScreen(),
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -49,6 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return MainLayout(
       child: Scaffold(
+        appBar: CustomAppBar(text: "", height: 35),
         backgroundColor: Colors.transparent,
         resizeToAvoidBottomInset: true,
         body: BlocListener<RegisterBloc, RegisterState>(
@@ -62,6 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     duration: const Duration(seconds: 3),
                   ),
                 );
+            } else if (state is RegisterProceed) {
+              _navigateToSecondRegisterScreen(registerBloc);
             }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -73,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Text(localizations.register,
                         style: theme.textTheme.headlineLarge),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 14),
                     // Social Login Buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14),
                         Expanded(
                           child: CustomSocialLoginButton(
                             text: localizations.facebook,
@@ -99,15 +114,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
                     Text(localizations.or, style: theme.textTheme.bodyLarge),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
                     // Email Field
                     CustomTextField(
                       controller: _emailController,
                       labelText: localizations.email,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     // Password Field
                     CustomTextField(
                       controller: _passwordController,
@@ -122,43 +137,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword =
-                                !_obscurePassword; // Toggle password visibility
+                            _obscurePassword = !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 14),
                     Button(
                       text: Text(localizations.next),
-                      onPressed: state is! RegisterLoading
-                          ? () {
-                              registerBloc.add(
-                                RegisterButtonPressed(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => RegisterBloc(),
-                                    child: const SecondRegisterScreen(),
-                                  ),
-                                ),
-                              );
-                            }
-                          : null,
+                      onPressed: () {
+                        registerBloc.add(
+                          EmailPasswordEntered(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            localizations: localizations,
+                          ));
+                      },
                     ),
-                    if (state is RegisterLoading)
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    const SizedBox(height: 16),
-                    // Forgot Password and Login Button
+                    const SizedBox(height: 14), // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(

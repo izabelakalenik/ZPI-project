@@ -143,7 +143,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         toolbarHeight: height,
         title: Text(
           text,
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
             shadows: [
               Shadow(
                 offset: Offset(1.0, 2.0),
@@ -173,6 +173,7 @@ class CustomTextField extends StatelessWidget {
   final String? initialValue;
   final bool readOnly;
   final int maxLines;
+  final ValueChanged<String>? onChanged;
 
   const CustomTextField({
     this.controller,
@@ -183,6 +184,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.maxLines = 1,
     this.readOnly = false,
+    this.onChanged,
     super.key,
   });
 
@@ -206,19 +208,19 @@ class CustomTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
-          borderSide:
-              const BorderSide(color: Colors.white70), // Gray border on focus
+          borderSide: const BorderSide(color: Colors.white70), // Gray border on focus
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.0),
-          borderSide: const BorderSide(
-              color: Colors.white70), // Gray border when enabled
+          borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
         ),
         suffixIcon: suffixIcon, // Use the optional suffix icon
       ),
+      onChanged: onChanged, // Pass onChanged to the TextFormField
     );
   }
 }
+
 
 class CustomSocialLoginButton extends StatelessWidget {
   final String text;

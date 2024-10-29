@@ -21,7 +21,7 @@
   "choose": "Choose at least one",
   "create": "Create Account",
   "select_year": "Select Year",
-  "more_about_you": "Tell us more about you!",
+  "more_about_you": "Tell us about you!",
   "name": "Name",
   "username": "Username",
   "year": "Year of Birth",
@@ -96,7 +96,7 @@
   "is_for_adults": "Is it only for adults",
   "rating": "Rating",
 
-  "liked_movies_title": "Liked Movies",
+  "liked_movies_title": "Liked",
 
   "privacy_policy": "Privacy Policy",
 
@@ -123,9 +123,14 @@
   "joined_friends": "Joined Friends",
 
   "fill_both": "Please fill in both email and password",
+  "fill_all": "Please fill in all the fields",
   "not_email": "That don't look like an email",
   "invalid_credentials": "The password or the e-mail address is incorrect",
-  "unknown_error": "An unknown error occurred"
+  "unknown_error": "An unknown error occurred",
+  "username_taken": "Username taken",
+  "email_taken": "This email is already registered",
+  "not_year": "That doesn't look like a valid year",
+  "invalid_password":  "Password must be at least 6 characters long, contain at least one number, and include a special character."
 
 
 }
