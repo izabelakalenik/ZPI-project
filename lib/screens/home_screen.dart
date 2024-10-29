@@ -102,7 +102,7 @@ class HomeScreenContent extends StatelessWidget {
                 onSwipe: SwipeUtils.onSwipe,
                 onUndo: SwipeUtils.onUndo,
                 numberOfCardsDisplayed: 2,
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(5.0),
                 cardBuilder: (
                     context,
                     index,

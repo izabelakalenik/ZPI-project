@@ -10,12 +10,14 @@ class MovieTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MovieScreen(movie: movie),
+      onTap: () => {
+        // Navigator.of(context).pop(),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MovieScreen(movie: movie)),
         ),
-      ),
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
