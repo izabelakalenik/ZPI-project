@@ -4,7 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_bloc.dart';
 import 'package:zpi_project/screens/forgotten_password_screen/forgotten_password_screen.dart';
-import 'package:zpi_project/screens/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_screen.dart';
+import 'package:zpi_project/screens/home_screen/home_bloc.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import '../register_screen/register_bloc.dart';
@@ -80,12 +81,15 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => BlocProvider(
+                    create: (_) => HomeBloc()..add(LoadInitialCards()),
+                    child: const HomeScreen(),
+                  ),
                 ),
               );
             }
           },
-        child: BlocBuilder<LoginBloc, LoginState>(
+          child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
               return Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -166,21 +170,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                        final email = _emailController.text;
-                        final password = _passwordController.text;
+                              final email = _emailController.text;
+                              final password = _passwordController.text;
 
-                        if (email.isNotEmpty && password.isNotEmpty) {
-                          loginBloc.add(LoginButtonPressed(
-                            email: email,
-                            password: password,
-                            localizations: localizations
-                          ));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(localizations.fill_both))
-                          );
-                        }
-                      }
+                              if (email.isNotEmpty && password.isNotEmpty) {
+                                loginBloc.add(LoginButtonPressed(
+                                    email: email,
+                                    password: password,
+                                    localizations: localizations));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text(localizations.fill_both)));
+                              }
+                            }
                           : null,
                     ),
                     if (state is LoginLoading)

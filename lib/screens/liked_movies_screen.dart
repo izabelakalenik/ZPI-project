@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../models/movie_model.dart';
+//import '../models/movie_model.dart';
+import 'package:zpi_project/movies/domain/entities/movie.dart';
 import '../styles/layouts.dart';
 import '../widgets/category_selector.dart';
 import '../widgets/liked_movies/movie_grid.dart';

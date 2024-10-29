@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/movie_model.dart';
+//import '../../models/movie_model.dart';
+import 'package:zpi_project/movies/domain/entities/movie.dart';
 import '../../screens/shake_movie_screen.dart';
 import '../../styles/layouts.dart';
 
@@ -25,7 +26,8 @@ class RandomMovieButton extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ShakeMovieScreen(likedMovies: movies)),
+              MaterialPageRoute(
+                  builder: (context) => ShakeMovieScreen(likedMovies: movies)),
             );
           },
           backgroundColor: Colors.black,

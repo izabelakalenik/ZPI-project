@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zpi_project/models/movie_model.dart';
+//import 'package:zpi_project/models/movie_model.dart';
+import 'package:zpi_project/movies/domain/entities/movie.dart';
 
 class DetailedMovieCardFront extends StatelessWidget {
   final Movie movie;
