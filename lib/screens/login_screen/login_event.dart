@@ -21,3 +21,8 @@ class LoginButtonPressed extends LoginEvent {
   String toString() =>
       'LoginButtonPressed { email: $email, password: $password }';
 }
+
+class LoginWithFacebookPressed extends LoginEvent {
+  @override
+  List<Object> get props => [];
+}

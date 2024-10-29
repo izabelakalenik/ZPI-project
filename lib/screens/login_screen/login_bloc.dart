@@ -12,6 +12,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc() : super(LoginInitial()) {
     on<LoginButtonPressed>(_onLoginButtonPressed);
+    on<LoginWithFacebookPressed>(_onLoginWithFacebookPressed);
   }
 
   Future<void> _onLoginButtonPressed(
@@ -39,6 +40,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         errorMessage = localizations.unknown_error;
       }
       emit(LoginFailure(error: errorMessage));
+    } catch (error) {
+      emit(LoginFailure(error: error.toString()));
+    }
+  }
+
+  Future<void> _onLoginWithFacebookPressed(
+      LoginWithFacebookPressed event,
+      Emitter<LoginState> emit,
+      ) async {
+    emit(LoginLoading());
+    try {
+      final userCredential = await _authService.signInWithFacebook();
+      if (userCredential != null) {
+        emit(LoginSuccess());
+      } else {
+        emit(LoginFailure(error: "Login failed")); // Możesz dostosować komunikat o błędzie
+      }
     } catch (error) {
       emit(LoginFailure(error: error.toString()));
     }

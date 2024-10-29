@@ -69,3 +69,10 @@ class CheckUsernameAvailability extends RegisterEvent {
   @override
   List<Object?> get props => [username, localizations];
 }
+
+class RegisterWithFacebookPressed extends RegisterEvent {
+  const RegisterWithFacebookPressed({required super.localizations});
+
+  @override
+  List<Object> get props => [];
+}

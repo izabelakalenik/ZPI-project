@@ -61,12 +61,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     on<SubmitRegistration>((event, emit) async {
 
-      UserCredential userCredential = await authService.registerUser(state.user);
-      firestoreService.saveUser(state.user, userCredential);
-      await authService.signInWithEmailAndPassword(email: state.user.email, password: state.user.password);
+      // if password is not set - user was registered with facebook
+      if (state.user.password == ''){
+        state.user.email = await authService.getEmailFromFacebook();
+      } else {
+        await authService.registerUser(state.user);
+        await authService.signInWithEmailAndPassword(email: state.user.email, password: state.user.password);
+      }
+      firestoreService.saveUser(state.user, authService.getCurrentUser()!.uid);
 
       emit(RegisterInitial()); // Reset state
-
     });
 
     on<CheckUsernameAvailability>((event, emit) async {
@@ -76,6 +80,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
     });
 
+
+    on<RegisterWithFacebookPressed>((event, emit) async {
+      emit(RegisterProceed(state.user));
+    });
   }
 }
 

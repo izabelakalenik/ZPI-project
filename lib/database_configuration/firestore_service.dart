@@ -20,8 +20,8 @@ class FirestoreService{
     return users.docs.isEmpty;
   }
 
-  Future<void> saveUser(UserModel user, UserCredential userCredential) async{
-    await _firestore.collection('users').doc(userCredential.user!.uid).set({
+  Future<void> saveUser(UserModel user, String uid) async{
+    await _firestore.collection('users').doc(uid).set({
       'name': user.name,
       'username': user.username,
       'birthYear': user.birthYear,

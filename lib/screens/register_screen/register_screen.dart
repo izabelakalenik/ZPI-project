@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:zpi_project/database_configuration/authentication_service.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
 import 'register_bloc.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -51,6 +55,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _passwordController.dispose();
     super.dispose();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +113,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
+                              // this logic should be moved to bloc
+                              try {
+                              final authService = AuthenticationService();
+                              final userCredential = await authService.registerWithFacebook();
+
+                              if (userCredential != null) {
+                                registerBloc.add(RegisterWithFacebookPressed(localizations: localizations));
+                              }
+                            } catch (error) {
+                              // Obsłuż błąd, np. wyświetl komunikat o błędzie
+                              debugPrint("Error during Facebook registration: $error");
+                              registerBloc.add(RegisterWithFacebookPressed(localizations: localizations));
+                            }
                             },
                           ),
                         ),
