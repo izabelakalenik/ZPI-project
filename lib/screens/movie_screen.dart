@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/models/movie_model.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import 'package:zpi_project/widgets/movie_categories_info.dart';
-import '../../utils/check_login_status.dart';
+import 'package:zpi_project/widgets/movie_card/movie_categories_info.dart';
+import '../utils/check_login_status.dart';
 import 'package:zpi_project/widgets/movie_card/movie_card.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -57,18 +56,7 @@ class MovieScreenContent extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // GestureDetector(
-              //   onTap: onCardTapped,
-              //   child: AnimatedSwitcher(
-              //     duration: const Duration(milliseconds: 0),
-              //     child: MovieCard(
-              //             key: ValueKey('front'),
-              //             movie: movie,
-              //           )
-              //   ),
-              // ),
-              // const SizedBox(height: 10),
-              MovieCard(movie: movie, onPressed: onPressed),
+              MovieCard(movie: movie),
               const SizedBox(height: 10),
               MovieCategoriesInfo(
                 categories: movie.categories,
@@ -77,4 +65,6 @@ class MovieScreenContent extends StatelessWidget {
           ),
         ));
   }
+
+
 }

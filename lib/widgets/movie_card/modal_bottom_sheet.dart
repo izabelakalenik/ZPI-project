@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/movie_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../movies/domain/entities/movie.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   final Movie movie;

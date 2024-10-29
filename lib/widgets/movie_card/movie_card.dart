@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:zpi_project/models/movie_model.dart';
+import '../../movies/domain/entities/movie.dart';
+import 'modal_bottom_sheet.dart';
 
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
-  final VoidCallback onPressed;
 
-  const MovieCard({super.key, required this.movie, required this.onPressed});
+  const MovieCard({super.key, required this.movie});
 
 
   @override
@@ -48,7 +48,13 @@ class MovieCard extends StatelessWidget {
                       ),
                       IconButton(
                         icon: const Icon(Icons.info_outline, color: Colors.white),
-                        onPressed: onPressed,
+                        onPressed: () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (ctx) => ModalBottomSheet(movie: movie),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -60,4 +66,5 @@ class MovieCard extends StatelessWidget {
       ),
     );
   }
+
 }

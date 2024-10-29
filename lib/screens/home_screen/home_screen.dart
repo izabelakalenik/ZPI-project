@@ -6,8 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/home_screen/home_bloc.dart';
 
 import '../../styles/layouts.dart';
-import '../widgets/movie_card/modal_bottom_sheet.dart';
-import '../widgets/movie_card/movie_card.dart';
+import '../../widgets/movie_card/movie_card.dart';
 import '../../widgets/movie_card/swipe_utils.dart';
 import '../../widgets/nav_drawer.dart';
 import '../../widgets/category_selector.dart'; // Import the CategorySelector
@@ -21,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
-  late List<MovieCard> cards; // Declare cards as late
   //List<String> _selectedCategories = []; //will be needed when implementing filtering
 
   @override
@@ -41,28 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<HomeBloc>().add(LoadInitialCards());
-
-    cards = movies.map((movie) {
-      return MovieCard(
-        movie: movie,
-        onPressed: () => _openIconButtonPressed(movie), // Pass the movie to the handler
-      );
-    }).toList();
-  }
-
-  void _openIconButtonPressed(Movie movie) {
-    showModalBottomSheet(
-      isScrollControlled: true, // This is important to allow custom height
-      context: context,
-      builder: (ctx) => ModalBottomSheet(movie: movie), // Pass the movie to the modal
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: HomeScreenContent(
-        cards: cards,
         controller: controller,
         onCategoriesSelected: _onCategoriesSelected,
       ),
@@ -71,13 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenContent extends StatelessWidget {
-  final List<MovieCard> cards;
   final CardSwiperController controller;
   final ValueChanged<List<String>> onCategoriesSelected;
 
   const HomeScreenContent({
     super.key,
-    required this.cards,
     required this.controller,
     required this.onCategoriesSelected,
   });

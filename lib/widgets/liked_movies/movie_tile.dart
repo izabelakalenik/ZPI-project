@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //import '../../models/movie_model.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import '../../screens/movie_screen/movie_screen.dart';
+import '../../screens/movie_screen.dart';
 
 class MovieTile extends StatelessWidget {
   final Movie movie;
