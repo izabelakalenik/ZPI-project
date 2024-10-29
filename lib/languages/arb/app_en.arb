@@ -90,6 +90,8 @@
 
   "edit_profile_title": "Edit profile",
   "edit_profile_save_changes": "Save changes",
+  "edit_profile_changes_saved": "Successfuly saved the changes",
+
   "shake_movie_screen_button": "Shake",
 
   "release_date": "Release date",
@@ -131,5 +133,6 @@
   "email_taken": "This email is already registered",
   "not_year": "That doesn't look like a valid year",
   "invalid_password":  "Password must be at least 6 characters long, contain at least one number, and include a special character."
+
 
 }
