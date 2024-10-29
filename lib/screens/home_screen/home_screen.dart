@@ -4,12 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/home_screen/home_bloc.dart';
-import 'package:logger/logger.dart';
 
 import '../../styles/layouts.dart';
-import '../../widgets/movie_card/movie_card.dart';
 import '../../widgets/detailed_movie_card/detailed_movie_card_front.dart';
-import '../../widgets/movie_card/movie_card_model.dart';
 import '../../widgets/movie_card/swipe_utils.dart';
 import '../../widgets/nav_drawer.dart';
 import '../../widgets/category_selector.dart'; // Import the CategorySelector
@@ -100,14 +97,10 @@ class HomeScreenContent extends StatelessWidget {
             Flexible(
               child:
                   BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-                var logger = Logger();
-                logger.log(Level.info, state.movies.length);
                 if (state is InitializeNotFinished) {
-                  logger.log(Level.info, state);
                   return Center(child: CircularProgressIndicator());
                 }
                 if (state.movies.isEmpty) {
-                  logger.log(Level.info, "movie empty in screen");
                   return Center(child: CircularProgressIndicator());
                 }
                 return CardSwiper(

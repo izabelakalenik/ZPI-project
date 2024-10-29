@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import 'package:logger/logger.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  //final MovieRepository movieRepository;
+
   HomeBloc() : super(HomeInitial()) {
     on<LoadInitialCards>(_onLoadInitialCards);
     on<CardSwipedLeft>(_onCardSwipedLeft);
@@ -19,8 +20,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(InitializeNotFinished());
-    var logger = Logger();
-    logger.log(Level.info, "wywołany jest on init!!!!!!!!!!!!!");
     final sampleMovies = [
       Movie(
         id: 1,

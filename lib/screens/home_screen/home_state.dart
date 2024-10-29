@@ -15,9 +15,6 @@ class HomeState extends Equatable {
     List<Movie>? movies,
     bool? isLoadingMore,
   }) {
-    var logger = Logger();
-    logger.log(Level.info, "wywołanie state");
-    logger.log(Level.info, movies == null ? "movies is null" : movies.length);
     return HomeState(
       movies: movies ?? this.movies,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
