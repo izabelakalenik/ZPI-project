@@ -3,7 +3,7 @@ import 'package:zpi_project/styles/layouts.dart';
 import 'package:zpi_project/widgets/nav_drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import 'package:zpi_project/widgets/movie_card/movie_categories_info.dart';
+import 'package:zpi_project/widgets/movie_categories_info.dart';
 import '../utils/check_login_status.dart';
 import 'package:zpi_project/widgets/movie_card/movie_card.dart';
 

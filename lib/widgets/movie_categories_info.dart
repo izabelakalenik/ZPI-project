@@ -7,11 +7,11 @@ class MovieCategoriesInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center( // Centering the widget
+    return Center(
       child: SizedBox(
-        width: 350,
+        width: 340,
         child: Card(
-          color: Colors.white.withOpacity(0.25),
+          color: Colors.black.withOpacity(0.4),
           elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -19,21 +19,22 @@ class MovieCategoriesInfo extends StatelessWidget {
               height: 40,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: categories.length, // Dynamically set the item count
+                itemCount: categories.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.25),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
                       child: Text(
-                        categories[index], // Access category dynamically
-                        style: const TextStyle(
+                        categories[index],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                           color: Colors.white, // Text color
-                          fontWeight: FontWeight.bold, // Font weight
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),

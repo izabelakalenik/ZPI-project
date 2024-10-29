@@ -8,7 +8,6 @@ class MovieCard extends StatelessWidget {
 
   const MovieCard({super.key, required this.movie});
 
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
