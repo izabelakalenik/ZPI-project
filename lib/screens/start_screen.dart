@@ -45,7 +45,6 @@ class _StartScreenState extends State<StartScreen> {
           );
         },
       ),
-
     ));
   }
 }

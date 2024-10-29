@@ -7,6 +7,7 @@ import 'package:zpi_project/screens/setting_screens/policy_screen.dart';
 import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
 
 import '../../styles/layouts.dart';
+import '../../utils/check_login_status.dart';
 import '../../widgets/nav_drawer.dart';
 import 'edit_profile_screen.dart';
 import 'logout_dialog.dart';
@@ -19,6 +20,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(child: const SettingsScreenContent());

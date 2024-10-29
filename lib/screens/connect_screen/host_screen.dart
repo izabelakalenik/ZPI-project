@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
+import 'package:zpi_project/utils/check_login_status.dart';
 import 'package:zpi_project/utils/screen_brightness_manager.dart';
 import '../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,11 +22,11 @@ class _HostScreenState extends State<HostScreen> {
   @override
   void initState() {
     super.initState();
+    checkLoginStatus(context);
     // Generate a unique room code
     roomCode = Uuid().v4().substring(0, 8);
     _initializeControllers();
     _increaseBrightness();
-
   }
 
   // Function to simulate adding friends when they join by entering the code

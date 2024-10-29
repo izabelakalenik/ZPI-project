@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zpi_project/styles/layouts.dart';
+import 'package:zpi_project/utils/check_login_status.dart';
 import 'package:zpi_project/utils/const.dart';
 import 'package:zpi_project/utils/user_data.dart';
 import 'package:zpi_project/widgets/custom_dropdown.dart';
@@ -18,7 +19,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfileScreen> {
-  User user = UserData.myUser;
+  UserModel user = UserData.myUser;
   late TextEditingController _passwordController;
   late TextEditingController _emailController;
   late TextEditingController _usernameController;
@@ -28,6 +29,7 @@ class _EditProfileState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+    checkLoginStatus(context);
     _initializeControllers();
   }
 
@@ -36,7 +38,7 @@ class _EditProfileState extends State<EditProfileScreen> {
     _emailController = TextEditingController(text: user.email);
     _usernameController = TextEditingController(text: user.username);
     _selectedCountry =
-        COUNTRIES.contains(user.country) ? user.country! : COUNTRIES.first;
+        COUNTRIES.contains(user.country) ? user.country : COUNTRIES.first;
   }
 
   @override

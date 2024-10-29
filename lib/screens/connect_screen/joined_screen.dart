@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
+import '../../utils/check_login_status.dart';
 import '../../widgets/nav_drawer.dart';
 
 class JoinedScreen extends StatefulWidget {
@@ -17,6 +18,13 @@ class JoinedScreen extends StatefulWidget {
 }
 
 class JoinedScreenState extends State<JoinedScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus(context);
+  }
+
   final List<String> friends = [];
   @override
   Widget build(BuildContext context) {
