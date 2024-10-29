@@ -58,7 +58,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              localizations.connect,
+              localizations.connect_with_user,
               style: theme.textTheme.bodyLarge,
             ),
             onTap: () => {

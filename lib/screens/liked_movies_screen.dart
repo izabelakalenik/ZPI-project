@@ -120,7 +120,7 @@ class LikedMoviesScreenContent extends StatelessWidget {
 
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: CustomAppBar(text: localizations.liked_movies_title),
+      appBar: CustomAppBar(text: localizations.liked),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
