@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../styles/layouts.dart';
+import '../widgets/movie_card/modal_bottom_sheet.dart';
 import '../widgets/movie_card/movie_card.dart';
 import 'package:zpi_project/models/movie_model.dart';
 import '../widgets/movie_card/swipe_utils.dart';
@@ -19,14 +20,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
-  final List<MovieCard> cards = movies.map((movie) => MovieCard(movie: movie)).toList();
-  //List<String> _selectedCategories = []; //will be needed when implementing filtering
+  late List<MovieCard> cards; // Declare cards as late
 
   @override
   void initState() {
     super.initState();
     checkLoginStatus(context);
+    // Initialize the cards list here
+    cards = movies.map((movie) {
+      return MovieCard(
+        movie: movie,
+        onPressed: () => _openIconButtonPressed(movie), // Pass the movie to the handler
+      );
+    }).toList();
   }
+
+  void _openIconButtonPressed(Movie movie) {
+    showModalBottomSheet(
+      isScrollControlled: true, // This is important to allow custom height
+      context: context,
+      builder: (ctx) => ModalBottomSheet(movie: movie), // Pass the movie to the modal
+    );
+  }
+
 
   @override
   void dispose() {

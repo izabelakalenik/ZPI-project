@@ -28,7 +28,7 @@ class _MovieScreenState extends State<MovieScreen> {
     return MainLayout(
       child: MovieScreenContent(
         movie: widget.movie,
-        onCardTapped: () {}
+          onPressed: () {}
       ),
     );
   }
@@ -36,12 +36,12 @@ class _MovieScreenState extends State<MovieScreen> {
 
 class MovieScreenContent extends StatelessWidget {
   final Movie movie;
-  final VoidCallback onCardTapped;
+  final VoidCallback onPressed;
 
   const MovieScreenContent({
     super.key,
     required this.movie,
-    required this.onCardTapped,
+    required this.onPressed,
   });
 
   @override
@@ -67,7 +67,7 @@ class MovieScreenContent extends StatelessWidget {
               //   ),
               // ),
               // const SizedBox(height: 10),
-              MovieCard(movie: movie),
+              MovieCard(movie: movie, onPressed: onPressed),
               const SizedBox(height: 10),
               MovieCategoriesInfo(
                 categories: movie.categories,

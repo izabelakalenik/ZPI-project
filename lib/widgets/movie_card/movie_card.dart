@@ -4,8 +4,10 @@ import 'package:zpi_project/models/movie_model.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
+  final VoidCallback onPressed;
 
-  const MovieCard({super.key, required this.movie});
+  const MovieCard({super.key, required this.movie, required this.onPressed});
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class MovieCard extends StatelessWidget {
                       ),
                       IconButton(
                         icon: const Icon(Icons.info_outline, color: Colors.white),
-                        onPressed: () {},
+                        onPressed: onPressed,
                       ),
                     ],
                   ),
