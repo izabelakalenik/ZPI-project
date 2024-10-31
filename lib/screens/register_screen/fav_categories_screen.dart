@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:zpi_project/screens/register_screen/register_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
+
+import '../../movies/data/repositories/movie_repository_impl.dart';
 
 class FavCategoriesScreen extends StatefulWidget {
   const FavCategoriesScreen({super.key});
@@ -14,24 +17,25 @@ class FavCategoriesScreen extends StatefulWidget {
 
 class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
   late RegisterBloc registerBloc;
+  late MovieRepositoryImpl movieRepository;
+  Map<int, String> _genres = {};
 
   @override
   void initState() {
     super.initState();
     registerBloc = BlocProvider.of<RegisterBloc>(context);
+    movieRepository = Provider.of<MovieRepositoryImpl>(context, listen: false);
+    _loadGenres(); // Load genres when initializing
   }
 
-  final List<String> _genres = [
-    'Romantic Comedy',
-    'Adventure',
-    'Horror',
-    'Sci-fi',
-    'Thriller',
-    'Anime',
-    'Drama'
-  ];
+  Future<void> _loadGenres() async {
+      final genreMap = await movieRepository.getRealTimeGenres(); // Fetch genres map
+      setState(() {
+        _genres = genreMap; // Convert map values to list
+      });
+  }
 
-  final List<String> _selectedGenres = [];
+  final List<int> _selectedGenres = [];
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +79,10 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                   child: ListView.builder(
                       itemCount: _genres.length,
                       itemBuilder: (context, index) {
-                        final genre = _genres[index];
+                        final genreEntry = _genres.entries.elementAt(index);
+                        final genreId = genreEntry.key;
+                        final genreName = genreEntry.value;
+
                         return CheckboxListTile(
                           side: BorderSide(color: Colors.white),
                           checkColor: Colors.white,
@@ -86,18 +93,18 @@ class _FavCategoriesScreenState extends State<FavCategoriesScreen> {
                             }
                             return Colors.white;
                           }),
-                          value: _selectedGenres.contains(genre),
+                          value: _selectedGenres.contains(genreId),
                           onChanged: (isChecked) {
                             setState(() {
                               if (isChecked!) {
-                                _selectedGenres.add(genre);
+                                _selectedGenres.add(genreId);
                               } else {
-                                _selectedGenres.remove(genre);
+                                _selectedGenres.remove(genreId);
                               }
                             });
                           },
                           title: Text(
-                            genre,
+                            genreName,
                             style: const TextStyle(
                               color: Colors.white,
                             ),

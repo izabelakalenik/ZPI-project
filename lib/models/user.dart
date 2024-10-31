@@ -6,7 +6,7 @@ class UserModel {
   int birthYear;
   String gender;
   String country;
-  List<String> favoriteGenres;
+  List<int> favoriteGenres;
 
   UserModel({
     required this.email,
@@ -27,7 +27,7 @@ class UserModel {
     int? birthYear,
     String? gender,
     String? country,
-    List<String>? favoriteGenres,
+    List<int>? favoriteGenres,
   }) {
     return UserModel(
       email: email ?? this.email,

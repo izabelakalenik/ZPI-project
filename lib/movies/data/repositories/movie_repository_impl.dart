@@ -10,13 +10,13 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<List<Movie>> fetchMovies() async {
-    final genreMap = await _getGenres();
+    final genreMap = await getGenres();
 
     final moviesData = await remoteDataSource.fetchMovies();
     return moviesData.map((json) => Movie.fromJson(json, genreMap)).toList();
   }
 
-  Future<Map<int, String>> _getGenres() async {
+  Future<Map<int, String>> getGenres() async {
     if (GenreCache.instance.genres != null) {
       return GenreCache.instance.genres!;
     }
@@ -25,4 +25,10 @@ class MovieRepositoryImpl implements MovieRepository {
     GenreCache.instance.setGenres(genres);
     return genres;
   }
+
+  Future<Map<int, String>> getRealTimeGenres() async {
+    final genres = await remoteDataSource.fetchGenres();
+    return genres;
+  }
+
 }

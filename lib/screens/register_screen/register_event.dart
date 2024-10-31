@@ -43,7 +43,7 @@ class UserDetailsEntered extends RegisterEvent {
 }
 
 class GenresSelected extends RegisterEvent {
-  final List<String> genres;
+  final List<int> genres;
 
   const GenresSelected({
     required super.localizations,

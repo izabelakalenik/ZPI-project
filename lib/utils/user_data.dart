@@ -9,6 +9,6 @@ class UserData {
     birthYear: 1990, // Example birth year
     gender: 'Male', // Example gender
     country: 'Poland', // Example country
-    favoriteGenres: ['Action', 'Adventure', 'Drama'], // Example favorite genres
+    favoriteGenres: [1, 2, 3], // Example favorite genres
   );
 }
