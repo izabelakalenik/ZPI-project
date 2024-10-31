@@ -61,7 +61,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'account-does-not-exist') {
-        emit(LoginFailure(error: e.message!));
+        emit(LoginFailure(error: localizations.dont_have_an_account));
       }
     } catch (error) {
       emit(LoginFailure(error: error.toString()));

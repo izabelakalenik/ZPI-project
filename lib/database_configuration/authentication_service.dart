@@ -64,8 +64,7 @@ class AuthenticationService {
       if (await firestoreService.isEmailUnique(email)) {
         signOutUser();
         throw FirebaseAuthException(
-            code: 'account-does-not-exist',
-            message: 'An account with this email does not exist. Please register.');
+            code: 'account-does-not-exist');
       } else {
         debugPrint("Logged user: $email");
         final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
@@ -89,8 +88,8 @@ class AuthenticationService {
       if (! await firestoreService.isEmailUnique(email)) {
         signOutUser();
         throw FirebaseAuthException(
-            code: 'email-already-in-use',
-            message: 'An account with this email already exists.');
+            code: 'email-already-in-use'
+        );
       } else {
         debugPrint("Logged user: $email");
         final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);

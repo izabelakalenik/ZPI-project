@@ -77,27 +77,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 );
             } else if (state is RegisterProceed) {
-              _navigateToSecondRegisterScreen(registerBloc);}
-            // } else if (state is FacebookRegisterFailure) {
-            //   showDialog(
-            //     context: context,
-            //     builder: (BuildContext context) {
-            //       return AlertDialog(
-            //         backgroundColor: Colors.black.withOpacity(0.8),
-            //         title: Text("Already registered"),
-            //         content: Text("You have been already registered through Facebook. Please log in now."),
-            //         actions: [
-            //           TextButton(
-            //             onPressed: () {
-            //               Navigator.of(context).pop();
-            //             },
-            //             child: Text("OK"),
-            //           ),
-            //         ],
-            //       );
-            //     },
-            //   );
-            // }
+              _navigateToSecondRegisterScreen(registerBloc);
+            }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
             builder: (context, state) {

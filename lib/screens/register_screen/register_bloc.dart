@@ -91,7 +91,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       } on FirebaseAuthException catch (authError) {
         if (authError.code == 'email-already-in-use') {
           emit(RegisterFailure(
-              error: event.localizations.email_taken, user: state.user));
+              error: event.localizations.already_have_account, user: state.user));
         }
       } catch (error) {
         emit(RegisterFailure(
