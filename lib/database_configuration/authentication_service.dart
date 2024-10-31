@@ -43,59 +43,61 @@ class AuthenticationService {
   }
 
   Future<UserCredential> registerUser(UserModel user) async {
-    UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+    UserCredential userCredential =
+        await _firebaseAuth.createUserWithEmailAndPassword(
       email: user.email,
-      password: user.password,);
+      password: user.password,
+    );
     return userCredential;
   }
 
   Future<UserCredential?> signInWithFacebook() async {
-      final LoginResult loginResult = await FacebookAuth.instance.login();
+    final LoginResult loginResult = await FacebookAuth.instance.login();
 
-      if (loginResult.status == LoginStatus.cancelled) {
-        return null;
-      } else if (loginResult.status == LoginStatus.failed) {
-        return null;
-      }
-
-      final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
-      final email = await getEmailFromFacebook();
-
-      if (await firestoreService.isEmailUnique(email)) {
-        signOutUser();
-        throw FirebaseAuthException(
-            code: 'account-does-not-exist');
-      } else {
-        debugPrint("Logged user: $email");
-        final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-        return userCredential;
-      }
+    if (loginResult.status == LoginStatus.cancelled) {
+      return null;
+    } else if (loginResult.status == LoginStatus.failed) {
+      return null;
     }
 
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+    final email = await getEmailFromFacebook();
+
+    if (await firestoreService.isEmailUnique(email)) {
+      signOutUser();
+      throw FirebaseAuthException(code: 'account-does-not-exist');
+    } else {
+      debugPrint("Logged user: $email");
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+      return userCredential;
+    }
+  }
 
   Future<UserCredential?> registerWithFacebook() async {
-      final LoginResult loginResult = await FacebookAuth.instance.login();
+    final LoginResult loginResult = await FacebookAuth.instance.login();
 
-      if (loginResult.status == LoginStatus.cancelled) {
-        return null;
-      } else if (loginResult.status == LoginStatus.failed) {
-        return null;
-      }
-
-      final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
-      final email = await getEmailFromFacebook();
-
-      if (! await firestoreService.isEmailUnique(email)) {
-        signOutUser();
-        throw FirebaseAuthException(
-            code: 'email-already-in-use'
-        );
-      } else {
-        debugPrint("Logged user: $email");
-        final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-        return userCredential;
-      }
+    if (loginResult.status == LoginStatus.cancelled) {
+      return null;
+    } else if (loginResult.status == LoginStatus.failed) {
+      return null;
     }
+
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+    final email = await getEmailFromFacebook();
+
+    if (!await firestoreService.isEmailUnique(email)) {
+      signOutUser();
+      throw FirebaseAuthException(code: 'email-already-in-use');
+    } else {
+      debugPrint("Logged user: $email");
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+      return userCredential;
+    }
+  }
 
   Future<String> getEmailFromFacebook() async {
     final userData = await FacebookAuth.instance.getUserData();

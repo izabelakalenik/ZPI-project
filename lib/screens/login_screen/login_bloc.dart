@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/database_configuration/authentication_service.dart';
 
@@ -16,10 +16,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _onLoginButtonPressed(
-
-      LoginButtonPressed event,
-      Emitter<LoginState> emit,
-      ) async {
+    LoginButtonPressed event,
+    Emitter<LoginState> emit,
+  ) async {
     emit(LoginLoading());
     final localizations = event.localizations;
     try {
@@ -30,7 +29,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
-
       String errorMessage;
       if (e.code == 'invalid-email') {
         errorMessage = localizations.not_email;
@@ -46,9 +44,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _onLoginWithFacebookPressed(
-      LoginWithFacebookPressed event,
-      Emitter<LoginState> emit,
-      ) async {
+    LoginWithFacebookPressed event,
+    Emitter<LoginState> emit,
+  ) async {
     emit(LoginLoading());
     final localizations = event.localizations;
 
