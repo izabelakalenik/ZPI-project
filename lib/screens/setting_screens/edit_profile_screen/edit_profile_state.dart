@@ -14,12 +14,13 @@ class EditProfileLoading extends EditProfileState {
 }
 
 class EditProfileLoaded extends EditProfileState {
-  EditProfileLoaded(super.user);
+  final UserModel initialUser;
+  EditProfileLoaded(super.user, this.initialUser);
 }
 
 class EditProfileError extends EditProfileState {
   final String message;
-  EditProfileError(this.message) : super(UserModel.defaultConstructor());
+  EditProfileError(this.message, super.user);
 }
 
 class EditProfileSuccess extends EditProfileState {

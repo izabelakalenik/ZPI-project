@@ -37,7 +37,6 @@ class AuthenticationService {
     return await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  // Check if a user is currently signed in
   User? getCurrentUser() {
     return _firebaseAuth.currentUser;
   }

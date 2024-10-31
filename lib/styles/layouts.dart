@@ -169,7 +169,7 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool obscureText;
   final Widget? suffixIcon;
-  final String? hintText; // Allow suffix icon
+  final String? hintText;
   final String? initialValue;
   final bool readOnly;
   final int maxLines;
@@ -196,10 +196,14 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       maxLines: maxLines,
       readOnly: readOnly,
-      style: const TextStyle(color: Colors.white),
+      style: TextStyle(
+        color: Colors.white.withOpacity(readOnly ? 0.6 : 1.0),
+      ),
       decoration: InputDecoration(
         labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle:  TextStyle(
+          color: Colors.white.withOpacity(readOnly ? 0.6 : 1.0),
+        ),
         hintText: hintText,
         hintStyle: const TextStyle(color: Colors.white),
         border: OutlineInputBorder(
@@ -214,9 +218,9 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
           borderSide: const BorderSide(color: Colors.white70), // Gray border when enabled
         ),
-        suffixIcon: suffixIcon, // Use the optional suffix icon
+        suffixIcon: suffixIcon,
       ),
-      onChanged: onChanged, // Pass onChanged to the TextFormField
+      onChanged: onChanged,
     );
   }
 }

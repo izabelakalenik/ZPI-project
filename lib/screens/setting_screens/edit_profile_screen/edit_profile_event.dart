@@ -24,4 +24,9 @@ class UpdateCountry extends EditProfileEvent {
   UpdateCountry(this.country);
 }
 
+class CheckUsernameAvailability extends EditProfileEvent {
+  final String username;
+  CheckUsernameAvailability(this.username);
+}
+
 class SaveProfileChanges extends EditProfileEvent {}
