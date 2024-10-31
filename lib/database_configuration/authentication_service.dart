@@ -61,7 +61,7 @@ class AuthenticationService {
     }
 
     final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
     final email = await getEmailFromFacebook();
 
     if (await firestoreService.isEmailUnique(email)) {
@@ -85,7 +85,7 @@ class AuthenticationService {
     }
 
     final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
     final email = await getEmailFromFacebook();
 
     if (!await firestoreService.isEmailUnique(email)) {
