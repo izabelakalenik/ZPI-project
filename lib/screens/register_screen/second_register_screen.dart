@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/screens/register_screen/fav_categories_screen.dart';
+import 'package:zpi_project/screens/register_screen/favourite_genres_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
 import 'input_validation.dart';
@@ -47,7 +47,7 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
       MaterialPageRoute(
         builder: (context) => BlocProvider.value(
           value: registerBloc,
-          child: const FavCategoriesScreen(),
+          child: const FavouriteGenresScreen(),
         ),
       ),
     );
