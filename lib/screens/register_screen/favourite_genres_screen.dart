@@ -29,10 +29,11 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
   }
 
   Future<void> _loadGenres() async {
-      final genreMap = await movieRepository.getRealTimeGenres(); // Fetch genres map
-      setState(() {
-        _genres = genreMap; // Convert map values to list
-      });
+    final genreMap =
+        await movieRepository.getRealTimeGenres(); // Fetch genres map
+    setState(() {
+      _genres = genreMap; // Convert map values to list
+    });
   }
 
   final List<int> _selectedGenres = [];
@@ -52,13 +53,12 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-              localizations.what_do_you_like,
-              style: theme.textTheme.headlineLarge?.copyWith(
-              color: Colors.white,
+                localizations.what_do_you_like,
+                style: theme.textTheme.headlineLarge?.copyWith(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-              ),
-
               const SizedBox(height: 10),
               Text(
                 localizations.choose,
@@ -78,6 +78,7 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
       ),
     );
   }
+
   Widget _buildGenreSelection() {
     return SizedBox(
       height: 350,
@@ -99,7 +100,7 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
               side: BorderSide(color: Colors.white),
               checkColor: Colors.white,
               fillColor: WidgetStateProperty.resolveWith<Color>(
-                    (Set<WidgetState> states) {
+                (Set<WidgetState> states) {
                   if (states.contains(WidgetState.selected)) {
                     return Color(0xFF91007E);
                   }
@@ -135,23 +136,23 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
       text: Text(localizations.create, textAlign: TextAlign.center),
       onPressed: _selectedGenres.isNotEmpty
           ? () {
-        registerBloc.add(
-          GenresSelected(
-            genres: _selectedGenres,
-            localizations: localizations,
-          ),
-        );
-        registerBloc.add(
-          SubmitRegistration(localizations: localizations),
-        );
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WelcomeScreen(),
-          ),
-              (Route<dynamic> route) => route.isFirst,
-        );
-      }
+              registerBloc.add(
+                GenresSelected(
+                  genres: _selectedGenres,
+                  localizations: localizations,
+                ),
+              );
+              registerBloc.add(
+                SubmitRegistration(localizations: localizations),
+              );
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WelcomeScreen(),
+                ),
+                (Route<dynamic> route) => route.isFirst,
+              );
+            }
           : null, // The button is disabled if nothing is chosen
     );
   }
