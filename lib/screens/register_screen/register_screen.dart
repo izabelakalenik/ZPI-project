@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
-import 'package:zpi_project/database_configuration/authentication_service.dart';
 import 'package:zpi_project/screens/register_screen/second_register_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
@@ -10,8 +9,6 @@ import '../login_screen/login_bloc.dart';
 import '../login_screen/login_screen.dart';
 import 'register_bloc.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -57,7 +54,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     final registerBloc = BlocProvider.of<RegisterBloc>(context);
@@ -81,8 +77,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 );
             } else if (state is RegisterProceed) {
-              _navigateToSecondRegisterScreen(registerBloc);
-            }
+              _navigateToSecondRegisterScreen(registerBloc);}
+            // } else if (state is FacebookRegisterFailure) {
+            //   showDialog(
+            //     context: context,
+            //     builder: (BuildContext context) {
+            //       return AlertDialog(
+            //         backgroundColor: Colors.black.withOpacity(0.8),
+            //         title: Text("Already registered"),
+            //         content: Text("You have been already registered through Facebook. Please log in now."),
+            //         actions: [
+            //           TextButton(
+            //             onPressed: () {
+            //               Navigator.of(context).pop();
+            //             },
+            //             child: Text("OK"),
+            //           ),
+            //         ],
+            //       );
+            //     },
+            //   );
+            // }
           },
           child: BlocBuilder<RegisterBloc, RegisterState>(
             builder: (context, state) {
@@ -113,19 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
-                              // this logic should be moved to bloc
-                              try {
-                              final authService = AuthenticationService();
-                              final userCredential = await authService.registerWithFacebook();
-
-                              if (userCredential != null) {
-                                registerBloc.add(RegisterWithFacebookPressed(localizations: localizations));
-                              }
-                            } catch (error) {
-                              // Obsłuż błąd, np. wyświetl komunikat o błędzie
-                              debugPrint("Error during Facebook registration: $error");
                               registerBloc.add(RegisterWithFacebookPressed(localizations: localizations));
-                            }
                             },
                           ),
                         ),

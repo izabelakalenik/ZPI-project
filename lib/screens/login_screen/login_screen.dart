@@ -8,7 +8,6 @@ import 'package:zpi_project/screens/home_screen.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
-import '../../database_configuration/authentication_service.dart';
 import '../register_screen/register_bloc.dart';
 import '../register_screen/register_screen.dart';
 import 'login_bloc.dart';
@@ -125,11 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
-                              final authService = AuthenticationService();
-                              final userCredential = await authService.signInWithFacebook();
-                              if (userCredential != null){
-                                loginBloc.add(LoginWithFacebookPressed());
-                              }
+                              loginBloc.add(LoginWithFacebookPressed(localizations: localizations));
                             },
                           ),
                         ),

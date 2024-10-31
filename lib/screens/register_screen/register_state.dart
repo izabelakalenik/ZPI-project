@@ -51,6 +51,15 @@ class RegisterFailure extends RegisterState {
   List<Object?> get props => super.props + [error];
 }
 
+class FacebookRegisterFailure extends RegisterState {
+  final String error;
+
+  const FacebookRegisterFailure({required this.error, required super.user});
+
+  @override
+  List<Object?> get props => super.props + [error];
+}
+
 class RegisterUsernameTaken extends RegisterState {
   final String error;
 

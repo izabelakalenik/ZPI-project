@@ -50,12 +50,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       Emitter<LoginState> emit,
       ) async {
     emit(LoginLoading());
+    final localizations = event.localizations;
+
     try {
       final userCredential = await _authService.signInWithFacebook();
       if (userCredential != null) {
         emit(LoginSuccess());
       } else {
-        emit(LoginFailure(error: "Login failed")); // Możesz dostosować komunikat o błędzie
+        emit(LoginFailure(error: localizations.unknown_error));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-does-not-exist') {
+        emit(LoginFailure(error: e.message!));
       }
     } catch (error) {
       emit(LoginFailure(error: error.toString()));

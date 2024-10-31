@@ -80,9 +80,23 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
     });
 
-
     on<RegisterWithFacebookPressed>((event, emit) async {
-      emit(RegisterProceed(state.user));
+      try {
+        final authService = AuthenticationService();
+        final userCredential = await authService.registerWithFacebook();
+
+        if (userCredential != null) {
+          emit(RegisterProceed(state.user));
+        }
+      } on FirebaseAuthException catch (authError) {
+        if (authError.code == 'email-already-in-use') {
+          emit(RegisterFailure(
+              error: event.localizations.email_taken, user: state.user));
+        }
+      } catch (error) {
+        emit(RegisterFailure(
+            error: event.localizations.unknown_error, user: state.user));
+      }
     });
   }
 }

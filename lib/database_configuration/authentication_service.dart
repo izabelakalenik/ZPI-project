@@ -7,6 +7,7 @@ import '../models/user.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final firestoreService = FirestoreService();
 
   Future<UserCredential> signInWithEmailAndPassword({
     required String email,
@@ -49,7 +50,6 @@ class AuthenticationService {
   }
 
   Future<UserCredential?> signInWithFacebook() async {
-    try {
       final LoginResult loginResult = await FacebookAuth.instance.login();
 
       if (loginResult.status == LoginStatus.cancelled) {
@@ -59,54 +59,44 @@ class AuthenticationService {
       }
 
       final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      final email = await getEmailFromFacebook();
 
-      final userData = await FacebookAuth.instance.getUserData();
-      final String email = userData['email'] ?? 'No email';
-
-      debugPrint("Logged user: $email");
-      final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-      return userCredential;
-    } catch (error) {
-      debugPrint("Error signing in with Facebook: $error");
-      return null;
+      if (await firestoreService.isEmailUnique(email)) {
+        signOutUser();
+        throw FirebaseAuthException(
+            code: 'account-does-not-exist',
+            message: 'An account with this email does not exist. Please register.');
+      } else {
+        debugPrint("Logged user: $email");
+        final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+        return userCredential;
+      }
     }
-  }
+
 
   Future<UserCredential?> registerWithFacebook() async {
-    final firestoreService = FirestoreService();
-    try {
       final LoginResult loginResult = await FacebookAuth.instance.login();
-      if (loginResult.status != LoginStatus.success) {
+
+      if (loginResult.status == LoginStatus.cancelled) {
+        return null;
+      } else if (loginResult.status == LoginStatus.failed) {
         return null;
       }
 
-      final OAuthCredential facebookAuthCredential =
-      FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
-      final userData = await FacebookAuth.instance.getUserData();
-      final String? email = userData['email'];
-
-      if (email == null) {
-        throw FirebaseAuthException(
-            code: 'no-email', message: 'Email is not provided by Facebook.');
-      }
+      final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+      final email = await getEmailFromFacebook();
 
       if (! await firestoreService.isEmailUnique(email)) {
+        signOutUser();
         throw FirebaseAuthException(
             code: 'email-already-in-use',
             message: 'An account with this email already exists.');
+      } else {
+        debugPrint("Logged user: $email");
+        final UserCredential userCredential = await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+        return userCredential;
       }
-
-      final UserCredential userCredential =
-      await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-
-      debugPrint("User registered successfully with Facebook: $email");
-      return userCredential;
-    } catch (error) {
-      debugPrint("Error registering with Facebook: $error");
-      return null;
     }
-  }
-
 
   Future<String> getEmailFromFacebook() async {
     final userData = await FacebookAuth.instance.getUserData();
