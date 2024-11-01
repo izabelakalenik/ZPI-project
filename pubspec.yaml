@@ -102,8 +102,6 @@ flutter:
     - assets/shake.png
     - assets/dices.png
     - assets/markdown/privacy_policy.md
-    - assets/age_icons/13.png
-    - assets/age_icons/18.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
