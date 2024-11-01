@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../styles/layouts.dart';
-import '../../utils/check_login_status.dart';
-import '../../widgets/nav_drawer.dart';
+import '../../../styles/layouts.dart';
+import '../../../utils/check_login_status.dart';
+import '../../../widgets/nav_drawer.dart';
+import 'joined_bloc.dart';
 
 class JoinedScreen extends StatefulWidget {
   final String? roomCode;
@@ -23,19 +25,36 @@ class JoinedScreenState extends State<JoinedScreen> {
   void initState() {
     super.initState();
     checkLoginStatus(context);
+    context.read<JoinedBloc>().add(JoinRoom(widget.roomCode!));
   }
 
   final List<String> friends = [];
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      child: JoinedScreenContent(
-        roomCode: widget.roomCode,
-        friends: friends,
+      child: BlocBuilder<JoinedBloc, JoinedState>(
+        builder: (context, state) {
+          if (state is JoinedInitial) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is JoinedRoomJoined) {
+            return JoinedScreenContent(
+              roomCode: state.roomCode,
+              friends: [],
+            );
+          } else if (state is JoinedParticipantsUpdated) {
+            return JoinedScreenContent(
+              roomCode: state.friends.isNotEmpty ? state.friends[0] : '',
+              friends: state.friends,
+            );
+          } else {
+            return Center(child: Text('Something went wrong'));
+          }
+        },
       ),
     );
   }
 }
+
 
 class JoinedScreenContent extends StatelessWidget {
   final String? roomCode;

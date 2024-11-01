@@ -32,4 +32,27 @@ class FirestoreService {
       'email': user.email,
     });
   }
+
+  Future<UserModel> fetchUser(String uid) async {
+    try {
+      final docSnapshot = await _firestore.collection('users').doc(uid).get();
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data();
+        return UserModel(
+          email: data?['email'] ?? '',
+          password: '', // Passwords are not stored in Firestore, passing "" because passing UserModel is easier than passing all other vaLues separately
+          name: data?['name'] ?? '',
+          username: data?['username'] ?? '',
+          birthYear: data?['birthYear'] ?? 0,
+          gender: data?['gender'] ?? '',
+          country: data?['country'] ?? '',
+          favoriteGenres: List<String>.from(data?['likedGenres'] ?? []),
+        );
+      } else {
+        throw Exception("User not found");
+      }
+    } catch (e) {
+      throw Exception("Failed to fetch user data: $e");
+    }
+  }
 }

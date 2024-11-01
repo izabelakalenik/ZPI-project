@@ -6,6 +6,8 @@ import '../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widgets/qr_code_scanner.dart';
 import 'join_room_dialog.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 class JoinerScreen extends StatefulWidget {
   const JoinerScreen({super.key});
@@ -15,8 +17,8 @@ class JoinerScreen extends StatefulWidget {
 }
 
 class _JoinerScreenState extends State<JoinerScreen> {
-
   late TextEditingController _roomController;
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   @override
   void initState() {
@@ -54,21 +56,24 @@ class _JoinerScreenState extends State<JoinerScreen> {
     );
   }
 
-  void _validateAndShowDialog(BuildContext context, String roomCode) {
+  Future<void> _validateAndShowDialog(BuildContext context, String roomCode) async {
     final localizations = AppLocalizations.of(context);
-    if (_isValidRoomCode(roomCode)) {
+    final roomRef = _database.child('rooms').child(roomCode);
+    final roomSnapshot = await roomRef.get();
+
+    if (roomSnapshot.exists && _isValidRoomCode(roomCode)) {
       showJoinRoomDialog(context, roomCode);
-    } else {
+    } else if (!_isValidRoomCode(roomCode)){
       _showErrorDialog(context, localizations.error_room);
+    }
+    else {
+      _showErrorDialog(context, 'Room does not exist');
     }
   }
 
   bool _isValidRoomCode(String roomCode) {
-    // Check length
     if (roomCode.length != 8) return false;
-    // Check if it contains "http" or "https"
     if (roomCode.contains('http') || roomCode.contains('https')) return false;
-
     return true;
   }
 

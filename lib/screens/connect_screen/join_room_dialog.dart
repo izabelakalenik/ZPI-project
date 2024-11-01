@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:zpi_project/screens/connect_screen/joined_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/connect_screen/joined/joined_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../../styles/layouts.dart';
 import '../../widgets/dialog.dart';
+import 'joined/joined_bloc.dart';
 
 class JoinRoomDialog extends StatefulWidget {
   final String roomCode;
@@ -15,7 +19,25 @@ class JoinRoomDialog extends StatefulWidget {
 }
 
 class _JoinRoomDialogState extends State<JoinRoomDialog> {
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
+  void _joinRoom(String roomCode) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    final roomRef = _database.child('rooms').child(roomCode);
+    final participantsRef = roomRef.child('participants');
+    participantsRef.child('userId123').set('UserName');
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BlocProvider(
+          create: (context) => JoinedBloc(),
+          child: JoinedScreen(roomCode: roomCode),
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -36,12 +58,7 @@ class _JoinRoomDialogState extends State<JoinRoomDialog> {
             children: [
               PopupButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => JoinedScreen(roomCode: widget.roomCode),
-                    ),
-                  );
+                  _joinRoom(widget.roomCode);
                 },
                 text: localizations.yes,
               ),

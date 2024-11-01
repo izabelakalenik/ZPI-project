@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:zpi_project/screens/connect_screen/host_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zpi_project/screens/connect_screen/host/host_screen.dart';
 import 'package:zpi_project/screens/connect_screen/joiner_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../styles/layouts.dart';
 import '../../utils/check_login_status.dart';
 import '../../widgets/nav_drawer.dart';
+import 'host/host_bloc.dart';
 
 class ConnectScreen extends StatefulWidget {
   const ConnectScreen({super.key});
@@ -29,7 +31,12 @@ class _ConnectScreenState extends State<ConnectScreen> {
         onCreateRoomPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HostScreen()),
+            MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                create: (context) => HostBloc(),
+                child: const HostScreen(),
+              ),
+            ),
           );
         },
         onJoinRoomPressed: () {

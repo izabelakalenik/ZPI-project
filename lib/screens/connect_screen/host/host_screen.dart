@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:uuid/uuid.dart';
 import 'package:zpi_project/utils/check_login_status.dart';
 import 'package:zpi_project/utils/screen_brightness_manager.dart';
-import '../../styles/layouts.dart';
+import '../../../styles/layouts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'host_bloc.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
@@ -14,8 +15,7 @@ class HostScreen extends StatefulWidget {
 }
 
 class _HostScreenState extends State<HostScreen> {
-  String roomCode = '';
-  List<String> friends = [];
+
   late TextEditingController _roomController;
   final ScreenBrightnessManager _brightnessManager = ScreenBrightnessManager(); // Instance of ScreenBrightnessManager
 
@@ -23,21 +23,15 @@ class _HostScreenState extends State<HostScreen> {
   void initState() {
     super.initState();
     checkLoginStatus(context);
-    // Generate a unique room code
-    roomCode = Uuid().v4().substring(0, 8);
+    context.read<HostBloc>().add(CreateRoom());
     _initializeControllers();
     _increaseBrightness();
+
   }
 
-  // Function to simulate adding friends when they join by entering the code
-  void addFriend(String friendName) {
-    setState(() {
-      friends.add(friendName);
-    });
-  }
 
   void _initializeControllers() {
-    _roomController = TextEditingController(text: roomCode);
+    _roomController = TextEditingController();
   }
 
   @override
@@ -59,15 +53,27 @@ class _HostScreenState extends State<HostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      child: HostScreenContent(
-        roomCode: roomCode,
-        friends: friends,
-        roomController: _roomController,
-        onConnectPressed: () {
-          // Action when Connect button is pressed
-        },
-      ),
+    return BlocBuilder<HostBloc, HostState>(
+      builder: (context, state) {
+        List<String> friends = [];
+
+        if (state is HostRoomCreated) {
+          _roomController.text = state.roomCode;
+        } else if (state is HostParticipantsUpdated) {
+          friends = state.friends;
+        }
+
+        return MainLayout(
+          child: HostScreenContent(
+            roomCode: _roomController.text,
+            friends: friends,
+            roomController: _roomController,
+            onConnectPressed: () {
+              // Action when Connect button is pressed
+            },
+          ),
+        );
+      },
     );
   }
 }
