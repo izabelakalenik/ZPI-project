@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
 import 'package:zpi_project/screens/register_screen/register_bloc.dart';
 import 'package:zpi_project/screens/register_screen/welcome_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
-import '../../movies/data/repositories/movie_repository_impl.dart';
+import 'favourite_genres_block.dart';
+import 'favourite_genres_event.dart';
+import 'favourite_genres_state.dart';
 
 class FavouriteGenresScreen extends StatefulWidget {
   const FavouriteGenresScreen({super.key});
@@ -17,26 +18,16 @@ class FavouriteGenresScreen extends StatefulWidget {
 
 class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
   late RegisterBloc registerBloc;
-  late MovieRepositoryImpl movieRepository;
-  Map<int, String> _genres = {};
+  late FavouriteGenresBloc genresBloc;
+  final List<int> _selectedGenres = [];
 
   @override
   void initState() {
     super.initState();
     registerBloc = BlocProvider.of<RegisterBloc>(context);
-    movieRepository = Provider.of<MovieRepositoryImpl>(context, listen: false);
-    _loadGenres(); // Load genres when initializing
+    genresBloc = BlocProvider.of<FavouriteGenresBloc>(context);
+    genresBloc.add(LoadGenres()); // Dispatch event to load genres
   }
-
-  Future<void> _loadGenres() async {
-    final genreMap =
-        await movieRepository.getRealTimeGenres(); // Fetch genres map
-    setState(() {
-      _genres = genreMap; // Convert map values to list
-    });
-  }
-
-  final List<int> _selectedGenres = [];
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +59,17 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              _buildGenreSelection(),
+            BlocBuilder<FavouriteGenresBloc, FavouriteGenresState>(
+              builder: (context, state) {
+                if (state.isLoading) {
+                  return const Center(child: CircularProgressIndicator(color: Colors.white));
+                } if (state.genres.isNotEmpty) {
+                  return _buildGenreSelection(state.genres);
+                } else {
+                  return Center(child: Text(localizations.no_genres_to_display));
+                }
+              },
+            ),
               const SizedBox(height: 20),
               _buildSubmitButton(localizations),
               const SizedBox(height: 16),
@@ -79,7 +80,7 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
     );
   }
 
-  Widget _buildGenreSelection() {
+  Widget _buildGenreSelection(Map<int, String> genres) {
     return SizedBox(
       height: 350,
       child: Container(
@@ -90,9 +91,9 @@ class _FavouriteGenresScreenState extends State<FavouriteGenresScreen> {
           border: Border.all(color: Colors.transparent, width: 0),
         ),
         child: ListView.builder(
-          itemCount: _genres.length,
+          itemCount: genres.length,
           itemBuilder: (context, index) {
-            final genreEntry = _genres.entries.elementAt(index);
+            final genreEntry = genres.entries.elementAt(index);
             final genreId = genreEntry.key;
             final genreName = genreEntry.value;
 
