@@ -56,7 +56,7 @@
   "menu": "Menu",
   "home": "Home",
   "liked": "Liked movies",
-  "connect": "Connect to user",
+  "connect_with_user": "Connect with user",
 
   "categories": "Categories",
   "comedy": "Comedy",
@@ -93,7 +93,7 @@
   "shake_movie_screen_button": "Shake",
 
   "release_date": "Release date",
-  "is_for_adults": "Is it only for adults",
+  "age_recommendation": "Age recommendation",
   "rating": "Rating",
 
   "liked_movies_title": "Liked",

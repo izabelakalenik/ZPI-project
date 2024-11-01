@@ -56,7 +56,7 @@
   "menu": "Menu",
   "home": "Strona główna",
   "liked": "Polubione filmy",
-  "connect": "Połącz z użytkownikiem",
+  "connect_with_user": "Połącz z użytkownikiem",
 
   "categories": "Kategorie",
   "comedy": "Komedia",
@@ -95,7 +95,7 @@
   "report_problem_submit": "Wyślij",
 
   "release_date": "Data wypuszczenia",
-  "is_for_adults": "Czy film jest tylko dla dorosłych",
+  "age_recommendation": "Rekomendacja wieku",
   "rating": "Ocena",
 
   "yes": "Tak",

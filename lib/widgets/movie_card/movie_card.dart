@@ -1,68 +1,69 @@
 import 'package:flutter/material.dart';
-
-import 'movie_card_model.dart';
+import '../../movies/domain/entities/movie.dart';
+import 'modal_bottom_sheet.dart';
 
 class MovieCard extends StatelessWidget {
-  final MovieCardModel movie;
+  final Movie movie;
 
-  const MovieCard(
-    this.movie, {
-    super.key,
-  });
+  const MovieCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 0,
-            blurRadius: 7,
-            offset: const Offset(0, 0),
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            child: Image.asset(
-              movie.poster,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 330,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (ctx) => ModalBottomSheet(movie: movie),
+            );
+          },
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  movie.title,
-                  style: theme.textTheme.labelLarge,
+                Image.network(
+                  movie.posterPath,
+                  height: 520,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
-                const SizedBox(height: 3),
-                Text(
-                  movie.director,
-                  style: theme.textTheme.labelMedium,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  movie.description,
-                  style: theme.textTheme.labelSmall,
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    color: Colors.black.withOpacity(0.75),
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            movie.title,
+                            style: theme.textTheme.labelLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

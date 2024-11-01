@@ -5,7 +5,7 @@ import 'package:shake_detector/shake_detector.dart';
 import 'package:zpi_project/styles/layouts.dart';
 //import '../models/movie_model.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import 'package:zpi_project/screens/movie_screen/movie_screen.dart';
+import 'package:zpi_project/screens/movie_screen.dart';
 import '../utils/check_login_status.dart';
 
 class ShakeMovieScreen extends StatefulWidget {

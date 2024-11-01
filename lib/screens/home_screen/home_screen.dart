@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/home_screen/home_bloc.dart';
 
 import '../../styles/layouts.dart';
-import '../../widgets/detailed_movie_card/detailed_movie_card_front.dart';
+import '../../widgets/movie_card/movie_card.dart';
 import '../../widgets/movie_card/swipe_utils.dart';
 import '../../widgets/nav_drawer.dart';
 import '../../widgets/category_selector.dart'; // Import the CategorySelector
@@ -20,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
-  //final List<MovieCard> cards = movies.map(MovieCard.new).toList();
   //List<String> _selectedCategories = []; //will be needed when implementing filtering
 
   @override
@@ -108,14 +107,14 @@ class HomeScreenContent extends StatelessWidget {
                   controller: controller,
                   cardsCount: state.movies.length,
                   onSwipe: SwipeUtils.onSwipe,
-                  numberOfCardsDisplayed: 1,
-                  padding: const EdgeInsets.all(15.0),
+                  numberOfCardsDisplayed: 2,
+                  padding: const EdgeInsets.all(5.0),
                   cardBuilder: (context, index, _, __) =>
-                      DetailedMovieCardFront(movie: state.movies[index]),
+                      MovieCard(movie: state.movies[index]),
                 );
               }),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

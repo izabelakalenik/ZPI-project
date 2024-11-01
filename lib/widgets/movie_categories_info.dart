@@ -7,72 +7,39 @@ class MovieCategoriesInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 370,
-      child: Card(
-        color: Colors.white.withOpacity(0.25),
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: SizedBox(
-            height: 40,
-            child: Center(
-              // this list should iterate trough all the elements from categories, but all the method that I found create error when we use axis.horizontal
-              child: ListView(
+    return Center(
+      child: SizedBox(
+        width: 340,
+        child: Card(
+          color: Colors.black.withOpacity(0.4),
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SizedBox(
+              height: 40,
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4),
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.25),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
                       child: Text(
-                        categories[0],
+                        categories[index],
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white, // Text color
-                          fontWeight: FontWeight.bold, // Font weight
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4),
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        categories[1],
-                        style: TextStyle(
-                          color: Colors.white, // Text color
-                          fontWeight: FontWeight.bold, // Font weight
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 4),
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.25),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        categories[2],
-                        style: TextStyle(
-                          color: Colors.white, // Text color
-                          fontWeight: FontWeight.bold, // Font weight
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),

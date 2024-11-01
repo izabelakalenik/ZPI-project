@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //import '../../models/movie_model.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
-import '../../screens/movie_screen/movie_screen.dart';
+import '../../screens/movie_screen.dart';
 
 class MovieTile extends StatelessWidget {
   final Movie movie;
@@ -11,12 +11,14 @@ class MovieTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MovieScreen(movie: movie),
+      onTap: () => {
+        // Navigator.of(context).pop(),
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MovieScreen(movie: movie)),
         ),
-      ),
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
