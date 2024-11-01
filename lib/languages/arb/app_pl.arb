@@ -36,9 +36,9 @@
   "country": "Kraj",
   "create_new_password": "Stwórz nowe hasło",
   "forgotten_password_message": "Nie przejmuj się, wyślemy Ci linka abyś mógł stworzyć nowe!",
-  "email_send_message" : "Wysłaliśmy Ci link do zresetowania hasła. Jeśli go nie otrzymasz w ciągu kilku minut, spróbuj ponownie.",
+  "email_send_message" : "Wysłaliśmy na Twój adres e-mail link do zresetowania hasła. Jeśli go nie otrzymasz w ciągu kilku minut, spróbuj ponownie.",
   "send_email_error" : "Wystąpił błąd, sprawdź proszę, czy wprowadziłeś poprawny adres e-mail",
-
+  "send_email_error_unknown" : "Wystąpił błąd, nie udało się wysłać linka do zresetowania hasła",
 
   "settings": "Ustawienia",
   "account": "Konto",
@@ -92,6 +92,13 @@
   "edit_profile_title": "Edytuj profil",
   "edit_profile_save_changes": "Zapisz zmiany",
   "edit_profile_changes_saved": "Pomyślnie zapisano zmiany",
+  "edit_profile_input_username": "Podaj proszę swoją nową nazwę użytkownika",
+  "edit_profile_reset_password": "Reset Password",
+  "edit_profile_user_not_found": "Użytkownik nie został znaleziony. Spróbuj ponownie.",
+  "edit_profile_load_user_fail": "Nie udało się załadować profilu użytkownika. Sprawdź połączenie i spróbuj ponownie.",
+  "edit_profile_username_taken": "Nazwa użytkownika jest już zajęta. Wybierz inną.",
+  "edit_profile_save_changes_unknown": "Wystąpił błąd podczas zapisywania zmian. Spróbuj ponownie.",
+  "edit_profile_unexpected_error": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",
 
 
   "report_problem_submit": "Wyślij",

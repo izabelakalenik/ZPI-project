@@ -36,8 +36,10 @@
   "country": "Country",
   "create_new_password": "Create a new password",
   "forgotten_password_message": "Don’t worry, we will send you a link to create a new one!",
-  "email_send_message" : "We've sent you a link to reset your password. If you don't receive it in a few minutes, try again",
+  "email_send_message" : "We've sent you an email with a link to reset your password. If you don't receive it in a few minutes, try again",
   "send_email_error" : "There is an error, please check if you entered a valid email",
+  "send_email_error_unknown" : "There is an error, we couldn't send an email with a link to reset the password,",
+
 
 
   "settings": "Settings",
@@ -91,6 +93,13 @@
   "edit_profile_title": "Edit profile",
   "edit_profile_save_changes": "Save changes",
   "edit_profile_changes_saved": "Successfuly saved the changes",
+  "edit_profile_input_username": "Please input your new Username",
+  "edit_profile_reset_password": "Reset Password",
+  "edit_profile_user_not_found": "User not found. Please try again.",
+  "edit_profile_load_user_fail": "Failed to load user profile. Please check your connection and try again.",
+  "edit_profile_username_taken": "The username is already taken. Please choose a different one.",
+  "edit_profile_save_changes_unknown": "An error occurred while saving changes. Please try again.",
+  "edit_profile_unexpected_error": "An unexpected error occurred. Please try again.",
 
   "shake_movie_screen_button": "Shake",
 

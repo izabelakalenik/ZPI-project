@@ -29,4 +29,7 @@ class CheckUsernameAvailability extends EditProfileEvent {
   CheckUsernameAvailability(this.username);
 }
 
-class SaveProfileChanges extends EditProfileEvent {}
+class SaveProfileChanges extends EditProfileEvent {
+  final String username;
+  SaveProfileChanges(this.username);
+}

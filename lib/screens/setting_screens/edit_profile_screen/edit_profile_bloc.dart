@@ -10,8 +10,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final FirestoreService firestoreService = FirestoreService();
   final AuthenticationService authService = AuthenticationService();
 
-  late UserModel initialUser; // Store initial user data in the bloc
-
   EditProfileBloc() : super(EditProfileInitial()) {
     on<LoadUserProfile>(_onLoadUserProfile);
     on<UpdateUsername>(_onUpdateUsername);
@@ -26,68 +24,68 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     try {
       final currentUser = authService.getCurrentUser();
       if (currentUser != null) {
-        initialUser = await firestoreService.fetchUser(currentUser.uid); // Set initial user
-        emit(EditProfileLoaded(initialUser, initialUser));
+        final user = await firestoreService.fetchUser(currentUser.uid);
+        emit(EditProfileLoaded(user));
       } else {
-        emit(EditProfileError("User not found.", UserModel.defaultConstructor()));
+        emit(EditProfileError("user-not-found",UserModel.defaultConstructor()));
       }
     } catch (e) {
-      emit(EditProfileError("Failed to load user profile.", UserModel.defaultConstructor()));
+      emit(EditProfileError("load-user-fail.",UserModel.defaultConstructor()));
     }
   }
 
-  void _onUpdateUsername(UpdateUsername event, Emitter<EditProfileState> emit) async {
-    if (state is EditProfileLoaded) {
-      final currentUsername = (state as EditProfileLoaded).user.username;
-      if (event.username != currentUsername) {
-        final isUnique = await firestoreService.isUsernameUnique(event.username);
-        if (!isUnique) {
-          emit(EditProfileError("Username taken", state.user));
-        } else {
-          final user = (state as EditProfileLoaded).user.copyWith(username: event.username);
-          emit(EditProfileLoaded(user, initialUser));
-        }
-      } else {
-        emit(EditProfileLoaded((state as EditProfileLoaded).user, initialUser));
-      }
+  void _onUpdateUsername(UpdateUsername event, Emitter<EditProfileState> emit) {
+    if (state is! EditProfileLoading ) {
+      final user = state.user.copyWith(username: event.username);
+      emit(EditProfileProgress(user));
     }
   }
 
   void _onUpdatePassword(UpdatePassword event, Emitter<EditProfileState> emit) {
-    if (state is EditProfileLoaded) {
-      final user = (state as EditProfileLoaded).user.copyWith(password: event.password);
-      emit(EditProfileLoaded(user, initialUser));
+    if (state is! EditProfileLoading ) {
+      final user = state.user.copyWith(password: event.password);
+      emit(EditProfileProgress(user));
     }
   }
 
   void _onUpdateCountry(UpdateCountry event, Emitter<EditProfileState> emit) {
-    if (state is EditProfileLoaded) {
-      final user = (state as EditProfileLoaded).user.copyWith(country: event.country);
-      emit(EditProfileLoaded(user,initialUser));
+    if (state is! EditProfileLoading ) {
+      final user = state.user.copyWith(country: event.country);
+      emit(EditProfileProgress(user));
     }
   }
 
-  Future<void> _onSaveProfileChanges(SaveProfileChanges event, Emitter<EditProfileState> emit) async {
-    if (state is EditProfileLoaded) {
-      final user = (state as EditProfileLoaded).user;
 
-      if (user == initialUser) {
+  Future<void> _onSaveProfileChanges(SaveProfileChanges event, Emitter<EditProfileState> emit) async {
+    if(state is! EditProfileLoading ){
+      final user = state.user;
+
+      final isUnique = await firestoreService.isUsernameUnique(event.username);
+      if (!isUnique && event.username != user.username) {
+        emit(EditProfileError("username-taken", user));
         return;
       }
+      final updatedUser = user.copyWith(username: event.username, country: user.country);
       emit(EditProfileLoading());
+
       try {
-        await firestoreService.saveUser(user, authService.getCurrentUser()!.uid);
-        emit(EditProfileSuccess(user));
+        await firestoreService.saveUser(updatedUser, authService.getCurrentUser()!.uid);
+        emit(EditProfileSuccess(updatedUser));
+        emit(EditProfileLoaded(updatedUser));
       } catch (e) {
-        emit(EditProfileError("Failed to save profile changes: ${e.toString()}", user));
+        emit(EditProfileError("save-changes-unknown}", updatedUser));
       }
     }
   }
 
   void _onCheckUsernameAvailability(CheckUsernameAvailability event, Emitter<EditProfileState> emit) async {
     final isUnique = await firestoreService.isUsernameUnique(event.username);
-    if (!isUnique) {
-      emit(EditProfileError("Username taken", state.user));
+
+    if (!isUnique && event.username != state.user.username) {
+      emit(EditProfileError("username-taken",state.user));
+    } else if (event.username.isNotEmpty) {
+      final updatedUser = state.user.copyWith(username: event.username);
+      emit(EditProfileProgress(updatedUser));
     }
   }
 }

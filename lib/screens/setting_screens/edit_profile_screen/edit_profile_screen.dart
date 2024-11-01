@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/styles/layouts.dart';
@@ -7,8 +8,9 @@ import 'package:zpi_project/utils/const.dart';
 import 'package:zpi_project/widgets/custom_dropdown.dart';
 import 'package:zpi_project/widgets/profile_picture.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'edit_profile_bloc.dart';
+
 import '../../../database_configuration/authentication_service.dart';
+import 'edit_profile_bloc.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -21,13 +23,19 @@ class _EditProfileState extends State<EditProfileScreen> {
   late TextEditingController _emailController;
   late TextEditingController _usernameController;
   late String _selectedCountry;
-
-  late String _initialUsername;
-  late String _initialEmail;
-  late String _initialCountry;
+  final AuthenticationService authService = AuthenticationService();
+  late  AppLocalizations localizations;
 
   Timer? _debounce;
-  final AuthenticationService authService = AuthenticationService();
+
+  late String _initialUsername;
+  late String _initialCountry;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    localizations = AppLocalizations.of(context);
+  }
 
   @override
   void initState() {
@@ -50,6 +58,17 @@ class _EditProfileState extends State<EditProfileScreen> {
     super.dispose();
   }
 
+  void _checkUsernameAvailability() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+
+    _debounce = Timer(const Duration(seconds: 1), () {
+      final bloc = context.read<EditProfileBloc>();
+      if (_usernameController.text != _initialUsername) {
+        bloc.add(CheckUsernameAvailability(_usernameController.text.trim()));
+      }
+    });
+  }
+
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -59,44 +78,59 @@ class _EditProfileState extends State<EditProfileScreen> {
     );
   }
 
+  void onSaveChangesPressed() {
+    final bloc = context.read<EditProfileBloc>();
+
+    final hasUsernameChanged = _usernameController.text.trim() != _initialUsername.trim();
+    final hasCountryChanged = _selectedCountry != _initialCountry;
+
+    if (_usernameController.text.isEmpty) {
+      showSnackBar(localizations.edit_profile_input_username);
+      return;
+    }
+    if (!hasUsernameChanged && !hasCountryChanged) {return;}
+    if (hasCountryChanged) {bloc.add(UpdateCountry(_selectedCountry));}
+
+    bloc.add(SaveProfileChanges(_usernameController.text.trim()));
+  }
+
   Future<void> sendPasswordResetEmail() async {
     try {
       await authService.sendPasswordResetEmail(email: _emailController.text);
-      showSnackBar("Sprawdź skrzynkę pocztową aby zmienić hasło");
+      showSnackBar(localizations.email_send_message);
     } catch (e) {
-      showSnackBar("Nie udało się wysłać emaila");
+      showSnackBar(localizations.send_email_error_unknown);
     }
   }
 
-  void _checkUsernameAvailability() {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-    _debounce = Timer(const Duration(seconds: 1), () {
-      context.read<EditProfileBloc>().add(CheckUsernameAvailability(_usernameController.text));
-    });
-  }
-
-  void onSaveChangesPressed() {
-    final bloc = context.read<EditProfileBloc>();
-    bloc.add(SaveProfileChanges());
+  String _getErrorMessage(String errorCode) {
+    switch (errorCode) {
+      case "user-not-found":
+        return localizations.edit_profile_user_not_found;
+      case "load-user-fail":
+        return localizations.edit_profile_load_user_fail;
+      case "username-taken":
+        return localizations.edit_profile_username_taken;
+      case "save-changes-unknown":
+        return localizations.edit_profile_save_changes_unknown;
+      default:
+        return localizations.edit_profile_unexpected_error;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
-
     return MainLayout(
       child: Scaffold(
         appBar: CustomAppBar(text: localizations.edit_profile_title),
         body: BlocListener<EditProfileBloc, EditProfileState>(
           listener: (context, state) {
             if (state is EditProfileError) {
-              // Display error messages and reset the state to ensure visibility each time
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
                   SnackBar(
-                    content: Text(state.message),
+                    content: Text(_getErrorMessage(state.message)),
                     duration: const Duration(seconds: 3),
                   ),
                 );
@@ -111,66 +145,63 @@ class _EditProfileState extends State<EditProfileScreen> {
                 );
             } else if (state is EditProfileLoaded) {
               _initialUsername = state.user.username;
-              _initialEmail = state.user.email;
               _initialCountry = state.user.country;
-
-              _usernameController.text = _initialUsername;
-              _emailController.text = _initialEmail;
-              _selectedCountry = _initialCountry;
+            }
+            if (state is EditProfileProgress ||  state is EditProfileLoaded){
+              _usernameController.text = state.user.username;
+              _emailController.text = state.user.email;
+              _selectedCountry = state.user.country;
             }
           },
           child: BlocBuilder<EditProfileBloc, EditProfileState>(
             builder: (context, state) {
               if (state is EditProfileLoading) {
                 return Center(child: CircularProgressIndicator());
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ListView(
-                    padding: EdgeInsets.symmetric(horizontal: 32),
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                      SizedBox(height: 50),
-                      ProfilePicture(),
-                      SizedBox(height: 24),
-                      CustomTextField(
-                        labelText: localizations.username,
-                        controller: _usernameController,
-                        onChanged: (username) {
-                          _checkUsernameAvailability();
-                        },
-                      ),
-                      SizedBox(height: 24),
-                      CustomTextField(
-                        labelText: localizations.email,
-                        controller: _emailController,
-                        readOnly: true,
-                      ),
-                      SizedBox(height: 24),
-                      CustomDropdown(
-                        labelText: localizations.country,
-                        value: _selectedCountry,
-                        items: COUNTRIES,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedCountry = value!;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 24),
-                      Button(
-                        text: Text(localizations.edit_profile_save_changes),
-                        onPressed: onSaveChangesPressed,
-                      ),
-                      SizedBox(height: 24),
-                      Button(
-                        onPressed: sendPasswordResetEmail,
-                        text: Text("Reset password"),
-                      ),
-                    ],
-                  ),
-                );
               }
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    SizedBox(height: 50),
+                    ProfilePicture(),
+                    SizedBox(height: 24),
+                    CustomTextField(
+                      labelText: localizations.username,
+                      controller: _usernameController,
+                      onChanged:(value) {_checkUsernameAvailability();},
+                    ),
+                    SizedBox(height: 24),
+                    CustomTextField(
+                      labelText: localizations.email,
+                      controller: _emailController,
+                      readOnly: true,
+                    ),
+                    SizedBox(height: 24),
+                    CustomDropdown(
+                      labelText: localizations.country,
+                      value: _selectedCountry,
+                      items: COUNTRIES,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCountry = value!;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 24),
+                    Button(
+                      text: Text(localizations.edit_profile_save_changes),
+                      onPressed: onSaveChangesPressed,
+                    ),
+                    SizedBox(height: 24),
+                    Button(
+                      onPressed: sendPasswordResetEmail,
+                      text: Text(localizations.edit_profile_reset_password),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
         ),

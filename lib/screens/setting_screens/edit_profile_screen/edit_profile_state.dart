@@ -14,8 +14,11 @@ class EditProfileLoading extends EditProfileState {
 }
 
 class EditProfileLoaded extends EditProfileState {
-  final UserModel initialUser;
-  EditProfileLoaded(super.user, this.initialUser);
+  EditProfileLoaded(super.user);
+}
+
+class EditProfileProgress extends EditProfileState {
+  EditProfileProgress(super.user);
 }
 
 class EditProfileError extends EditProfileState {
