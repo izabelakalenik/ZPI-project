@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zpi_project/screens/register_screen/fav_categories_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:zpi_project/screens/register_screen/favourite_genres/favourite_genres_screen.dart';
 import 'package:zpi_project/styles/layouts.dart';
 
+import '../../movies/data/repositories/movie_repository_impl.dart';
+import 'favourite_genres/favourite_genres_block.dart';
 import 'input_validation.dart';
 import 'register_bloc.dart';
 
@@ -45,9 +48,16 @@ class _SecondRegisterScreenState extends State<SecondRegisterScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: registerBloc,
-          child: const FavCategoriesScreen(),
+        builder: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: registerBloc),
+            BlocProvider(
+              create: (context) => FavouriteGenresBloc(
+                movieRepository: Provider.of<MovieRepositoryImpl>(context, listen: false),
+              ),
+            ),
+          ],
+          child: const FavouriteGenresScreen(),
         ),
       ),
     );

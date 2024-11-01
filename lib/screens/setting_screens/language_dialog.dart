@@ -42,14 +42,14 @@ class _LanguageDialogState extends State<LanguageDialog> {
             icon: Icons.language,
             label: localizations.polish,
             onTap: () {
-              _changeLanguage(const Locale("pl"));
+              _changeLanguage(const Locale("pl", "PL"));
             },
           ),
           MenuItem(
             icon: Icons.language,
             label: localizations.english,
             onTap: () {
-              _changeLanguage(const Locale("en"));
+              _changeLanguage(const Locale("en", "US"));
             },
           ),
           const SizedBox(height: 20),

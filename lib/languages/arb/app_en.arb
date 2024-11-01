@@ -122,6 +122,8 @@
   "your_room": "Your Room Code",
   "joined_friends": "Joined Friends",
 
+  "no_genres_to_display": "No genres to display",
+
   "fill_both": "Please fill in both email and password",
   "fill_all": "Please fill in all the fields",
   "not_email": "That don't look like an email",

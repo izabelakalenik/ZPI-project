@@ -124,6 +124,8 @@
 
   "privacy_policy": "Polityka Prywatności",
 
+  "no_genres_to_display": "Brak gatunków do wyświetlenia.",
+
   "fill_both": "Proszę wypełnić oba pola: e-mail i hasło",
   "fill_all": "Proszę wypełnić wszystkie pola",
   "not_email": "To nie wygląda na prawidłowy adres e-mail",
