@@ -93,7 +93,7 @@
   "shake_movie_screen_button": "Shake",
 
   "release_date": "Release date",
-  "is_for_adults": "Is it only for adults",
+  "age_recommendation": "Age recommendation",
   "rating": "Rating",
 
   "liked_movies_title": "Liked",

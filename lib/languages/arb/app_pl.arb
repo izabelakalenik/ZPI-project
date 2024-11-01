@@ -95,7 +95,7 @@
   "report_problem_submit": "Wyślij",
 
   "release_date": "Data wypuszczenia",
-  "is_for_adults": "Czy film jest tylko dla dorosłych",
+  "age_recommendation": "Rekomendacja wieku",
   "rating": "Ocena",
 
   "yes": "Tak",
