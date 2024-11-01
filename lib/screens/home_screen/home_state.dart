@@ -47,9 +47,9 @@ class InitializeNotFinished extends HomeState {}
 
 class AddingMoviesNotFinished extends HomeState {
   const AddingMoviesNotFinished({
-    required List<Movie> movies,
-    required int currentIndex,
-  }) : super(movies: movies, currentIndex: currentIndex);
+    required super.movies,
+    required super.currentIndex,
+  });
 }
 
 // check after implementing all backend, do we need that many states?
