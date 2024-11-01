@@ -132,5 +132,4 @@
   "not_year": "That doesn't look like a valid year",
   "invalid_password":  "Password must be at least 6 characters long, contain at least one number, and include a special character."
 
-
 }

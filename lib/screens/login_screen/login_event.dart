@@ -12,7 +12,10 @@ class LoginButtonPressed extends LoginEvent {
   final String password;
   final AppLocalizations localizations;
 
-  const LoginButtonPressed({required this.email, required this.password, required this.localizations,});
+  const LoginButtonPressed(
+      {required this.email,
+      required this.password,
+      required this.localizations});
 
   @override
   List<Object> get props => [email, password, localizations];
@@ -20,4 +23,13 @@ class LoginButtonPressed extends LoginEvent {
   @override
   String toString() =>
       'LoginButtonPressed { email: $email, password: $password }';
+}
+
+class LoginWithFacebookPressed extends LoginEvent {
+  final AppLocalizations localizations;
+
+  const LoginWithFacebookPressed({required this.localizations});
+
+  @override
+  List<Object> get props => [localizations];
 }

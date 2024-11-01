@@ -61,6 +61,7 @@ dependencies:
   firebase_storage: ^12.3.3
   cloud_firestore: ^5.4.4
   screen_brightness: ^2.0.0
+  flutter_facebook_auth: 6.0.4
 
   http: ^0.13.4
   logger: ^2.4.0

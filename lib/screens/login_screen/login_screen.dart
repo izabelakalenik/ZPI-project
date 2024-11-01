@@ -80,11 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 );
             } else if (state is LoginSuccess) {
-              Navigator.pushAndRemoveUntil(context,
+              Navigator.pushAndRemoveUntil(
+                context,
                 MaterialPageRoute(
                   builder: (context) => WelcomeScreen(),
                 ),
-                    (route) => false,
+                (route) => false,
               );
 
               Navigator.pushAndRemoveUntil(
@@ -95,11 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const HomeScreen(),
                   ),
                 ),
-                    (route) => route.isFirst,
+                (route) => route.isFirst,
               );
             }
           },
-        child: BlocBuilder<LoginBloc, LoginState>(
+          child: BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
               return Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -128,7 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
+                              loginBloc.add(LoginWithFacebookPressed(
+                                  localizations: localizations));
                             },
                           ),
                         ),
@@ -180,21 +182,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: Text(localizations.login_2),
                       onPressed: state is! LoginLoading
                           ? () {
-                        final email = _emailController.text;
-                        final password = _passwordController.text;
+                              final email = _emailController.text;
+                              final password = _passwordController.text;
 
-                        if (email.isNotEmpty && password.isNotEmpty) {
-                          loginBloc.add(LoginButtonPressed(
-                            email: email,
-                            password: password,
-                            localizations: localizations
-                          ));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(localizations.fill_both))
-                          );
-                        }
-                      }
+                              if (email.isNotEmpty && password.isNotEmpty) {
+                                loginBloc.add(LoginButtonPressed(
+                                    email: email,
+                                    password: password,
+                                    localizations: localizations));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text(localizations.fill_both)));
+                              }
+                            }
                           : null,
                     ),
                     if (state is LoginLoading)
