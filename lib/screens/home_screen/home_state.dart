@@ -3,10 +3,12 @@ part of 'home_bloc.dart';
 class HomeState extends Equatable {
   final List<Movie> movies;
   final bool isLoadingMore;
+  final int currentIndex;
 
   const HomeState({
     this.movies = const [],
     this.isLoadingMore = false,
+    this.currentIndex = 0,
   });
   // storing list of next movie in state is better then cach with freqent changes of the list
 
@@ -14,10 +16,26 @@ class HomeState extends Equatable {
     // to copy new state, have check this if it works correctly
     List<Movie>? movies,
     bool? isLoadingMore,
+    int? currentIndex,
   }) {
     return HomeState(
       movies: movies ?? this.movies,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      currentIndex: currentIndex ?? this.currentIndex,
+    );
+  }
+
+  HomeState addMovies({
+    List<Movie>? movies,
+    bool? isLoadingMore,
+    int? currentIndex,
+  }) {
+    final updatedMovies =
+        movies != null ? [...this.movies, ...movies] : this.movies;
+    return HomeState(
+      movies: updatedMovies,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      currentIndex: currentIndex ?? this.currentIndex,
     );
   }
 
@@ -26,6 +44,13 @@ class HomeState extends Equatable {
 }
 
 class InitializeNotFinished extends HomeState {}
+
+class AddingMoviesNotFinished extends HomeState {
+  const AddingMoviesNotFinished({
+    required super.movies,
+    required super.currentIndex,
+  });
+}
 
 // check after implementing all backend, do we need that many states?
 class HomeInitial extends HomeState {}

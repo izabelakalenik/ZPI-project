@@ -5,6 +5,7 @@ import '../cache/genre_cache.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
+  int currentPage = 1;
 
   MovieRepositoryImpl(this.remoteDataSource);
 
@@ -12,8 +13,12 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<List<Movie>> fetchMovies() async {
     final genreMap = await _getGenres();
 
-    final moviesData = await remoteDataSource.fetchMovies();
-    return moviesData.map((json) => Movie.fromJson(json, genreMap)).toList();
+    final moviesData = await remoteDataSource.fetchMovies(currentPage);
+    currentPage++;
+    return moviesData
+        .take(5)
+        .map((json) => Movie.fromJson(json, genreMap))
+        .toList();
   }
 
   Future<Map<int, String>> _getGenres() async {
