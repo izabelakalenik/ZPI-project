@@ -29,6 +29,29 @@ class FirestoreService{
       'country': user.country,
       'likedGenres': user.favoriteGenres,
       'email': user.email,
+      'likedMovies': user.likedMovies,
+      'dislikedMovies': user.dislikedMovies,
     });
+  }
+
+  Future<List<int>> getLikedMovies() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return [];
+
+    final snapshot = await _firestore.collection('users').doc(user.uid).get();
+    if (snapshot.exists) {
+      return List<int>.from(snapshot['likedMovies'] ?? []);
+    } else {
+      return [];
+    }
+  }
+
+  Future<void> updateUserLikedMovies(List<int> likedMovies) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await _firestore.collection('users').doc(user.uid).update({
+        'likedMovies': likedMovies,
+      });
+    }
   }
 }

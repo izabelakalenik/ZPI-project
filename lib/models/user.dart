@@ -7,6 +7,8 @@ class UserModel {
   String gender;
   String country;
   List<String> favoriteGenres;
+  List<int> likedMovies;
+  List<int> dislikedMovies;
 
   UserModel({
     required this.email,
@@ -17,6 +19,8 @@ class UserModel {
     required this.gender,
     required this.country,
     required this.favoriteGenres,
+    this.likedMovies = const [],
+    this.dislikedMovies = const [],
   });
 
   UserModel copyWith({
@@ -28,6 +32,8 @@ class UserModel {
     String? gender,
     String? country,
     List<String>? favoriteGenres,
+    List<int>? likedMovies,
+    List<int>? dislikedMovies,
   }) {
     return UserModel(
       email: email ?? this.email,
@@ -38,6 +44,21 @@ class UserModel {
       gender: gender ?? this.gender,
       country: country ?? this.country,
       favoriteGenres: favoriteGenres ?? this.favoriteGenres,
+      likedMovies: likedMovies ?? this.likedMovies,
+      dislikedMovies: dislikedMovies ?? this.dislikedMovies,
     );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'name': name,
+      'username': username,
+      'birthYear': birthYear,
+      'gender': gender,
+      'country': country,
+      'favoriteGenres': favoriteGenres,
+      'likedMovies': likedMovies,
+      'dislikedMovies': dislikedMovies,
+    };
   }
 }
