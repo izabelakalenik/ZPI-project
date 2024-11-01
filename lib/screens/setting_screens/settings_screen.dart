@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zpi_project/screens/setting_screens/about_authors_screen.dart';
 import 'package:zpi_project/screens/setting_screens/language_dialog.dart';
@@ -9,7 +10,8 @@ import 'package:zpi_project/screens/setting_screens/report_problem_screen.dart';
 import '../../styles/layouts.dart';
 import '../../utils/check_login_status.dart';
 import '../../widgets/nav_drawer.dart';
-import 'edit_profile_screen.dart';
+import 'edit_profile_screen/edit_profile_bloc.dart';
+import 'edit_profile_screen/edit_profile_screen.dart';
 import 'logout_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -60,7 +62,11 @@ class SettingsScreenContent extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => EditProfileScreen()),
+                        builder: (context) => BlocProvider(
+                          create: (context) => EditProfileBloc(),
+                          child: const EditProfileScreen(),
+                        ),
+                      ),
                     );
                   },
                 ),

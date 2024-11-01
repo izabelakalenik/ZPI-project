@@ -19,6 +19,16 @@ class UserModel {
     required this.favoriteGenres,
   });
 
+  UserModel.defaultConstructor()
+      : email = "",
+        password = "",
+        name = "",
+        username = "",
+        birthYear = 0,
+        gender = "",
+        country = "",
+        favoriteGenres = [];
+
   UserModel copyWith({
     String? email,
     String? password,
