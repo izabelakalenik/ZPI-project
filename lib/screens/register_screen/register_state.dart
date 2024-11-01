@@ -1,6 +1,5 @@
 part of 'register_bloc.dart';
 
-
 final defaultUser = UserModel(
   email: '',
   password: '',

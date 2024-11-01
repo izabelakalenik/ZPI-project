@@ -1,4 +1,5 @@
 part of 'register_bloc.dart';
+
 abstract class RegisterEvent extends Equatable {
   final AppLocalizations localizations;
 
@@ -39,7 +40,8 @@ class UserDetailsEntered extends RegisterEvent {
   });
 
   @override
-  List<Object?> get props => [name, username, birthYear, country, gender, localizations];
+  List<Object?> get props =>
+      [name, username, birthYear, country, gender, localizations];
 }
 
 class GenresSelected extends RegisterEvent {
@@ -68,4 +70,11 @@ class CheckUsernameAvailability extends RegisterEvent {
 
   @override
   List<Object?> get props => [username, localizations];
+}
+
+class RegisterWithFacebookPressed extends RegisterEvent {
+  const RegisterWithFacebookPressed({required super.localizations});
+
+  @override
+  List<Object> get props => [];
 }

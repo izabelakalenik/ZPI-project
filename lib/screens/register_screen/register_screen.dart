@@ -108,7 +108,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             text: localizations.facebook,
                             buttonType: SocialLoginButtonType.facebook,
                             onPressed: () async {
-                              // await socialAuthProvider.handleGoogleSignIn();
+                              registerBloc.add(RegisterWithFacebookPressed(
+                                  localizations: localizations));
                             },
                           ),
                         ),
@@ -137,7 +138,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _obscurePassword = !_obscurePassword; // Toggle password visibility
+                            _obscurePassword =
+                                !_obscurePassword; // Toggle password visibility
                           });
                         },
                       ),
@@ -146,15 +148,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Button(
                       text: Text(localizations.next),
                       onPressed: () {
-                        registerBloc.add(
-                          EmailPasswordEntered(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                            localizations: localizations,
-                          ));
+                        registerBloc.add(EmailPasswordEntered(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          localizations: localizations,
+                        ));
                       },
                     ),
-                    const SizedBox(height: 14), // Forgot Password and Login Button
+                    const SizedBox(height: 14),
+                    // Forgot Password and Login Button
                     Align(
                       alignment: Alignment.center,
                       child: InkWell(
