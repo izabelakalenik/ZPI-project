@@ -28,7 +28,6 @@ class _MovieScreenState extends State<MovieScreen> {
     return MainLayout(
       child: MovieScreenContent(
         movie: widget.movie,
-          onPressed: () {}
       ),
     );
   }
@@ -36,12 +35,10 @@ class _MovieScreenState extends State<MovieScreen> {
 
 class MovieScreenContent extends StatelessWidget {
   final Movie movie;
-  final VoidCallback onPressed;
 
   const MovieScreenContent({
     super.key,
     required this.movie,
-    required this.onPressed,
   });
 
   @override
