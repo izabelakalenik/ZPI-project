@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:zpi_project/models/movie_model.dart';
+
 import 'package:zpi_project/movies/domain/entities/movie.dart';
 
 class DetailedMovieCardFront extends StatelessWidget {
@@ -33,26 +33,26 @@ class DetailedMovieCardFront extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(height: 20),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Stack(
-                  children: [
-                    Image.network(
-                      movie.posterPath,
-                      height: 400,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: const Icon(Icons.info_outline),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // const SizedBox(height: 20),
+              // ClipRRect(
+              //   borderRadius: BorderRadius.circular(8.0),
+              //   child: Stack(
+              //     children: [
+              //       // Image.network(
+              //       //   movie.posterPath,
+              //       //   height: 400,
+              //       // ),
+              //       Positioned(
+              //         bottom: 0,
+              //         right: 0,
+              //         child: IconButton(
+              //           icon: const Icon(Icons.info_outline),
+              //           onPressed: () {},
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

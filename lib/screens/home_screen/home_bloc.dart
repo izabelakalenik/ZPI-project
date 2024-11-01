@@ -1,15 +1,24 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zpi_project/movies/domain/entities/movie.dart';
+import 'package:zpi_project/movies/domain/repositories/movie_repositorie.dart';
+import 'package:zpi_project/movies/data/data_sources/movie_remote_data_source.dart';
+import 'package:zpi_project/movies/data/repositories/movie_repository_impl.dart';
+import 'package:logger/logger.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  //final MovieRepository movieRepository;
+  final MovieRepository _movieRepository;
+  int currentIndex = 0;
+  var logger = Logger();
 
-  HomeBloc() : super(HomeInitial()) {
+  HomeBloc()
+      : _movieRepository = MovieRepositoryImpl(MovieRemoteDataSource()),
+        super(HomeInitial()) {
     on<LoadInitialCards>(_onLoadInitialCards);
+    on<LoadMoreCards>(_onLoadMoreCards);
     on<CardSwipedLeft>(_onCardSwipedLeft);
     on<CardSwipedRight>(_onCardSwipedRight);
     on<CardUndo>(_onCardUndo);
@@ -20,78 +29,63 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(InitializeNotFinished());
-    final sampleMovies = [
-      Movie(
-        id: 1,
-        title: 'Movie 1',
-        overview: 'Overview of Movie 1',
-        posterPath:
-            'https://image.tmdb.org/t/p/w500//v9acaWVVFdZT5yAU7J2QjwfhXyD.jpg',
-        voteAverage: 8.1,
-        releaseDate: '2021-01-01',
-        isForAdults: false,
-        categories: ['Action', 'Drama'],
-      ),
-      Movie(
-        id: 2,
-        title: 'Movie 2',
-        overview: 'Overview of Movie 2',
-        posterPath:
-            'https://image.tmdb.org/t/p/w500//3V4kLQg0kSqPLctI5ziYWabAZYF.jpg',
-        voteAverage: 7.5,
-        releaseDate: '2021-02-01',
-        isForAdults: false,
-        categories: ['Comedy', 'Romance'],
-      ),
-      Movie(
-        id: 3,
-        title: 'Movie 3',
-        overview: 'Overview of Movie 3',
-        posterPath:
-            'https://image.tmdb.org/t/p/w500//v9acaWVVFdZT5yAU7J2QjwfhXyD.jpg',
-        voteAverage: 6.3,
-        releaseDate: '2021-03-01',
-        isForAdults: true,
-        categories: ['Horror', 'Thriller'],
-      ),
-      Movie(
-        id: 4,
-        title: 'Movie 4',
-        overview: 'Overview of Movie 4',
-        posterPath:
-            'https://image.tmdb.org/t/p/w500//3V4kLQg0kSqPLctI5ziYWabAZYF.jpg',
-        voteAverage: 9.0,
-        releaseDate: '2021-04-01',
-        isForAdults: false,
-        categories: ['Adventure', 'Fantasy'],
-      ),
-      Movie(
-        id: 5,
-        title: 'Movie 5',
-        overview: 'Overview of Movie 5',
-        posterPath: 'https://example.com/poster5.jpg',
-        voteAverage: 7.8,
-        releaseDate: '2021-05-01',
-        isForAdults: false,
-        categories: ['Sci-Fi', 'Action'],
-      ),
-    ];
+    try {
+      List<Movie> initialMovies = await _movieRepository.fetchMovies();
+      emit(state.copyWith(
+          movies: initialMovies,
+          isLoadingMore: false,
+          currentIndex: currentIndex));
+    } catch (error) {
+      emit(HomeFailure(error: error.toString()));
+    }
+  }
 
-    emit(state.copyWith(movies: sampleMovies, isLoadingMore: false));
+  // we can implement this technic to ask api for more movies before we ran out of the existing ones (to make user wait less, this gmail hack)
+  Future<void> _onLoadMoreCards(
+    LoadMoreCards event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(AddingMoviesNotFinished(
+        movies: state.movies, currentIndex: currentIndex));
+    try {
+      logger.log(Level.info, "loading more movies is turn on");
+      List<Movie> moreMovies = await _movieRepository.fetchMovies();
+      emit(state.addMovies(movies: moreMovies, currentIndex: currentIndex));
+    } catch (error) {
+      emit(HomeFailure(error: error.toString()));
+    }
   }
 
   Future<void> _onCardSwipedLeft(
     CardSwipedLeft event,
     Emitter<HomeState> emit,
-  ) async {}
+  ) async {
+    logger.log(Level.info, "Card was swiped Left");
+    //here we have to add event.movie.it to the firebase user liked movies
+    currentIndex++;
+    if (currentIndex >= state.movies.length) {
+      add(LoadMoreCards());
+    }
+  }
 
   Future<void> _onCardSwipedRight(
     CardSwipedRight event,
     Emitter<HomeState> emit,
-  ) async {}
+  ) async {
+    logger.log(Level.info, "Card was swiped Right");
+    //here we have to add event.movie.it to the firebase user disliked movies
+    currentIndex++;
+    if (currentIndex >= state.movies.length) {
+      add(LoadMoreCards());
+    }
+  }
 
   Future<void> _onCardUndo(
     CardUndo event,
     Emitter<HomeState> emit,
-  ) async {}
+  ) async {
+    logger.log(Level.info, "There is card Undo");
+    //here we have to remove event.movie.it from the firebase user disliked or liked movies
+    if (currentIndex > 0) currentIndex--;
+  }
 }
