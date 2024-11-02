@@ -30,13 +30,10 @@ class HostBloc extends Bloc<HostEvent, HostState> {
 
       await roomRef.set({
         'host': user.username,
-        'participants': [user.username]
+        'participants': {currentUser.uid: user.username}
       });
         } else {
-      await roomRef.set({
-        'host': 'Anonymous Host',
-        'participants': ['Anonymous Host']
-      });
+      //error
     }
 
     _participantsRef = roomRef.child('participants');
@@ -45,20 +42,13 @@ class HostBloc extends Bloc<HostEvent, HostState> {
   }
 
   Future<void> _onAddParticipant(AddParticipant event, Emitter<HostState> emit) async {
-
-    final snapshot = await _participantsRef.once();
-    List<dynamic> participants = snapshot.snapshot.value as List<dynamic>? ?? [];
-
-    if (!participants.contains(event.participantName)) {
-      participants.add(event.participantName);
-      await _participantsRef.set(participants);
-    }
+    _participantsRef.child(event.participantId).set(event.participantName);
   }
 
   void _listenToParticipants(Emitter<HostState> emit) {
     _participantsRef.onValue.listen((event) {
-      final participantsSnapshot = event.snapshot.value as List<dynamic>? ?? [];
-      final friends = participantsSnapshot.cast<String>();
+      final participantsSnapshot = event.snapshot.value as Map<dynamic, dynamic>? ?? {};
+      final friends = participantsSnapshot.values.cast<String>().toList();
       emit(HostParticipantsUpdated(friends));
     });
   }

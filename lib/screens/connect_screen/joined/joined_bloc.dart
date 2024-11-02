@@ -7,27 +7,6 @@ import '../../../database_configuration/firestore_service.dart';
 part 'joined_event.dart';
 part 'joined_state.dart';
 
-class JoinedInitial extends JoinedState {}
-
-class JoinedRoomJoined extends JoinedState {
-  final String roomCode;
-
-  JoinedRoomJoined(this.roomCode);
-
-  @override
-  List<Object?> get props => [roomCode];
-}
-
-class JoinedParticipantsUpdated extends JoinedState {
-  final List<String> friends;
-
-  JoinedParticipantsUpdated(this.friends);
-
-  @override
-  List<Object?> get props => [friends];
-}
-
-// JoinedBloc
 class JoinedBloc extends Bloc<JoinedEvent, JoinedState> {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final FirestoreService firestoreService = FirestoreService();
@@ -45,10 +24,10 @@ class JoinedBloc extends Bloc<JoinedEvent, JoinedState> {
     if (currentUser != null) {
       final user = await firestoreService.fetchUser(currentUser.uid);
 
-      _participantsRef.child(user.username);
+      await _participantsRef.child(currentUser.uid).set(user.username);
 
     } else {
-      _participantsRef.child("Anonymous");
+      //error
     }
 
     _listenToParticipants(emit);
